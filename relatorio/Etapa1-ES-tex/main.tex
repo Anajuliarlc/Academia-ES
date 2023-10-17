@@ -1,0 +1,577 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{xurl}
+\usepackage[a4paper, left=4cm, right=4cm]{geometry}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Trabalho ICD},
+    pdfpagemode=FullScreen,
+    }
+
+\title{Trabalho de Engenharia de Software}
+\author{Ana Júlia Rita Lima Cardoso \and George Dutra \and Iago Riveiro Santos Dutra \and Luan Rodrigues de Carvalho \and Luís Henrique Domingues Bueno}
+\date{Outubro 2023}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% \maketitle                          
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Trabalho de Engenharia de Software}
+            
+        \vspace{0.5cm}
+        \LARGE
+        Etapa 1
+            
+        \vspace{1.5cm}
+            
+        \textbf{Ana Júlia Rita Lima Cardoso, George Dutra, Iago Riveiro Santos Dutra, Luan Rodrigues de Carvalho, Luís Henrique Domingues Bueno}
+            
+        \vfill
+            
+        Trabalho desenvolvido e apresentado para\\
+        Ciência de Dados e Inteligência Artificial
+            
+        \vspace{0.8cm}
+            
+        \includegraphics[width=0.4\textwidth]{Logo FGV.png}
+            
+        \Large
+        Escola de Matemática Aplicada\\
+        Fundação Getúlio Vargas\\
+        Brasil\\
+        Outubro 2023
+            
+    \end{center}
+\end{titlepage}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Casos de Uso e suas descrições}
+
+\subsection{Caso 1: Contatar Personal Trainer}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[1.1 -] Abra o sistema da academia (já logado);
+        
+        \item[1.2 -] Na área do menu, selecione "Contatar meu Treinador";
+        
+        \item[1.3 -] Clique na caixa de texto e escreva um resumo do motivo do seu contato;
+        
+        \item[1.4 -] Será exibida uma mensagem com links de possíveis páginas de FAQ que podem responder sua dúvida, e uma mensagem perguntando se deseja prosseguir com o contato:
+        \begin{itemize}
+            \item[-] Toque em 'Não' para cancelar o contato (Fim de caso).
+            \item[-] Toque em 'Sim' para continuar o contato.
+        \end{itemize}
+        
+        \item[1.5 -]  Selecione uma das opções apresentadas:
+        \begin{itemize}
+            \item[-] Cancelar contato (Fim de caso).
+            \item[-] Conversar com treinador por texto;
+            \item[-] Conversar com treinador por voz;
+        \end{itemize}
+        
+        \item[1.6 -] Aguarde até 10 minutos enquanto procuramos por treinadores disponíveis para contato imediato;
+        
+        \item[1.7 -] O usuário poderá conversar com o treinador por texto ou por chamada em tempo real;
+        
+        \item[1.8 -] Ao fim do contato, o treinador ou o usuário poderão encerrar a conversa ou a chamada;
+        
+        \item[1.9 -] Aluno poderá selecionar opção dizendo se sua dúvida foi respondida;
+        
+        \item[1.10 -] Ambos aluno e treinador poderão avaliar o atendimento, fazer comentários, ou denunciar atitudes um do outro durante o contato que violem as regras da plataforma (Fim de caso).
+    \end{itemize}
+    
+    \textbf{Fluxo Alternativo 1.6 - Treinador não encontrado:}
+    
+    \begin{itemize}
+        \item[1.6.1 -]  Caso não seja encontrado um treinador disponível para atender o aluno, ele poderá:
+
+        \begin{itemize}
+            \item[-] Pedir por outra busca (Retorne a 1.5);
+            \item[-] Cancelar contato (Fim de caso).
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 1.7 - Usuário inativo:}
+
+    \begin{itemize}
+        \item[1.7.1 -] Caso o usuário fique inativo por mais de 15 minutos, o contato poderá ser encerrado pelo treinador.
+    \end{itemize}
+    \newpage
+    \textbf{Fluxo Alternativo 1.7 - Treinador inativo:}
+
+    \begin{itemize}
+        \item[1.7.2 -] Caso o professor fique inativo por mais de 15 minutos, o aluno poderá:
+        
+        \begin{itemize}
+             \item[-] Solicitar contato com outro professor (Retorne a 1.5);
+             \item[-] Encerrar contato (Avance a 1.9).
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 1.9 - Dúvida não respondida:}
+
+    \begin{itemize}
+        \item[1.9.1 -] Caso aluno marque que sua dúvida não foi respondida, ele poderá:
+
+        \begin{itemize}
+             \item[-] Buscar por outro treinador (Retorne a 1.5);
+             \item[-] Entrar em contato com central de reclamações (Fim de caso);
+             \item[-] Encerrar contato (Avance a 1.10).
+         \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 2: Alterar Cargas de Treino}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[2.1 -] Abra o sistema da academia (já logado);
+        \item[2.2 -] Selecione a opção "Meus Treinos" na área do menu;
+        \item[2.3 -] Toque na aba "Progressão";
+        \item[2.4 -] Selecionando a opção "Progressão Recomendada", o aluno poderá selecionar uma entre algumas recomendações de aumento de carga personalizadas para seu perfil (Fim de caso);
+        \item[2.5 -] Selecionando a opção "Progressão Manual", o aluno poderá inserir manualmente as novas cargas que ele passará a usar em cada um de seus treinos (Fim de caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 2.2 - Usuário não possui treino em progresso:}
+
+    \begin{itemize}
+        \item[2.2.1 -] Será exibida uma mensagem de erro, na qual o usuário terá a opção de ser redirecionado para a página de contato com treinador ou somente encerrar a operação (Fim de Caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 2.4 - Sem recomendações:}
+
+    \begin{itemize}
+        \item[2.4.1 -] Será exibida uma mensagem dizendo que o sistema não tem recomendações de progressão, e recomendará ao usuário duas opções:
+
+        \begin{itemize}
+             \item[-] Entrar em contato com um treinador para discutir a progressão, redirecionando à janela de contato com treinadores (Fim de caso);
+             \item[-] Inserir progressão manualmente (Retorne a 2.5).
+         \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 2.5 - Carga Inválida:}
+
+    \begin{itemize}
+        \item[2.5.1 -] Caso o usuário tente inserir uma carga que não existe, será exibida uma mensagem de erro, e ele será retornado à aba de Progressão Manual (Retorne a 2.5).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 2.5 - Carga Perigosa:}
+
+    \begin{itemize}
+        \item[2.5.2 -] Caso o usuário tente inserir uma carga que é considerada perigosa para seu perfil:
+
+        \begin{itemize}
+             \item[-] Será exibida uma mensagem recomendando a ele que fale antes com um Personal;
+             \item[-] Serão exibidas três opções:
+             \begin{itemize}
+                 \item[-] Selecionando "Tenho certeza", a carga será modificada (Fim de Caso);
+                 \item[-] Selecionando "Quero contatar um treinador", ele será redirecionado para a janela de contato com um treinador (Fim de caso);
+                 \item[-] Selecionando "Cancelar", a operação será encerrada (Fim de Caso);
+             \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 3: Criar treinos}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[3.1 -] Abra o sistema da academia(já logado);
+        \item[3.2 -] Selecione a área de "Treinos" na área do menu;
+        \item[3.3 -] Dentro daquele área, clique em "Novo treino";
+        \item[3.4 -] Na barra de pesquisa que será aberta, coloque o nome do aluno que deseja criar o treino. Podendo escrever seu nome completo ou escrever sua maior parte e clicar em cima ao ver a opção;
+        \item[3.5 -] Após selecionar o aluno, uma nova aba será aberta, na qual será possível escrever o nome do exercício a ser executado, ao seu lado, quantas séries e quantas repetições;
+        \item[3.6 -] Clique no "+" abaixo para escrever mais um exercício;
+        \item[3.7 -] Ao finalizar, clique em "Finalizar treino";
+        \item[3.8 -] Visualize o treino do aluno(Fim de caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 3.5 - Aluno errado:}
+
+    \begin{itemize}
+        \item[3.5.1 -] Caso o aluno selecionado para criar treino não seja o desejado:
+        
+         \begin{itemize}
+             \item[-] Clique no botão "Voltar" no canto superior esquerdo da tela;
+             \item[-] Retorne ao passo 3.4.
+         \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 3.5 - Deletar exercício:}
+
+    \begin{itemize}
+        \item[3.5.2 -] Caso o exercício não seja o desejado ou errado:
+        
+         \begin{itemize}
+             \item[-] Clique no pequeno botão de lixo que fica ao lado do exercício;
+             \item[-] Caso deseje acrescentar outro, prossiga para 3.6;
+             \item[-] Após terminar, prossiga para 3.7.
+         \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 3.5 - Mudar exercício:}
+
+    \begin{itemize}
+        \item[3.5.3 -] Caso tenha digitado o exercício errado ou mudado de ideia, também é possível:
+        
+         \begin{itemize}
+             \item[-] Clique na caixinha que escreveu o exercício e digite o novo exercício;
+             \item[-] Prossiga com os passos seguintes.
+         \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 4: Fazer matrícula}
+
+    \textbf{Fluxo Principal - Caminho Feliz:} \\
+
+    \begin{itemize}
+        \item[4.1 -] Abra o sistema da academia(já logado);
+        
+        \item[4.2 -] Abra a aba "Matrículas" na área do menu;
+        
+        \item[4.3 -] Clique em "Matricular novo aluno";
+        
+        \item[4.4 -] Preencha os campos de nome completo, RG, CPF, número de celular e endereço de residência;
+        
+        \item[4.5 -] Clique em "Prosseguir", que irá guiar ao campo médico;
+        
+        \item[4.6 -] Preencha a documentação médica, que pergunta se toma algum medicamento, tem algum problema de saúde e pergunta porque decidiu iniciar a academia;
+        
+        \item[4.7 -] Clique em "Prosseguir", que guiará a área de pagamentos;
+        
+        \item[4.8 -] Redireciona a "Cadastrar forma de pagamento";
+        
+        \item[4.9 -] Clique em "Prosseguir", que irá para a tela de confirmação;
+        
+        \item[4.10 -] Na tela de confirmação aparecerão todas as informações preenchidas durante o processo. Se todas estiverem corretas, clique em prosseguir;
+        
+        \item[4.11 -] Ao prosseguir, o contrato será exibido, no final haverá um botão de confirmação com os termos do contrato, que deve ser clicado pelo aluno;
+        
+        \item[4.12 -] Após clicar, a área para assinatura do aluno é disponibilizada e deve ser assinada;
+        
+        \item[4.13 -] Finalizada a matrícula(Fim de caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 4.10 - Informações básicas erradas:}
+
+    \begin{itemize}
+        \item[4.10.1-] Caso as informações da primeira tela de cadastro estejam erradas, a tela de confirmação mostrará (o que guiará o usuário a voltar lá):
+        
+        \begin{itemize}
+            \item[-] Clique em "Voltar a Info Básicas" e repita o passo 4.4;
+            \item[-] Prossiga com os passos, que já estarão salvos no sistema.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 4.10 - Documentação médica errada:}
+
+    \begin{itemize}
+        \item[4.10.2-] Caso as informações da documentação médica estejam erradas, a tela de confirmação mostrará(o que guiará o usuário a voltar lá):
+
+        \begin{itemize}
+            \item[-] Clique em "Voltar a Doc Médica" e repita o passo 4.6;
+            \item[-] Prossiga com os passos, que já estarão salvos no sistema.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo - Voltar:}
+
+    \begin{itemize}
+        \item[] Caso digite alguma informação errada e perceba logo após que clicou em "Prosseguir", é possível clicar a qualquer momento no botão que fica no canto superior esquerdo da tela, "Voltar". Permitindo que preencha as informações novamente a qualquer momento.
+    \end{itemize}
+
+\subsection{Caso 5: Atualizar Medidas}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[5.1 -] Abra o sistema da academia (já logado);
+        \item[5.2 -] Na área do menu, selecione "Progresso";
+        \item[5.3 -] Na aba "Progresso" será exibido o histórico de medidas, clique no botão "Atualizar medidas";
+        \item[5.4 -] Serão exibidas as últimas medidas registradas, clique na caixa de texto de cada medida e modifique o valor;
+        \item[5.5 -] Clique em "Salvar Medidas";
+        \item[5.6 -] Visualize a nova medida na aba "Progresso" (Fim do caso).
+    \end{itemize}
+    
+    \textbf{Fluxo Alternativo 5.3 - Medida incorreta:}
+
+    \begin{itemize}
+        \item[5.3.1 -] Caso uma medida do histórico esteja incorreta:
+        \begin{itemize}
+            \item[-] Clique na medida errada;
+            \item[-] Selecione uma das opções:
+            \begin{itemize}
+                \item[-] Deletar medida (Retorne a 5.6).
+                \item[-] Atualizar medidas (Retorne a 5.4).
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    
+\subsection{Caso 6: Cadastrar Novas Aulas}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[6.1 -] Abra o sistema da academia (já logado);
+        \item[6.2 -] Na área do menu, selecione "Aulas";
+        \item[6.3 -] Na aba "Aulas" serão exibidas todas as aulas e datas registradas, clique em "Nova aula";
+        \item[6.4 -] Acrescente o título da aula e a descrição da aula;
+        \item[6.5 -] Clique no calendário para exibir os horários;
+        \item[6.6 -] Selecione os horários das aulas e sala em que ser[a dada];
+        \item[6.7 -] Clique em "Salvar Aulas";
+        \item[6.8 -] Confirme com a senha do usuário;
+        \item[6.9 -] Visualize a aula na aba "Aulas" (Fim de caso).
+    \end{itemize}
+    
+    \textbf{Fluxo Alternativo 6.6 - Horário e Sala Indisponível:}
+
+    \begin{itemize}
+        \item[6.6.1 -] Caso o horário  e sala selecionados já possua uma aula marcada:
+        \begin{itemize}
+            \item[-] Será exibida com a mensagem "Conflito de Horário" e a aula que está dando conflito;
+            \item[-] Selecione uma das opções:
+            \begin{itemize}
+                \item[-] Alterar horário e manter sala(Retorne a 6.6);
+                \item[-] Alterar sala e manter horário(Retorne a 6.6).
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    
+\subsection{Caso 7: Solicitar troca de treino}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[7.1 -] Abra o sistema da academia (já logado);
+        \item[7.2 -] Selecione a aba de "Treinos" na área do menu;
+        \item[7.3 -] Dentro da aba, abra o menu kebab do bloco do treino que deseja alterar e selecione "Solicitar Alteração";
+        \item[7.4 -] Na caixa de texto que surge, escolha o motivo de troca de treino e escreva o detalhamento do pedido com alguma exigência ou limitação;
+        \item[7.5 -] Após revisar a solicitação, clique em "Enviar Solicitação"(Fim de Caso).
+    \end{itemize}
+    
+    \textbf{Fluxo Alternativo 7.4 - Treino errado:}
+
+    \begin{itemize}
+        \item[7.4.1 -] Caso o aluno queira que outro treino seja adaptado (e.g. membros superiores, e não inferiores), ele deve:
+        \begin{itemize}
+            \item[-] Clicar no botão "Voltar" no canto superior esquerdo da tela;
+            \item[-] Retornar ao passo 7.3.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 7.5 - Motivo errado:}
+
+    \begin{itemize}
+        \item[7.5.1 -] Caso queira mudar a razão da solicitação:
+        \begin{itemize}
+            \item[-] Clicar no botão "Voltar" no canto superior esquerdo da tela;
+            \item[-] Retornar ao passo 7.3.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 7.5 - Cancelar solicitação:}
+
+    \begin{itemize}
+        \item[7.5.3 -] Caso tenha enviado uma solicitação de maneira equivocada:
+        \begin{itemize}
+            \item[-] Volte à aba "Treinos" do programa;
+            \item[-] Acesse a opção "Minhas solicitações de troca";
+            \item[-] Escolha o item que deseja cancelar;
+            \item[-] Clique em "Excluir Solicitação".
+        \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 8: Cadastrar forma de pagamento}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[8.1 -] Abra o sistema da academia (já logado);
+        \item[8.2 -] Abra a aba "Perfil" na área do menu;
+        \item[8.3 -] Clique em "Informações de Pagamento";
+        \item[8.4 -] Clique em "Cadastrar Novo Meio de Pagamento";
+        \item[8.5 -] Escolha o tipo de meio de pagamento;
+        \item[8.6 -] Se o meio de pagamento escolhido for cartão de crédito, preencher as informações do cartão;
+        \item[8.7 -] Clique em "Prosseguir", que irá para a tela de confirmação;
+        \item[8.8 -] Na tela de confirmação aparecerão todas as informações preenchidas durante o processo. Se todas estiverem corretas, clique em confirmar(Fim de Caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 8.6 - Cartão de débito:}
+
+    \begin{itemize}
+        \item[8.6.1 -] Caso o aluno escolha pagar com cartão de débito:
+        \begin{itemize}
+            \item[-] Preencher as informações do cartão;
+            \item[-] Prosseguir ao passo 8.7.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 8.6 - Débito automático em conta corrente:}
+
+    \begin{itemize}
+        \item[8.6.2 -] Caso o aluno escolha pagar com débito automático:
+        \begin{itemize}
+            \item[-] Preencher informações da conta corrente;
+            \item[-] Prosseguir ao passo 8.7
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 8.6 - Boleto recorrente:}
+
+    \begin{itemize}
+        \item[8.6.3 -] Caso o aluno escolha pagar com boleto recorrente:
+        \begin{itemize}
+            \item[-] Prosseguir ao passo 8.7.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 8.6 - Informações incongruentes:}
+
+    \begin{itemize}
+        \item[8.6.4 -] Caso a API do banco não reconheça as informações inseridas.
+        \begin{itemize}
+            \item[-] Corrigir informação(ões) incongruente(s), a(s) qual(is) o sistema identificará por uma mensagem de erro em fonte vermelha abaixo da(s) respectiva(s) caixa(s) de input.
+        \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 9: Marcar aulas coletivas}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[9.1 -] Abra o sistema da academia (já logado);
+        \item[9.2 -] Seleciona "Aulas" na área do menu;
+        \item[9.3 -] Seleciona "Marcar Aulas";
+        \item[9.4 -] Selecione uma aula disponível dentre as apresentadas;
+        \item[9.5 -] O aluno reserva o dia e horário dentre os apresentados para a aula;
+        \item[9.6 -] O sistema mostra uma confirmação na sua tela de que você se inscreveu numa aula(Fim de Caso);
+    \end{itemize}
+    \newpage
+    \textbf{Fluxo Alternativo 9.4 - Número de Alunos máx. Atingido:}
+
+    \begin{itemize}
+        \item[9.4.1 -] Caso o número máximo de alunos numa aula tenha sido atingido:
+        \begin{itemize}
+            \item[-] Ao selecionar a aula naquele dia e horário o sistema abrirá uma aba que dirá que a aula está cheia e que o aluno pode tentar selecionar outra data;
+            \item[-] Repita o passo 9.4 e caso nenhum dia estiver possível para aquela aula, repita o passo 9.3.
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 9.2 - Cancelar Aulas:}
+
+    \begin{itemize}
+        \item[9.2.1 -] Caso o aluno deseje cancelar sua inscrição numa aula:
+        \begin{itemize}
+            \item[-] Volte ao ponto 9.2, que mostrará todas as suas aulas marcadas;
+            \item[-] Selecione a aula que deseja cancelar;
+            \item[-] Clique em "Cancelar";
+            \item[-] Uma aba de confirmação de cancelação aparecerá na sua tela e a aula em questão sumirá da lista de aulas inscritas do aluno.
+        \end{itemize}
+    \end{itemize}
+
+\subsection{Caso 10: Definir metas}
+
+    \textbf{Fluxo Principal - Caminho Feliz:}
+
+    \begin{itemize}
+        \item[10.1 -] Abra o sistema da academia (já logado);
+        \item[10.2 -] Seleciona "Progresso" na área do menu;
+        \item[10.3 -] O aluno seleciona "Definir metas";
+        \item[10.4 -] O aluno preenche os campos de metas de treino, tais como minutos de corrida diária, meta de perda de peso/calorias, ou ganho de massa muscular;
+        \item[10.5 -] O aluno salva as metas criadas no sistema;
+        \item[10.6 -] Todas as metas aparecerão numa aba de visualização para o aluno verificar(Fim de Caso).
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 10.2 - Cancelar Metas:}
+
+    \begin{itemize}
+        \item[10.2.1 -]  Caso o aluno deseje cancelar todas as suas metas:
+        \begin{itemize}
+            \item[-] No passo 10.2 haverá o botão "Cancelar Metas", selecione-o;
+            \item[-] Ao selecionar, uma aba de confirmação será aberta, perguntando se tem certeza do processo;
+            \item[-] Caso tenha, clique em "Sim".
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Fluxo Alternativo 10.2 - Editar Metas:}
+
+    \begin{itemize}
+        \item[10.2.2 -] Caso o aluno deseje editar suas metas:
+        \begin{itemize}
+            \item[-] No passo 10.2 haverá o botão "Editar Metas", selecione-o;
+            \item[-] Ao selecionar, uma aba de confirmação será aberta, perguntando se tem certeza do processo;
+            \item[-] Caso tenha, clique em "Sim";
+            \item[-] A aba de edição será aberta com os antigos dados salvos, o aluno poderá editar suas metas aqui;
+            \item[-] Quando terminar, clique em "Salvar".
+        \end{itemize}
+    \end{itemize}
+
+\section{Estórias de usuário: }
+
+\subsection{Estória 1: }
+    Contatar Personal:  Como um aluno da academia, eu gostaria de poder contatar um personal trainer a qualquer momento, em horário comercial, por mensagem ou ligação, para tirar dúvidas, pedir dicas, ou fazer reclamações a respeito do meu treinamento atual.
+\subsection{Estória 2: }
+    Alterar cargas: Como aluno, preciso ser capaz de atualizar as cargas de peso de treino no aplicativo da academia para acompanhar meu progresso e atualizar o nível de dificuldade dos meus exercícios.
+\subsection{Estória 3: }
+    Criar Treinos: Como professor, é preciso poder criar os treinos dos alunos para acompanharem os métodos adequados a eles.
+\subsection{Estória 4: }
+    Fazer Matrícula: Como professor, preciso fazer a matrícula dos alunos,  colocando suas limitações e preocupações, para que o contrato com a academia seja adequado às suas necessidades. 
+\subsection{Estória 5: }
+    Atualizar Medidas: Como aluno, gostaria de atualizar minhas medidas pessoais (peso, medidas e etc.) para acompanhar meu progresso nas metas estabelecidas.
+\subsection{Estória 6: }
+    Criar Aulas: Como personal trainer, preciso criar novas aulas (boxe, dança, etc.) para disponibilizar a todos os alunos as aulas fornecidas pela academia.
+\subsection{Estória 7: }
+    Solicitar troca de treino: Como um aluno, gostaria de solicitar mudanças em meu plano de treinamento para meu professor, para assim poder evoluir ou adaptá-lo a uma lesão.
+\subsection{Estória 8: }
+    Cadastrar forma de pagamento: Como aluno, gostaria de poder cadastrar uma nova forma de pagamento para pagar a academia e para não precisar solicitar isso ao atendente em caso de bloqueio de cartão.
+\subsection{Estória 9: }
+    Marcar aulas coletivas: Como um aluno, preciso ser capaz de reservar uma aula para garantir minha participação e uso dos recursos disponíveis da academia.
+\subsection{Estória 10: }
+    Definir metas: Como um aluno, preciso ser capaz de definir minhas metas de treino diárias, semanais ou mensais, para que eu possa acompanhar meu progresso.
+
+\section{Metáfora do Sistema: }
+
+O sistema virtual de uma academia pode ser comparado a uma "Cozinha de Restaurante Fitness". Nesta metáfora, o sistema virtual assume o papel dos chefes e cozinheiros que preparam pratos saudáveis para os clientes, explicando mais sobre o assunto, podemos dividir em algumas categorias, sendo elas:
+
+Chefes Virtuais: O sistema virtual é como o chef de cozinha do restaurante em questão. Ele é o encarregado de criar receitas de exercícios, planos de treinamento e rotinas personalizadas para cada cliente, no caso, os alunos.
+
+Cozinheiros Virtuais: Os "cozinheiros" representam os diferentes componentes do sistema virtual, como programas de treinamento, metas estabelecidas e aulas oferecidas, além de também podermos compreender como os personais da academia virtual. Eles trabalham juntos para fornecer um serviço completo aos clientes.
+
+Clientes Famintos por Saúde: Os alunos da academia são como os clientes famintos por saúde e condicionamento físico. Eles chegam à "cozinha" em busca de refeições de exercícios e aulas bem preparadas para atender às suas necessidades específicas.
+
+Cardápio de Exercícios: O cardápio da academia é composto por exercícios variados e programas de treinamento. Os chefes e cozinheiros virtuais ajudam os clientes a escolher os pratos (exercícios) adequados para seus objetivos. Mais além, podemos entender que as metas criadas pelos alunos sejam suas comidas favoritas e nossa cozinha fará o possível para servi-la da melhor forma possível.
+
+Pratos Personalizados: Assim como um chef personaliza pratos com base nas preferências do cliente, o sistema virtual personaliza rotinas de exercícios com base nas metas e capacidades de cada cliente como citado anteriormente, levando em questão, o peso, medida, tudo relacionado a metas e progresso do cliente.
+
+Serviço de Mesa e Feedback: Os garçons e atendentes representam o sistema virtual que fornece feedback e orientação aos clientes durante seus treinos. Eles se asseguram de que os pratos sejam servidos da maneira correta e de que os clientes tenham uma experiência satisfatória.
+
+Qualidade e Sabor: A qualidade dos exercícios e a eficácia do treinamento são comparáveis ao sabor dos pratos em um restaurante. O sistema virtual garante que os exercícios e aulas sejam eficazes e agradáveis para cada cliente, levando em consideração suas limitações e preocupações, que até poderiam ser interpretadas como alergias e desgostos.
+
+Nesta metáfora, a academia é vista como um restaurante fitness onde os clientes recebem pratos personalizados de exercícios preparados por chefes e cozinheiros virtuais. O sistema virtual desempenha o papel central na criação de experiências de treinamento deliciosas e saudáveis para os frequentadores famintos por condicionamento físico.
+    
+\end{document}
