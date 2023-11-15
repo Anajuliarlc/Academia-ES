@@ -42,3 +42,23 @@ class Frame(ABC, tk.Frame):
     @abstractmethod
     def destroy(self) -> None:
         pass
+
+class FrameNotFound(ValueError):
+    def __init__(self) -> None:
+        """Raise when the frame type is not implemented"""        
+        super().__init__("Login frame not found")
+
+class ExampleFrame(Frame):
+    def __init__(self, window: tk.Tk, height: int = 600, width: int = 800,
+                  pos_x: int = 0, pos_y: int = 0) -> None:
+        """Create a frame to be used as example in the application """
+        super().__init__(window, height, width, pos_x, pos_y)
+
+    def desing(self) -> None:
+        pass
+
+    def place_objects(self) -> None:
+        pass
+
+    def destroy(self) -> None:
+        pass
