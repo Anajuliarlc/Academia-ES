@@ -9,21 +9,21 @@ import exc.exceptions as exc
 
 class TestUser(unittest.TestCase):
     def test_validate_cpf_empty(self):
-        """Testa se o CPF está vazio"""
+        """Testa o caso do CPF estar vazio"""
         self.assertRaises(exc.EmptyFieldError, User, "", "123456")     
     
     def test_validate_cpf_invalid_chars(self):
-        """Testa se o CPF contém caracteres inválidos"""
+        """Testa o caso do CPF conter caracteres inválidos"""
         self.assertRaises(exc.InvalidCPFError, User, "999.999.999-9A", "123456")     
         self.assertRaises(exc.InvalidCPFError, User, "999.999.999-9>", "123456")
 
     def test_validate_cpf_invalid_lenght(self):
-        """Testa se o CPF contém o tamanho correto"""
+        """Testa o caso do CPF ter tamanho incorreto"""
         self.assertRaises(exc.InvalidCPFError, User, "999", "123456")     
         self.assertRaises(exc.InvalidCPFError, User, "999.999.999-999", "123456")     
     
     def test_validate_password_empty(self):
-        """Testa se a senha está vazia"""
+        """Testa o caso da senha estar vazia"""
         self.assertRaises(exc.EmptyFieldError, User, "999.999.999-99", "")
     
 if __name__ == "__main__":
