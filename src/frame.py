@@ -25,14 +25,14 @@ class Frame(ABC, tk.Frame):
         self.pos_x = pos_x
         self.pos_y = pos_y
 
-        self.desing()
+        self.design()
         self.place_objects()
 
         self.place(x = self.pos_x, y = self.pos_y,
                     height = self.height, width = self.width)
     
     @abstractmethod
-    def desing(self) -> None:       
+    def design(self) -> None:       
         pass
 
     @abstractmethod
@@ -54,7 +54,7 @@ class ExampleFrame(Frame):
         """Create a frame to be used as example in the application """
         super().__init__(window, height, width, pos_x, pos_y)
 
-    def desing(self) -> None:
+    def design(self) -> None:
         self["bg"] = "red"
 
     def place_objects(self) -> None:

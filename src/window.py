@@ -10,9 +10,9 @@ class Window(tk.Tk):
         self.pos_x = pos_x
         self.pos_y = pos_y
         
-        self.desing()
+        self.design()
 
-    def desing(self):
+    def design(self):
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
         self.config(bg = "#000000")
