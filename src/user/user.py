@@ -34,7 +34,7 @@ class UserMeta(type):
     """ User Metaclass for Singleton Pattern application. """
 
     _instances = {}
-
+    
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             instance = super().__call__(*args, **kwargs)
@@ -96,6 +96,9 @@ class User(metaclass = UserMeta):
     def register(self, cpf: str, password: str) -> None:
         self.validate_cpf(cpf)
         self.validate_password(password)
+
+        # TODO: Implement complete registration in SQL database
+        self.access.insert(cpf, password)
 
 if __name__ == "__main__":
     # Temporary driver code to test access to database
