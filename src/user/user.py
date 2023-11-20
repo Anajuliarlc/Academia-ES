@@ -3,7 +3,8 @@ import re
 
 import sys 
 import os
-sys.path.append(os.path.abspath("./src")) # Adds src directory to python modules path.
+# Adds src directory to python modules path.
+sys.path.append(os.path.abspath("./src")) 
 
 import exc.exceptions as exc
 
@@ -21,22 +22,30 @@ class Access:
         self.table.to_csv(self.path, index=False)
 
     def select(self, username: str) -> pd.DataFrame:
-        return self.table[self.table['username'] == username]
+        return self.table.loc[self.table['CPF'] == username]
     
     def insert(self, username: str, password: str) -> None:
-        self.table = self.table.append({'CPF': username, 'Password': password}, ignore_index=True)
+        self.table = self.table.append({'CPF': username, 'Password': password}, 
+                                       ignore_index=True)
+        self.write()
         self.update()
 
+class UserMeta(type):
+    """ User Metaclass for Singleton Pattern application. """
 
-class User():
-    def __init__(self, cpf: str, password: str) -> None:
-        self.validate_cpf(cpf)
-        self.cpf = cpf
+    _instances = {}
 
-        self.validate_password(password)
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            instance = super().__call__(*args, **kwargs)
+            cls._instances[cls] = instance
+        return cls._instances[cls]
 
-        self.access = Access("./src/database/usuarios.csv")
-        self.login(self.cpf, password)
+class User(metaclass = UserMeta):
+    """User class for interaction with the environment."""
+    def __init__(self) -> None:
+        self.cpf = None
+        self.access = None
 
     def validate_cpf(self, cpf: str) -> None:
         if cpf == "":
@@ -50,8 +59,27 @@ class User():
 
     def validate_password(self, password: str) -> None:
         if password == "":
-            raise exc.EmptyFieldError("'senha'")
+            raise exc.EmptyFieldError("senha")
 
-    def login(self, username, password):
-        pass
+    def login(self, cpf: str, password: str) -> None:
+        self.validate_cpf(cpf)
+        self.validate_password(password)
+
+        login_cpf = re.sub(r"[.\-]", "", cpf)
+
+        # TODO: Replace with database access and guarantee the cpf type is right
+        self.access = Access("data/usuarios.csv")
+
+        if self.access.select(login_cpf).empty:
+            raise exc.CPFNotFoundError(cpf)
+        
+        if self.access.select(login_cpf)['Password'].values[0] != password:
+            raise exc.IncorrectPasswordError()
+    
+if __name__ == "__main__":
+    # Temporary driver code to test access to database
+    access = Access("./data/usuarios.csv")
+    access.select(32364696210)
+    
+    user = User()
     
