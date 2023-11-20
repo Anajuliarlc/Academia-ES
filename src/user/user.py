@@ -65,7 +65,7 @@ class User(metaclass = UserMeta):
         self.validate_cpf(cpf)
         self.validate_password(password)
 
-        login_cpf = re.sub(r"[.\-]", "", cpf)
+        login_cpf = int(re.sub(r"[.\-]", "", cpf))
 
         # TODO: Replace with database access and guarantee the cpf type is right
         self.access = Access("data/usuarios.csv")
@@ -73,7 +73,7 @@ class User(metaclass = UserMeta):
         if self.access.select(login_cpf).empty:
             raise exc.CPFNotFoundError(cpf)
         
-        if self.access.select(login_cpf)['Password'].values[0] != password:
+        if self.access.select(login_cpf)['Senha'].values[0] != password:
             raise exc.IncorrectPasswordError()
     
 if __name__ == "__main__":

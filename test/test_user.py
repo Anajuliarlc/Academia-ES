@@ -29,5 +29,13 @@ class TestUser(unittest.TestCase):
         """Testa o caso da senha estar vazia"""
         self.assertRaises(exc.EmptyFieldError, self.user.login, "999.999.999-99", "")
     
+    def test_CPF_not_found(self):
+        """Testa o caso do CPF não estar cadastrado"""
+        self.assertRaises(exc.CPFNotFoundError, self.user.login, "00000000000", "123456")
+
+    def test_incorrect_password(self):
+        """Testa o caso da senha estar incorreta"""
+        self.assertRaises(exc.IncorrectPasswordError, self.user.login, "32364696210", "123456")
+
 if __name__ == "__main__":
     unittest.main()
