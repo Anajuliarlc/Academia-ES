@@ -13,15 +13,30 @@ class EmptyFieldError(ValueError):
         super().__init__(self.message)
 
 class InvalidCPFError(ValueError):
-    """Exception raised for errors in the input CPF (Cadastro de Pessoa Física)."""
+    """Exception raised for errors in the input CPF (Cadastro de Pessoa Física).
+    """
 
     def __init__(self, cpf: str, msg: str = ""):
         """Raises an exception when a CPF is invalid.
 
-        :param cpf: The invalid CPF that caudes the exception.
+        :param cpf: The invalid CPF that caused the exception.
         :type cpf: str
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
         self.message = f"O CPF digitado '{cpf}' é inválido. " + msg
+        super().__init__(self.message)
+
+class CPFNotFoundError(KeyError):
+    """Exception raised when inputed CPF is not registered in system."""
+
+    def __init__(self, cpf: str, msg: str = ""):
+        """Raises an exception when a CPF is not registered.
+
+        :param cpf: The invalid CPF that caused the exception.
+        :type cpf: str
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O CPF digitado '{cpf}' não está cadastrado. " + msg
         super().__init__(self.message)
