@@ -40,3 +40,15 @@ class CPFNotFoundError(KeyError):
         """
         self.message = f"O CPF digitado '{cpf}' não está cadastrado. " + msg
         super().__init__(self.message)
+
+class IncorrectPasswordError(KeyError):
+    """Exception raised when inputed password is incorrect."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a password is wrong.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "A senha digitada está incorreta. " + msg
+        super().__init__(self.message)
