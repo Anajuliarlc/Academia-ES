@@ -52,3 +52,15 @@ class IncorrectPasswordError(KeyError):
         """
         self.message = "A senha digitada está incorreta. " + msg
         super().__init__(self.message)
+
+class InvalidPasswordError(ValueError):
+    """Exception raised when inputed password is invalid."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a password is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "A senha digitada é inválida. " + msg
+        super().__init__(self.message)

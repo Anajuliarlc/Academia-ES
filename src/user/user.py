@@ -44,7 +44,7 @@ class UserMeta(type):
 class User(metaclass = UserMeta):
     """User class for interaction with the environment."""
     def __init__(self) -> None:
-        self.cpf = None
+        self.logged_cpf = None
         self.access = None
 
     def validate_cpf(self, cpf: str) -> None:
@@ -60,10 +60,24 @@ class User(metaclass = UserMeta):
     def validate_password(self, password: str) -> None:
         if password == "":
             raise exc.EmptyFieldError("senha")
+        
+        if re.search(r"[\s\n]", password):
+            raise exc.InvalidPasswordError("A senha não deve conter espaços.")
+        
+        if len(password) < 7 or len(password) > 14:
+            raise exc.InvalidPasswordError(
+                "A senha deve conter entre 7 e 14 caracteres."
+                )
+
+        if not (re.search(r"[\d]+", password) 
+                and re.search(r"[A-Z]+", password) 
+                and re.search(r"[a-z]+", password)):
+            raise exc.InvalidPasswordError("A senha deve conter pelo menos um "
+                        "número, uma letra maiúscula e uma letra minúscula.")
 
     def login(self, cpf: str, password: str) -> None:
         self.validate_cpf(cpf)
-        self.validate_password(password)
+        if password == "": raise exc.EmptyFieldError("senha")
 
         login_cpf = int(re.sub(r"[.\-]", "", cpf))
 
@@ -71,15 +85,20 @@ class User(metaclass = UserMeta):
         self.access = Access("data/usuarios.csv")
 
         if self.access.select(login_cpf).empty:
-            raise exc.CPFNotFoundError(cpf)
+            raise exc.CPFNotFoundError(cpf, 
+                "Verify if the input is correct, or register a new account.")
         
         if self.access.select(login_cpf)['Senha'].values[0] != password:
             raise exc.IncorrectPasswordError()
-    
+
+        self.logged_cpf = login_cpf
+
+    def register(self, cpf: str, password: str) -> None:
+        self.validate_cpf(cpf)
+        self.validate_password(password)
+
 if __name__ == "__main__":
     # Temporary driver code to test access to database
     access = Access("./data/usuarios.csv")
     access.select(32364696210)
-    
-    user = User()
     
