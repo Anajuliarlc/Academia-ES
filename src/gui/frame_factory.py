@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
-import frame as fr
+import gui.frame as fr
 
 class FrameFactory(ABC):
 

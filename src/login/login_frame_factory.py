@@ -1,6 +1,9 @@
 import tkinter as tk
-import frame_factory as ff
-import frame as fr
+
+import sys
+sys.path.append("./src")
+import gui.frame_factory as ff
+import gui.frame as fr
 
 class LoginFrameFactory(ff.FrameFactory):
     @staticmethod
