@@ -92,5 +92,5 @@ class DBConnector:
 
 if __name__ == "__main__":
     db = DBConnector()
-    print(db.select())
+    print(db.insert())
     db.destory()
