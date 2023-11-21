@@ -4,7 +4,7 @@ sys.path.append("./src")
 import db.db_connector as db
 
 class Window(tk.Tk):
-    def __init__(self, title: str = "Chi-Trapzeio", height: int = 800, width: int = 1000,
+    def __init__(self, title: str = "Chi-Trapzeio", height: int = 600, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 0, connect: bool = False) -> None:
         super().__init__()
         self.title = title
@@ -21,7 +21,7 @@ class Window(tk.Tk):
     def design(self):
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
-        self.config(bg = "#000000")
+        self.config(bg = "#000F31")
         self.iconbitmap("img/icon.ico")
 
 
