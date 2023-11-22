@@ -18,6 +18,9 @@ class Window(tk.Tk):
             self.database = db.DBConnector()
 
         self.design()
+    
+    def change_frame(self, frame: tk.Frame) -> None:
+        pass
 
     def design(self):
         self.geometry(f"{self.width}x{self.height}")

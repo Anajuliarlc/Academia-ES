@@ -6,6 +6,7 @@ import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
 import student.menu_frame as smf
+import student.measurements_frame as smsf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -30,12 +31,15 @@ class StudentFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
+        elif type_ == "MeasurementsFrame":
+            return smsf.MeasurementsFrame(window)
         else:
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
     window = wd.Window(connect = False)
     frame = StudentFrameFactory("MenuFrame", window)
+    StudentFrameFactory("MeasurementsFrame", window)
     window.mainloop()
 
     
