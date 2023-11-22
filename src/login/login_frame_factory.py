@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("./src"))
 
 import gui.frame_factory as ff
 import gui.frame as fr
-import login_frame as lf
+import login.login_frame as lf
 
 class LoginFrameFactory(ff.FrameFactory):
     @staticmethod

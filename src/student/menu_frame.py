@@ -19,9 +19,12 @@ class MenuFrame(fr.Frame):
         menu_label = tk.Label(self, text = "MENU", font = ("Arial", 24, "bold"), 
                               bg = "#DF8350", fg = "#FEFAD2")
         menu_label.place(x = 80, y = 50)
+        
+        def go_to_workouts() -> None:
+            sff.StudentFrameFactory.get_frame("WorkoutsFrame", self.window)
 
         button_workouts = bt.MenuButton(text = "Meus Treinos", 
-                                        command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("WorkoutsFrame", self.window)),
+                                        command = go_to_workouts,
                                         window = self.window, pos_x = 20, pos_y = 150)
 
         button_progress = bt.MenuButton(text = "Progresso",
@@ -35,12 +38,14 @@ class MenuFrame(fr.Frame):
         button_profile = bt.MenuButton(text = "Perfil",
                                         command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("ProfileFrame", self.window)),
                                         window = self.window, pos_x = 20, pos_y = 450)
+        
+
 
     def destroy(self) -> None:
         super().destroy()
 
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window(connect = True)
     MenuFrame(mainframe)
     mainframe.mainloop()

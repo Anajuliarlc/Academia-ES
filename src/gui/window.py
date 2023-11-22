@@ -19,6 +19,9 @@ class Window(tk.Tk):
 
         self.design()
 
+    def change_frame(self, frame: tk.Frame) -> None:
+        ...
+
     def design(self):
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
@@ -30,4 +33,5 @@ class Window(tk.Tk):
 if __name__ == "__main__":
     import login.login_frame_factory as lff
     mainframe = Window(connect = False)
+    
     mainframe.mainloop()

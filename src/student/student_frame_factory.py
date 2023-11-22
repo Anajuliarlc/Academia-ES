@@ -6,6 +6,9 @@ import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
 import student.menu_frame as smf
+import student.workouts_frame as swf
+import student.request_change_frame as scf
+import student.increase_frame as sif
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -30,6 +33,12 @@ class StudentFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
+        elif type_ == "WorkoutsFrame":
+            return swf.WorkoutsFrame(window)
+        elif type_ == "RequestChangeFrame":
+            return scf.RequestChangeFrame(window)
+        elif type_ == "IncreaseFrame":
+            return sif.IncreaseFrame(window)
         else:
             raise fr.FrameNotFound()
         
