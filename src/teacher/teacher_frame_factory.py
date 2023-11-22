@@ -6,7 +6,7 @@ import gui.frame_factory as ff
 import gui.frame as fr
 import teacher.menu_frame as tmf
 import teacher.classes_frame as tcf
-import teacher.new_class as tnc
+import teacher.new_class_frame as tnc
 import gui.window as wd
 
 class TeacherFrameFactory(ff.FrameFactory):
@@ -38,7 +38,7 @@ class TeacherFrameFactory(ff.FrameFactory):
         elif type_ == "ClassesFrame":
             return tcf.ClassesFrame(window)
         elif type_ == "NewClass":
-            return tnc.NewClass(window)
+            return tnc.NewClassFrame(window)
         else:
             raise fr.FrameNotFound()
         

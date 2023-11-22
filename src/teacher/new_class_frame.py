@@ -8,7 +8,7 @@ import gui.entrytext as et
 import gui.buttons as bt
 import main
 
-class NewClass(fr.Frame):
+class NewClassFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
                   pos_x: int = 240, pos_y: int = 200) -> None:
         super().__init__(window, height, width, pos_x, pos_y)
@@ -61,5 +61,5 @@ class NewClass(fr.Frame):
 
 if __name__ == "__main__":
     window = wd.Window(connect = False)
-    frame = NewClass(window)
+    frame = NewClassFrame(window)
     window.mainloop()

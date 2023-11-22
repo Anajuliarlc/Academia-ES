@@ -22,10 +22,10 @@ VALUES
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Exercise
-INSERT INTO Exercise (IdUser, ExerciseName, SerNum, RepNum)
+INSERT INTO Exercise (IdUser, ExerciseName, SerNum, RepNum, WeightExercise)
 VALUES
-(3, 'Jogging', 3, 10),
-(4, 'Weightlifting', 4, 12);
+(3, 'Jogging', 3, 10, 20.0),
+(4, 'Weightlifting', 4, 12, 20.0);
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Measurements

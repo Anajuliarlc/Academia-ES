@@ -41,6 +41,7 @@ CREATE TABLE Exercise
   ExerciseName VARCHAR(255) NOT NULL,
   SerNum INT NOT NULL,
   RepNum INT NOT NULL,
+  WeightExercise FLOAT,
   PRIMARY KEY (IdExercise, IdUser),
   FOREIGN KEY (IdUser) REFERENCES Student(IdUser)
 );
