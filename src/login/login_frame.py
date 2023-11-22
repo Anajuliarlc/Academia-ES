@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath("./src"))
 import tkinter as tk
 
 import gui.frame as fr
+from gui.logo_frame import LogoFrame
 from gui.buttons import DefaultButton
 from gui.entrytext import EntryText
 from gui.errorlabel import ErrorLabel
@@ -64,7 +65,7 @@ class LoginFrame(fr.Frame):
                     exc.InvalidCPFError,
                     exc.IncorrectPasswordError) as error: 
                 self.warning = ErrorLabel(self, 
-                                          str(error), 
+                                          error, 
                                           600-len(str(error))*5, 
                                           370, 
                                           width=len(str(error))*10 , 
@@ -79,13 +80,14 @@ class LoginFrame(fr.Frame):
     def destroy(self) -> None:
         super().destroy()
         system = System()
+        LogoFrame(self.window, pos_x=119)
         if not system.database.select("Teacher", 
                                       "IdUser", 
                                       f"WHERE IdUser = {system.user}").empty:
+            
             TeacherFrameFactory("MenuFrame", self.window)
         elif not system.database.select("Student", 
                                       "IdUser", 
                                       f"WHERE IdUser = {system.user}").empty:
             StudentFrameFactory("MenuFrame", self.window)
-        
         

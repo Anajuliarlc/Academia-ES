@@ -6,7 +6,6 @@ import gui.window as wd
 import teacher.teacher_frame_factory as tff
 import gui.buttons as bt
 
-
 class MenuFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 240, 
                  pos_x: int = 0, pos_y: int = 0) -> None:
@@ -29,9 +28,8 @@ class MenuFrame(fr.Frame):
                                        window = self.window, pos_x = 20, pos_y = 300)
 
         button_register = bt.MenuButton(text = "Matrículas", 
-                                        command = lambda: self.window.change_frame(tff.TeacherFrameFactory.get_frame("RegisterFrame", self.window)),
+                                        command = lambda: tff.TeacherFrameFactory.get_frame("RegisterFrame", self.window),
                                         window = self.window, pos_x = 20, pos_y = 400)
-
 
     def destroy(self) -> None:
         super().destroy() 
@@ -40,3 +38,4 @@ if __name__ == "__main__":
     mainframe = wd.Window(connect = False)
     MenuFrame(mainframe)
     mainframe.mainloop()
+    
