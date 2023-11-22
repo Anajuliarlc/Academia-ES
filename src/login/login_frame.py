@@ -3,46 +3,89 @@ import os
 sys.path.append(os.path.abspath("./src"))
 
 import tkinter as tk
+
 import gui.frame as fr
-from login_class import Login
+from gui.buttons import DefaultButton
+from gui.entrytext import EntryText
+from gui.errorlabel import ErrorLabel
+
+import exc.exceptions as exc
+from login.login_class import Login
+from teacher.teacher_frame_factory import TeacherFrameFactory
+from student.student_frame_factory import StudentFrameFactory
+from main import System
 
 class LoginFrame(fr.Frame):
-    def __init__(self, window: tk.Tk, height: int = 600, width: int = 800,
-                  pos_x: int = 0, pos_y: int = 0) -> None:
+    def __init__(self, window: tk.Tk, height: int = 450, width: int = 1200,
+                  pos_x: int = 0, pos_y: int = 150) -> None:
         """Create a frame to be used as example in the application """
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
-        self["bg"] = "red"
+        self.config(bg = "#000F31")
 
     def place_objects(self) -> None:
-        self.title = tk.Label(self, text = "Bem vindo!", font = ("Arial", 20, "bold"))
-        self.title.place(x = 300, y = 20, height = 30, width = 200)
+        label1 = tk.Label(self, 
+                          text = "Insira suas credenciais:", 
+                          font = ("Arial", 20), 
+                          bg = "#000F31", 
+                          fg = "#DF8350")
+        label1.place(x = 455, y = 10)
+
+        label_cpf = tk.Label(self, 
+                             text = "CPF", 
+                             font = ("Arial", 20), 
+                             bg = "#000F31", 
+                             fg = "#FEFAD2")
+        label_cpf.place(x = 350, y = 90)
+        self.entry_cpf = EntryText(self, 350, 130, height=50)
+
+        label_password = tk.Label(self, 
+                                  text = "Senha", 
+                                  font = ("Arial", 20), 
+                                  bg = "#000F31", 
+                                  fg = "#FEFAD2")
+        label_password.place(x = 350, y = 200)
+        self.entry_password = EntryText(self, 350, 240, height=50, 
+                                        password=True)
         
-        self.label1 = tk.Label(self, text = "Insira suas credenciais:", font = ("Arial", 18))
-        self.label1.place(x = 150, y = 60, height = 20, width = 500)
-
-        self.label_cpf = tk.Label(self, text = "CPF:", font = ("Arial", 12, "bold"))
-        self.label_cpf.place(x = 220, y = 100, height = 20, width = 100)
-        self.entry_cpf = tk.Entry(self)
-        self.entry_cpf.place(x = 320, y = 100, height = 20, width = 200)
-
-        self.label_pass = tk.Label(self, text = "Senha:", font = ("Arial", 12, "bold"))
-        self.label_pass.place(x = 220, y = 120, height = 20, width = 100)
-        self.entry_pass = tk.Entry(self, show = "*")
-        self.entry_pass.place(x = 320, y = 120, height = 20, width = 200)
+        self.warning = tk.Label()
 
         def request_login() -> None:
             try:
-                login_command = Login(self.entry_cpf.get(), self.entry_pass.get())
+                self.warning.destroy()
+                login_command = Login(self.entry_cpf.get(), 
+                                      self.entry_password.get())
                 login_command.run()
-            except Exception as error: 
-                self.warning = tk.Label(self, text = str(error), font = ("Arial", 12, "bold"), fg = "red")
-                self.warning.place(x = 220, y = 200, height = 20, width = 300)
+                self.destroy()
 
-        self.button = tk.Button(self, text = "Entrar")
-        self.button["command"] = request_login
-        self.button.place(x = 200, y = 150, height = 40, width = 200)
+            except (exc.EmptyFieldError,
+                    exc.CPFNotFoundError,
+                    exc.InvalidCPFError,
+                    exc.IncorrectPasswordError) as error: 
+                self.warning = ErrorLabel(self, 
+                                          str(error), 
+                                          600-len(str(error))*5, 
+                                          370, 
+                                          width=len(str(error))*10 , 
+                                          height=60)
+                self.after(8000, self.warning.destroy)
+
+        self.button = DefaultButton("Entrar", 
+                                    request_login, 
+                                    self, 
+                                    500, 310, 200, 40)
         
     def destroy(self) -> None:
         super().destroy()
+        system = System()
+        if not system.database.select("Teacher", 
+                                      "IdUser", 
+                                      f"WHERE IdUser = {system.user}").empty:
+            TeacherFrameFactory("MenuFrame", self.window)
+        elif not system.database.select("Student", 
+                                      "IdUser", 
+                                      f"WHERE IdUser = {system.user}").empty:
+            StudentFrameFactory("MenuFrame", self.window)
+        
+        
