@@ -92,6 +92,6 @@ class DBConnector:
 
 if __name__ == "__main__":
     db = DBConnector()
-    print(db.select())
+    print(db.select("User"))
     print(db.select())
     db.destroy()
