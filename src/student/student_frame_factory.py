@@ -2,8 +2,10 @@ import tkinter as tk
 
 import sys
 sys.path.append("./src")
+import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
+import student.menu_frame as smf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -26,17 +28,14 @@ class StudentFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
+        elif type_ == "MenuFrame":
+            return smf.MenuFrame(window)
         else:
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
-    window = tk.Tk()
-    window.geometry("800x600")
-    window.resizable(False, False)
-    window.title("Student")
-    window.config(bg = "#FFFFFF")
-
-    frame = StudentFrameFactory("ExampleFrame", window)
+    window = wd.Window(connect = False)
+    frame = StudentFrameFactory("MenuFrame", window)
     window.mainloop()
 
-    frame = StudentFrameFactory("ClassFrame", window)
+    

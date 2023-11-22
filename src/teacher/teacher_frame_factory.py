@@ -4,6 +4,8 @@ import sys
 sys.path.append("./src")
 import gui.frame_factory as ff
 import gui.frame as fr
+import teacher.menu_frame as tmf
+import gui.window as wd
 
 class TeacherFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -29,17 +31,14 @@ class TeacherFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
+        elif type_ == "MenuFrame":
+            return tmf.MenuFrame(window)
         else:
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
-    window = tk.Tk()
-    window.geometry("800x600")
-    window.resizable(False, False)
-    window.title("Teacher")
-    window.config(bg = "#FFFFFF")
-
-    frame = TeacherFrameFactory("ExampleFrame", window)
+    window = wd.Window(connect = False)
+    frame = TeacherFrameFactory("MenuFrame", window)
     window.mainloop()
 
-    frame = TeacherFrameFactory("ClassFrame", window)
+    
