@@ -16,7 +16,7 @@ class MenuButton(tk.Button):
     
 
 class DefaultButton(tk.Button):
-    def __init__(self, text, command, window, pos_x, pos_y, width = 400, height = 150, font = ("Arial", 28)):
+    def __init__(self, text, command, window, pos_x, pos_y, width = 300, height = 120, font = ("Arial", 28)):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width
@@ -37,5 +37,5 @@ Cores usadas:
     #E29E6C - Laranja claro
     #000F31 - Azul escuro
     
-no botão padrão de 400x150, a fonte é Arial 28, mas se quiserem, dá pra mudar tbm
-na tela de Progresso do Aluno, recomendo que seja 300x100 e fonte Arial 28 tbm"""
+no botão padrão de 300x120, a fonte é Arial 28, mas se quiserem, dá pra mudar tbm 
+tanto tamanho do botão, tanto o tamnho da font"""
