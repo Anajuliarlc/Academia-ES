@@ -19,6 +19,14 @@ class Window(tk.Tk):
 
         self.design()
 
+    def change_frame(self, frame: tk.Frame) -> None:
+        """Changes the current frame to the one passed as argument
+
+        :param frame: Frame to be displayed
+        :type frame: tk.Frame
+        """    
+        pass
+
     def design(self):
         self.geometry(f"{self.width}x{self.height}")
         self.resizable(False, False)
