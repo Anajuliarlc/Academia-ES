@@ -41,7 +41,7 @@ class Frame(ABC, tk.Frame):
 
     @abstractmethod
     def destroy(self) -> None:
-        pass
+        super().destroy()
 
 class FrameNotFound(ValueError):
     def __init__(self) -> None:
