@@ -5,6 +5,7 @@ import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
 import teacher.class_frame as cf
+import teacher.teacher_frame_factory as tff
 
 class ClassesFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
@@ -43,13 +44,16 @@ class ClassesFrame(fr.Frame):
                                 self.classes[i][2], pos_x = pos_x,
                                 pos_y = 80)
             self.actual_classes[i] = class_i
-            
+    
+    def open_new_class(self) -> None:
+        tff.TeacherFrameFactory.get_frame("NewClass", self.window)
+
     def place_objects(self) -> None:
         label = tk.Label(self, text = "Aulas", font = ("Arial", 24, "bold"), 
                          bg = "#000F31", fg = "#FEFAD2")
         label.place(x = 425, y = 30, width = 100, height = 30)
         new_class_button = bt.DefaultButton(text = "Nova aula", 
-                                         command = self.destroy,
+                                         command = self.open_new_class,
                                          window = self, pos_x = 380, pos_y = 360,
                                          font = ("Arial", 20, "bold"),
                                          width = 200, height = 30)
