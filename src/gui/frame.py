@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
+import sys
+sys.path.append("./src")
 
 class Frame(ABC, tk.Frame):
 
@@ -24,6 +26,7 @@ class Frame(ABC, tk.Frame):
         self.width = width
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.window.active_frames.append(self)
 
         self.design()
         self.place_objects()
@@ -42,6 +45,7 @@ class Frame(ABC, tk.Frame):
     @abstractmethod
     def destroy(self) -> None:
         super().destroy()
+        self.window.active_frames.remove(self)
 
 class FrameNotFound(ValueError):
     def __init__(self) -> None:
