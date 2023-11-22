@@ -4,6 +4,7 @@ sys.path.append("./src")
 import gui.frame as fr
 import gui.window as wd
 import student.student_frame_factory as sff
+import gui.buttons as bt
 
 
 class MenuFrame(fr.Frame):
@@ -19,29 +20,20 @@ class MenuFrame(fr.Frame):
                               bg = "#DF8350", fg = "#FEFAD2")
         menu_label.place(x = 80, y = 50)
 
-        button_workouts = tk.Button(self, text = "Meus treinos", font = ("Arial", 18), 
-                                    bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                    highlightbackground="#000F31", 
-                                    command = lambda: sff.StudentFrameFactory("WorkoutsFrame", self.master))
-        button_workouts.place(x = 20, y = 150, width = 200, height = 50)
+        button_workouts = bt.MenuButton(text = "Treinos", 
+                                        command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("WorkoutsFrame", self.window)),
+                                        window = self.window, pos_x = 80, pos_y = 150)
+        button_workouts.place(x = 20, y = 200)
 
-        button_progress = tk.Button(self, text = "Progresso", font = ("Arial", 18),
-                                    bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                    highlightbackground="#000F31", 
-                                    command = lambda: sff.StudentFrameFactory("ProgressFrame", self.master))
-        button_progress.place(x = 20, y = 250, width = 200, height = 50)
+        button_classes = bt.MenuButton(text = "Aulas", 
+                                       command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("ClassesFrame", self.window)),
+                                       window = self.window, pos_x = 80, pos_y = 250)
+        button_classes.place(x = 20, y = 300)
 
-        button_classes = tk.Button(self, text = "Aulas", font = ("Arial", 18),
-                                   bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                   highlightbackground="#000F31", 
-                                   command = lambda: sff.StudentFrameFactory("ClassesFrame", self.master))
-        button_classes.place(x = 20, y = 350, width = 200, height = 50)
-
-        button_profile = tk.Button(self, text = "Perfil", font = ("Arial", 18),
-                                   bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                   highlightbackground="#000F31", 
-                                   command = lambda: sff.StudentFrameFactory("ProfileFrame", self.master))
-        button_profile.place(x = 20, y = 450, width = 200, height = 50)
+        button_register = bt.MenuButton(text = "Matrículas", 
+                                        command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("RegisterFrame", self.window)),
+                                        window = self.window, pos_x = 80, pos_y = 350)
+        button_register.place(x = 20, y = 400) 
 
 
     def destroy(self) -> None:

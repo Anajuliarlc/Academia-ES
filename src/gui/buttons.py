@@ -4,34 +4,27 @@ sys.path.append("./src")
 
 class MenuButton(tk.Button):
     def __init__(self, text, command, window, pos_x, pos_y, width = 200, height = 50):
-        self.text = text
-        self.command = command
-        self.window = window
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width
         self.height = height
-        super().__init__(self.window, text = self.text, font = ("Arial", 18), 
+        super().__init__(window, text = text, font = ("Arial", 18), 
                                     bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
                                     highlightbackground="#000F31", 
-                                    command = self.command)
+                                    command = command)
         self.place(x = self.pos_x, y = self.pos_y, width = self.width, height = self.height)
     
 
 class DefaultButton(tk.Button):
     def __init__(self, text, command, window, pos_x, pos_y, width = 400, height = 150, font = ("Arial", 28)):
-        self.text = text
-        self.command = command
-        self.window = window
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width
         self.height = height
-        self.font = font
-        super().__init__(self.window, text = self.text, font = self.font, 
+        super().__init__(window, text = text, font = font, 
                                     bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
                                     highlightbackground="#000F31", 
-                                    command = self.command)
+                                    command = command)
         self.place(x = self.pos_x, y = self.pos_y, width = self.width, height = self.height)
 
 
