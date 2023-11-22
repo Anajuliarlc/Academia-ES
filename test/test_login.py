@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath("./src")) # Adds src directory to python modules path.
 
-from login.login import Login
+from login.login_class import Login
 import exc.exceptions as exc
 
 class TestUser(unittest.TestCase):
@@ -38,22 +38,21 @@ class TestUser(unittest.TestCase):
     def test_login_password_empty(self):
         """Testa o caso da senha estar vazia"""
         self.assertRaises(exc.EmptyFieldError, Login, "999.999.999-99", "")
-    
-    #TODO: Liberar testes que acessam o bd, após solucionar o problema de querys consecutivas
 
-    # def test_login_cpf_not_found(self):
-    #     """Testa o caso do CPF não estar cadastrado"""
-    #     self.assertRaises(exc.CPFNotFoundError, self.login.run)
+    def test_login_cpf_not_found(self):
+        """Testa o caso do CPF não estar cadastrado"""
+        self.assertRaises(exc.CPFNotFoundError, 
+                          Login("00000000000", "wrong_password123").run)
 
-    # def test_login_incorrect_password(self):
-    #     """Testa o caso da senha estar incorreta"""
-    #     self.assertRaises(exc.IncorrectPasswordError, 
-    #                       Login("12345678901", "wrong_password123").run)
+    def test_login_incorrect_password(self):
+        """Testa o caso da senha estar incorreta"""
+        self.assertRaises(exc.IncorrectPasswordError, 
+                          Login("12345678901", "wrong_password123").run)
 
-    # def test_login_success(self):
-    #     """Testa o caso de sucesso no login"""
-    #     self.login.run()
-    #     self.assertEqual(self.login.system.user, self.login.system.database.select("User", "*", f"WHERE CPF = {self.login.cpf}")["IdUser"])
+    def test_login_success(self):
+        """Testa o caso de sucesso no login"""
+        self.login.run()
+        self.assertEqual(self.login.system.user, self.login.system.database.select("User", "IdUser", f"WHERE CPF = {self.login.cpf}").iloc[0][0])
 
 if __name__ == "__main__":
     unittest.main()

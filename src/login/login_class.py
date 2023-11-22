@@ -59,7 +59,7 @@ class Login():
         
         if attempt.empty:
             raise exc.CPFNotFoundError(self.cpf, 
-                "Verify if the input is correct, or request a new account.")
+                "Verifique se a entrada está correta ou solicite uma nova conta.")
         
         if attempt["UserPassword"].iloc[0] != self.password:
             raise exc.IncorrectPasswordError()
