@@ -41,16 +41,12 @@ class DBConnector:
         output = self.db.recv(4096).decode()
         return output
 
-    def insert(self, table: str = "ComQuestion (QuestionText, ResponseText)",
-               values: str = "('What is your name?', 'My name is...'), \
-                                ('How are you?', 'I am fine.')") -> str:
+    def insert(self, table: str, values: str) -> str:
         """_summary_
 
-        :param table: Table of database to insert values,
-        defaults to "ComQuestion (QuestionText, ResponseText)"
+        :param table: Table of database to insert values
         :type table: str, optional
-        :param values: Values to insert, defaults to
-        "('What is your name?', 'My name is...'),('How are you?', 'I am fine.')"
+        :param values: Values to insert
         :type values: str, optional
         :return: return of the query
         :rtype: str
@@ -58,11 +54,11 @@ class DBConnector:
         query = "INSERT INTO " + table + " VALUES " + values + ";"
         return self.query(query)
     
-    def select(self, table: str = "ComQuestion", columns: str = "*",
+    def select(self, table: str, columns: str = "*",
                 condition: str = "") -> pd.DataFrame:
         """Select values from a table
 
-        :param table: Table to be search, defaults to "ComQuestion"
+        :param table: Table to be search
         :type table: str, optional
         :param columns: Columns to be search, defaults to "*"
         :type columns: str, optional
@@ -73,7 +69,7 @@ class DBConnector:
         """        
         query = "SELECT " + columns + " FROM " + table + " " + condition + ";"
         return_query = self.query(query)
-        table_returned = return_query.split(f"MySQL [dbacademychi]> {query}")[1]
+        table_returned = return_query.split(query)[1]
         lines_returned = table_returned.split("\n")[1:]
         if len(lines_returned) == 1:
             return []
@@ -86,11 +82,28 @@ class DBConnector:
                 line = [column.strip() for column in line]
                 lines_df.append(line)
             return pd.DataFrame(lines_df, columns=colums_df)
+        
+    def delete(self, table: str, condition: str) -> str:
+        """Delete values from a table
+
+        :param table: Table to be delete
+        :type table: str, optional
+        :param condition: Conditions of the delete
+        :type condition: str, optional
+        :return: return of the query
+        :rtype: str
+        """        
+        query = "DELETE FROM " + table + " " + condition + ";"
+        return self.query(query)
     
-    def destory(self):
+    def destroy(self):
         self.db.close()
 
 if __name__ == "__main__":
     db = DBConnector()
-    print(db.insert())
-    db.destory()
+    print(db.select("User"))
+    table = "User (IdUser, UserName, BirthDate, CPF, RG, UserPassword)"
+    value = "(100, 'teste', '1999-01-01', '12345678910', '123456789', '123456789')"
+    print(db.insert(table = table, values = value))
+    print(db.delete("User", "WHERE IdUser = 100"))
+    db.destroy()
