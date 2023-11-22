@@ -6,6 +6,7 @@ import gui.window as wd
 import teacher.teacher_frame_factory as tff
 import gui.buttons as bt
 import login.login_frame_factory as lff
+import gui.logo_frame as lf
 
 
 class MenuFrame(fr.Frame):
@@ -38,6 +39,7 @@ class MenuFrame(fr.Frame):
         for frame in self.window.active_frames:
             if type(frame).__name__ != "LogoFrame":
                 frame.destroy()
+        lf.LogoFrame(self.window)
         lff.LoginFrameFactory.get_frame("LoginFrame", self.window)
         
 
