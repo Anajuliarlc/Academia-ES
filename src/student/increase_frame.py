@@ -7,7 +7,7 @@ import student.student_frame_factory as sff
 import gui.buttons as bt
 import db.db_connector as db
 import gui.errorlabel as el
-import gui.thank_you_frame as tyf
+import student.thank_you_frame as tyf
 import main
 
 class IncreaseFrame(fr.Frame):
@@ -21,7 +21,7 @@ class IncreaseFrame(fr.Frame):
     def place_objects(self) -> None:
         # select the student's workouts
         system = main.System()
-        workouts = self.window.database.select("Exercise", "ExerciseName", f"IdUser = {system.user}")
+        workouts = system.database.select("Exercise", "ExerciseName", f"IdUser = {system.user}")
 
         if len(workouts) == 0:
             # show error message

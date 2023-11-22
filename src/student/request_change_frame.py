@@ -5,15 +5,16 @@ import gui.frame as fr
 import gui.window as wd
 import student.student_frame_factory as sff
 import gui.buttons as bt
-import db.db_connector as db
 import gui.errorlabel as el
-import gui.thank_you_frame as tyf
 import gui.entrytext as et
+import main
+import datetime
 
 class RequestChangeFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
                  pos_x: int = 240, pos_y: int = 200) -> None:
         super().__init__(window, height, width, pos_x, pos_y)
+        self.errors = []
 
     def design(self) -> None:
         self.config(bg = "#000F31")
@@ -43,34 +44,30 @@ class RequestChangeFrame(fr.Frame):
         def send_request() -> None:
             if clicked.get() == "Motivo da solicitação":
                 # show error message
-                el.ErrorLabel(self, "Selecione um treino", 425, 200)
-            else:
-                # send request to database
-                db_connector = db.DBConnector()
-                db_connector.update(...)
-                # show message to user
-                tyf.ThankYouFrame(self, "Solicitação enviada", 425, 200)
-
-        button_request_change = bt.MenuButton(text = "Enviar solicitação",
-                                        window = self.window, pos_x = 520,
-                                        pos_y = 440, width=400, height=50,
-                                        command = lambda: send_request())
-        
-        def send_request() -> None:
-            if clicked.get() == "Motivo da solicitação":
-                # show error message
                 error = el.ErrorLabel(self, "Selecione um motivo", pos_x=280,
                                       pos_y=300, width=400, height=50)
+                self.errors.append(error)
             elif entry_text.get() == "":
                 # show error message
                 error = el.ErrorLabel(self, "Descreva sua situação", 425, 200)
+                self.errors.append(error)
             else:
-                # send request to database
-                # db_connector = db.DBConnector()
-                # db_connector.update(...)
-                # show message to user
+                system = main.System()
+                datetime_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                details = clicked.get() + ": " + entry_text.get()
+                return_message = system.database.insert("Request (IdUser, RequestDate, RequestDescription, RequestClosed)", f"({system.user}, \'{datetime_str}\', \'{details}\', false)")
+                print(return_message)
+                
+                for error in self.errors:
+                    error.destroy()
+                self.button_request_change.destroy()
                 self.destroy()
-                message = tyf.ThankYouFrame(self, "Solicitação enviada", 425, 200)
+                sff.StudentFrameFactory.get_frame("ThankYouFrame", self.window)
+
+        self.button_request_change = bt.MenuButton(text = "Enviar solicitação",
+                                        window = self, pos_x = 280,
+                                        pos_y = 240, width=400, height=50,
+                                        command = lambda: send_request())
 
     def destroy(self) -> None:
         super().destroy()

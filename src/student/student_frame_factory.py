@@ -9,6 +9,7 @@ import student.menu_frame as smf
 import student.workouts_frame as swf
 import student.request_change_frame as scf
 import student.increase_frame as sif
+import student.thank_you_frame as styf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -39,6 +40,8 @@ class StudentFrameFactory(ff.FrameFactory):
             return scf.RequestChangeFrame(window)
         elif type_ == "IncreaseFrame":
             return sif.IncreaseFrame(window)
+        elif type_ == "ThankYouFrame":
+            return styf.ThankYouFrame(window)
         else:
             raise fr.FrameNotFound()
         

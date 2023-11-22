@@ -21,13 +21,17 @@ class WorkoutsFrame(fr.Frame):
         self.config(bg = "#000F31")
 
     def place_objects(self) -> None:
-        button_increase = bt.DefaultButton(text = "Progredir Cargas", 
-                                        command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("IncreaseFrame", self.window)),
-                                        window = self.window, pos_x = 300, pos_y = 250)
+        def go_to_increase() -> None:
+            sff.StudentFrameFactory.get_frame("IncreaseFrame", self.window)
+            self.destroy()
 
-        button_request_change = bt.DefaultButton(text = "Solicitar alteração",
+        self.button_increase = bt.DefaultButton(text = "Progredir Cargas", 
+                                        command = lambda: go_to_increase(),
+                                        window = self, pos_x = 60, pos_y = 50)
+
+        self.button_request_change = bt.DefaultButton(text = "Solicitar alteração",
                                         command = self.request_change,
-                                        window = self.window, pos_x = 750, pos_y = 250)
+                                        window = self, pos_x = 510, pos_y = 50)
         
 
     def destroy(self) -> None:
