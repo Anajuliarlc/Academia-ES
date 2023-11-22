@@ -1,6 +1,6 @@
 USE dbacademychi;
 
-INSERT INTO User (IdUser, UserName, BirthDate, CPF, RG, UserPassaword)
+INSERT INTO User (IdUser, UserName, BirthDate, CPF, RG, UserPassword)
 VALUES
 (1, 'John Doe', '1990-05-15', 12345678901, 987654321, 'password123'),
 (2, 'Jane Smith', '1985-08-22', 23456789012, 876543210, 'testpass'),
@@ -15,17 +15,10 @@ VALUES
 (2, '09:00:00', '17:00:00');
 -- Adicione mais linhas conforme necessário
 
-INSERT INTO Student (IdUser, PhoneNumber, State, City, Neighbordhood, ResgistrationDate, MedicalData)
+INSERT INTO Student (IdUser, PhoneNumber, State, City, Neighbourdhood, RegistrationDate, MedicalData)
 VALUES
 (3, 9876543210, 'CA', 'Los Angeles', 'Downtown', '2022-01-10', 'No medical conditions'),
 (4, 8765432109, 'NY', 'New York', 'Midtown', '2022-02-15', 'Allergic to pollen');
--- Adicione mais linhas conforme necessário
-
--- Inserindo dados fictícios na tabela ComQuestion
-INSERT INTO ComQuestion (QuestionText, ResponseText)
-VALUES
-('How are you feeling today?', 'I feel great!'),
-('Any concerns or issues?', 'No concerns at the moment');
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Exercise
@@ -36,7 +29,7 @@ VALUES
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Measurements
-INSERT INTO Measurements (IdUser, MeasDate, Weight, Height, HighWaist, LowWaist, Bust, Biceps, _Thigh)
+INSERT INTO Measurements (IdUser, MeasDate, Weight, Height, HighWaist, LowWaist, Bust, Biceps, Thigh)
 VALUES
 (3, '2022-03-01', 70.5, 175, 80, 70, 95, 30, 55),
 (4, '2022-03-01', 65.2, 162, 75, 65, 88, 28, 50);
@@ -64,7 +57,7 @@ VALUES
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Take
-INSERT INTO Take (IdStuden, IdClass, IdTeacher)
+INSERT INTO Take (IdStudent, IdClass, IdTeacher)
 VALUES
 (3, 1, 1),
 (4, 2, 2);

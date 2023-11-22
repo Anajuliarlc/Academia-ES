@@ -7,7 +7,7 @@ CREATE TABLE User
   BirthDate DATE NOT NULL,
   CPF NUMERIC(11) NOT NULL,
   RG NUMERIC(11) NOT NULL,
-  UserPassaword VARCHAR(255) NOT NULL,
+  UserPassword VARCHAR(255) NOT NULL,
   PRIMARY KEY (IdUser),
   UNIQUE (CPF)
 );
@@ -27,19 +27,11 @@ CREATE TABLE Student
   PhoneNumber NUMERIC(11) NOT NULL,
   State CHAR(2) NOT NULL,
   City VARCHAR(255) NOT NULL,
-  Neighbordhood VARCHAR(255) NOT NULL,
-  ResgistrationDate DATE NOT NULL,
+  Neighbourdhood VARCHAR(255) NOT NULL,
+  RegistrationDate DATE NOT NULL,
   MedicalData VARCHAR(800),
   PRIMARY KEY (IdUser),
   FOREIGN KEY (IdUser) REFERENCES User(IdUser)
-);
-
-CREATE TABLE ComQuestion
-(
-  IdQuestion INT NOT NULL AUTO_INCREMENT,
-  QuestionText VARCHAR(800) NOT NULL,
-  ResponseText VARCHAR(800) NOT NULL,
-  PRIMARY KEY (IdQuestion)
 );
 
 CREATE TABLE Exercise
@@ -64,7 +56,7 @@ CREATE TABLE Measurements
   LowWaist FLOAT,
   Bust FLOAT,
   Biceps FLOAT,
-  _Thigh FLOAT,
+  Thigh FLOAT,
   PRIMARY KEY (IdMeas, IdUser),
   FOREIGN KEY (IdUser) REFERENCES Student(IdUser)
 );
@@ -109,11 +101,11 @@ CREATE TABLE Card
 
 CREATE TABLE Take
 (
-  IdStuden INT NOT NULL,
+  IdStudent INT NOT NULL,
   IdClass INT NOT NULL,
   IdTeacher INT NOT NULL,
-  PRIMARY KEY (IdStuden, IdClass, IdTeacher),
-  FOREIGN KEY (IdStuden) REFERENCES Student(IdUser),
+  PRIMARY KEY (IdStudent, IdClass, IdTeacher),
+  FOREIGN KEY (IdStudent) REFERENCES Student(IdUser),
   FOREIGN KEY (IdClass, IdTeacher) REFERENCES Class(IdClass, IdUser)
 );
 
