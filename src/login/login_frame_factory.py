@@ -1,9 +1,12 @@
 import tkinter as tk
 
 import sys
-sys.path.append("./src")
+import os
+sys.path.append(os.path.abspath("./src")) 
+
 import gui.frame_factory as ff
 import gui.frame as fr
+import login_frame as lf
 
 class LoginFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -26,6 +29,8 @@ class LoginFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
+        elif type_ == "LoginFrame":
+            return lf.LoginFrame(window, height, width, pos_x, pos_y)
         else:
             raise fr.FrameNotFound()
         
@@ -36,7 +41,7 @@ if __name__ == "__main__":
     window.title("Login")
     window.config(bg = "#FFFFFF")
 
-    frame = LoginFrameFactory("ExampleFrame", window)
+    frame = LoginFrameFactory("LoginFrame", window)
     window.mainloop()
 
     frame = LoginFrameFactory("ClassFrame", window)
