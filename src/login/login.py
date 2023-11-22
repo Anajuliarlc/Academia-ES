@@ -21,13 +21,12 @@ class Login():
         :type password: str
         :raises EmptyFieldError: Se o campo senha estiver vazio.
         """
-        self.system = System()
+        self.system = System() # Access the system singleton instance.
         self.cpf = self.validate_cpf(cpf)
 
         if password == "":
             raise exc.EmptyFieldError("senha")
-        else:
-            self.password = password
+        self.password = password
 
     def validate_cpf(self, cpf: str) -> str:
         """
