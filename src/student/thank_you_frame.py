@@ -19,7 +19,7 @@ class ThankYouFrame(fr.Frame):
                                bg = "#E29E6C", fg = "#FEFAD2")
         title_label.place(x=280, y=10, width=400, height=50)
 
-        message_label = tk.Label(self, text="Sua solicitação foi enviada com sucesso!\nAguarde a resposta por e-mail.",
+        message_label = tk.Label(self, text="Sua solicitação foi enviada com sucesso!",
                                font=("Arial", 14),
                                bg = "#E29E6C", fg = "#FEFAD2")
         message_label.place(x=280, y=60, width=400, height=50)
