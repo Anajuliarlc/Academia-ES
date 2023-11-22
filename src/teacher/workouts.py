@@ -15,11 +15,14 @@ class Workouts(fr.Frame):
     def design(self):
         self.config(bg = "#000F31")
 
+    def button_new_workout(self):
+        
+
     def place_objects(self):
-        bt.DefaultButton(text = "Novo Treino", 
+        button_new_workout = bt.DefaultButton(text = "Novo Treino", 
                          command= lambda: self.window.change_frame("NewWorkoutFrame"), 
                           window = self.window, pos_x = 340, pos_y = 300)
-        bt.DefaultButton(text = "Treinos atuais", 
+        button_workout = bt.DefaultButton(text = "Treinos atuais", 
                          command= lambda: self.window.change_frame("CurrentWorkoutsFrame"), 
                           window = self.window, pos_x = 740, pos_y = 300)
         
