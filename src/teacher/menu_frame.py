@@ -4,6 +4,7 @@ sys.path.append("./src")
 import gui.frame as fr
 import gui.window as wd
 import teacher.teacher_frame_factory as tff
+import gui.buttons as bt
 
 
 class MenuFrame(fr.Frame):
@@ -19,28 +20,21 @@ class MenuFrame(fr.Frame):
                               bg = "#DF8350", fg = "#FEFAD2")
         menu_label.place(x = 80, y = 50)
 
-        button_workouts = tk.Button(self, text = "Treinos", font = ("Arial", 18), 
-                                    bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                    highlightbackground="#000F31", 
-                                    command = lambda: tff.TeacherFrameFactory("WorkoutsFrame", self.master))
-        button_workouts.place(x = 20, y = 200, width = 200, height = 50)
+        button_workouts = bt.MenuButton(text = "Treinos", 
+                                        command = lambda: self.window.change_frame(tff.TeacherFrameFactory.get_frame("WorkoutsFrame", self.window)),
+                                        window = self.window, pos_x = 20, pos_y = 200)
+        
+        button_classes = bt.MenuButton(text = "Aulas", 
+                                       command = lambda: self.window.change_frame(tff.TeacherFrameFactory.get_frame("ClassesFrame", self.window)),
+                                       window = self.window, pos_x = 20, pos_y = 300)
 
-        button_classes = tk.Button(self, text = "Aulas", font = ("Arial", 18),
-                                   bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                   highlightbackground="#000F31", 
-                                   command = lambda: tff.TeacherFrameFactory("ClassesFrame", self.master))
-        button_classes.place(x = 20, y = 300, width = 200, height = 50)
-
-        button_register = tk.Button(self, text = "Matrículas", font = ("Arial", 18),
-                                   bg = "#E29E6C", fg = "#FEFAD2", borderwidth=2, 
-                                   highlightbackground="#000F31", 
-                                   command = lambda: tff.TeacherFrameFactory("RegisterFrame", self.master))
-        button_register.place(x = 20, y = 400, width = 200, height = 50)
+        button_register = bt.MenuButton(text = "Matrículas", 
+                                        command = lambda: self.window.change_frame(tff.TeacherFrameFactory.get_frame("RegisterFrame", self.window)),
+                                        window = self.window, pos_x = 20, pos_y = 400)
 
 
     def destroy(self) -> None:
-        super().destroy()
-
+        super().destroy() 
 
 if __name__ == "__main__":
     mainframe = wd.Window(connect = False)
