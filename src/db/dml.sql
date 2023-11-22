@@ -38,8 +38,8 @@ VALUES
 -- Inserindo dados fictícios na tabela Class
 INSERT INTO Class (IdUser, ClassName, ClassDate, ClassDescriprion, StudentsMax)
 VALUES
-(1, 'Yoga Class', '2022-04-05', 'Relaxation and flexibility exercises', 15),
-(2, 'High-Intensity Training', '2022-04-10', 'Intense workout for strength and endurance', 20);
+(1, 'Yoga Class', '2022-04-05 14:30:00', 'Relaxation and flexibility exercises', 15),
+(2, 'High-Intensity Training', '2022-04-10 15:30:00', 'Intense workout for strength and endurance', 20);
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Goal

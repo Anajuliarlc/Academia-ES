@@ -66,7 +66,7 @@ CREATE TABLE Class
   IdClass INT NOT NULL AUTO_INCREMENT,
   IdUser INT NOT NULL,
   ClassName VARCHAR(255) NOT NULL,
-  ClassDate DATE NOT NULL,
+  ClassDate DATETIME NOT NULL,
   ClassDescriprion VARCHAR(800) NOT NULL,
   StudentsMax INT NOT NULL,
   PRIMARY KEY (IdClass, IdUser),
