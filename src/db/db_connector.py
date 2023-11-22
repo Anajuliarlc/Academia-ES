@@ -73,7 +73,7 @@ class DBConnector:
         """        
         query = "SELECT " + columns + " FROM " + table + " " + condition + ";"
         return_query = self.query(query)
-        table_returned = return_query.split(f"MySQL [dbacademychi]> {query}")[1]
+        table_returned = return_query.split(query)[1]
         lines_returned = table_returned.split("\n")[1:]
         if len(lines_returned) == 1:
             return []
@@ -87,10 +87,11 @@ class DBConnector:
                 lines_df.append(line)
             return pd.DataFrame(lines_df, columns=colums_df)
     
-    def destory(self):
+    def destroy(self):
         self.db.close()
 
 if __name__ == "__main__":
     db = DBConnector()
+    print(db.select("User"))
     print(db.select())
-    db.destory()
+    db.destroy()
