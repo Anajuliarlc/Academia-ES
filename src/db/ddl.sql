@@ -41,6 +41,7 @@ CREATE TABLE Exercise
   ExerciseName VARCHAR(255) NOT NULL,
   SerNum INT NOT NULL,
   RepNum INT NOT NULL,
+  WeightExercise FLOAT,
   PRIMARY KEY (IdExercise, IdUser),
   FOREIGN KEY (IdUser) REFERENCES Student(IdUser)
 );
@@ -66,8 +67,8 @@ CREATE TABLE Class
   IdClass INT NOT NULL AUTO_INCREMENT,
   IdUser INT NOT NULL,
   ClassName VARCHAR(255) NOT NULL,
-  ClassDate DATE NOT NULL,
-  ClassDescriprion VARCHAR(800) NOT NULL,
+  ClassDate DATETIME NOT NULL,
+  ClassDescription VARCHAR(800) NOT NULL,
   StudentsMax INT NOT NULL,
   PRIMARY KEY (IdClass, IdUser),
   FOREIGN KEY (IdUser) REFERENCES Teacher(IdUser)
@@ -109,3 +110,12 @@ CREATE TABLE Take
   FOREIGN KEY (IdClass, IdTeacher) REFERENCES Class(IdClass, IdUser)
 );
 
+CREATE TABLE Request
+(
+  IdRequest INT NOT NULL AUTO_INCREMENT,
+  IdUser INT NOT NULL,
+  RequestDate DATETIME NOT NULL,
+  RequestDescription VARCHAR(800) NOT NULL,
+  RequestClosed BOOLEAN NOT NULL,
+  PRIMARY KEY (IdRequest, IdUser),
+)
