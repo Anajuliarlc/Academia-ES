@@ -7,6 +7,7 @@ import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
 import student.menu_frame as smf
+import student.progress_frame as pf
 import student.measurements_frame as msf
 import student.view_measurements_frame as svmsf
 import student.set_measurement_frame as ssmf
@@ -37,6 +38,8 @@ class StudentFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
+        elif type_ == "ProgressFrame":
+            return pf.ProgressFrame(window)
         elif type_ == "GoalsFrame":
             return gf.GoalsFrame(window)
         elif type_ == "SetGoalsFrame":
@@ -57,8 +60,7 @@ if __name__ == "__main__":
     frame = StudentFrameFactory("MenuFrame", window)
     system = main.System()
     system.user = 3
-    StudentFrameFactory("GoalsFrame", window)
-    StudentFrameFactory("MeasurementsFrame", window)
+    StudentFrameFactory("ProgressFrame", window)
     window.mainloop()
 
     

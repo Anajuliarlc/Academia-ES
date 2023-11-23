@@ -19,7 +19,7 @@ class MeasurementsFrame(fr.Frame):
 
     def view_measurement(self) -> None:
         self.destroy()
-        sff.StudentFrameFactory.get_frame("ViewMeasurementFrame", self.window)
+        sff.StudentFrameFactory.get_frame("ViewMeasurementsFrame", self.window)
 
     def place_objects(self) -> None:
         """Place objects on the frame
@@ -32,13 +32,13 @@ class MeasurementsFrame(fr.Frame):
         self.label_view_measurements = bt.DefaultButton(text = "Definir Medidas",
                                                 command = self.set_measurement,
                                                 window = self,
-                                                pos_x = 40, pos_y = 100,
-                                                width = 400, height = 50)
+                                                pos_x = 80, pos_y = 140,
+                                                height = 50, width = 340)
         self.label_view_measurements = bt.DefaultButton(text = "Visualizar Medidas",
                                                 command = self.view_measurement,
                                                 window = self,
-                                                pos_x = 40, pos_y = 200,
-                                                width = 400, height = 50)
+                                                pos_x = 80, pos_y = 240,
+                                                height = 50, width = 340)
 
     def destroy(self) -> None:
         super().destroy()
