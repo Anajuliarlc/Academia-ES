@@ -4,9 +4,9 @@ sys.path.append("./src")
 import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
-import student.profile as pf
 import main
 import pandas as pd
+import student.student_frame_factory as sff
 
 class ProfileFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
@@ -15,6 +15,12 @@ class ProfileFrame(fr.Frame):
 
     def design(self) -> None:
         self.config(bg = "#000F31")
+
+    def button_register_card(self):
+        for frame in self.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
+        sff.StudentFrameFactory.get_frame("RegisterCardFrame", frame.window)
 
     def place_objects(self) -> None:
         system = main.System()
@@ -49,7 +55,7 @@ class ProfileFrame(fr.Frame):
         self.card_info_label.place(x = 560, y = 50, width=300)
     
         self.button_register_card = bt.DefaultButton(text = "Registrar Cartão",
-                                        command = lambda: pf.go_to_register_card(self),
+                                        command = self.button_register_card,
                                         window = self, pos_x = 510, pos_y = 220)
         
         self.button_register_card.config(background='#E29E6C',

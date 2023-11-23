@@ -5,7 +5,6 @@ import gui.frame as fr
 import gui.window as wd
 import student.student_frame_factory as sff
 import gui.buttons as bt
-import student.menu as mn
 import login.login_frame_factory as lff
 
 class MenuFrame(fr.Frame):
@@ -52,7 +51,7 @@ class MenuFrame(fr.Frame):
         menu_label.place(x = 70, y = 50)
 
         button_workouts = bt.MenuButton(text = "Meus Treinos", 
-                                        command = lambda: mn.go_to_workouts(self),
+                                        command = self.button_workouts,
                                         window = self.window, pos_x = 20, pos_y = 150)
 
         button_progress = bt.MenuButton(text = "Progresso",
@@ -64,7 +63,7 @@ class MenuFrame(fr.Frame):
                                         window = self, pos_x = 20, pos_y = 330)
 
         button_profile = bt.MenuButton(text = "Perfil",
-                                        command = lambda: mn.go_to_profile(self),
+                                        command = self.button_profile,
                                         window = self.window, pos_x = 20, pos_y = 420)
         
         button_logout = bt.MenuButton(text = "Sair", 
