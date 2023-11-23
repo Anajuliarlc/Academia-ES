@@ -11,7 +11,6 @@ class RequestChangeFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
                  pos_x: int = 240, pos_y: int = 200) -> None:
         super().__init__(window, height, width, pos_x, pos_y)
-        self.errors = []
 
     def design(self) -> None:
         self.config(bg = "#000F31")

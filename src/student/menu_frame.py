@@ -5,7 +5,7 @@ import gui.frame as fr
 import gui.window as wd
 import student.student_frame_factory as sff
 import gui.buttons as bt
-
+import student.menu as mn
 
 class MenuFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 240, 
@@ -19,12 +19,9 @@ class MenuFrame(fr.Frame):
         menu_label = tk.Label(self, text = "MENU", font = ("Arial", 24, "bold"), 
                               bg = "#DF8350", fg = "#FEFAD2")
         menu_label.place(x = 80, y = 50)
-        
-        def go_to_workouts() -> None:
-            sff.StudentFrameFactory.get_frame("WorkoutsFrame", self.window)
 
         button_workouts = bt.MenuButton(text = "Meus Treinos", 
-                                        command = go_to_workouts,
+                                        command = lambda: mn.go_to_workouts(self),
                                         window = self.window, pos_x = 20, pos_y = 150)
 
         button_progress = bt.MenuButton(text = "Progresso",
@@ -36,7 +33,7 @@ class MenuFrame(fr.Frame):
                                         window = self.window, pos_x = 20, pos_y = 350)
 
         button_profile = bt.MenuButton(text = "Perfil",
-                                        command = lambda: self.window.change_frame(sff.StudentFrameFactory.get_frame("ProfileFrame", self.window)),
+                                        command = lambda: mn.go_to_profile(self),
                                         window = self.window, pos_x = 20, pos_y = 450)
         
 

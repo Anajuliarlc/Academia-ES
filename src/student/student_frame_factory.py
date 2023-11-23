@@ -10,6 +10,8 @@ import student.workouts_frame as swf
 import student.request_change_frame as scf
 import student.increase_frame as sif
 import student.thank_you_frame as styf
+import student.profile_frame as spf
+import student.register_card_frame as rcf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -42,6 +44,10 @@ class StudentFrameFactory(ff.FrameFactory):
             return sif.IncreaseFrame(window)
         elif type_ == "ThankYouFrame":
             return styf.ThankYouFrame(window)
+        elif type_ == "ProfileFrame":
+            return spf.ProfileFrame(window)
+        elif type_ == "RegisterCardFrame":
+            return rcf.RegisterCardFrame(window)
         else:
             raise fr.FrameNotFound()
         
