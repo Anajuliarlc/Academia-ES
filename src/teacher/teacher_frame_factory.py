@@ -8,6 +8,8 @@ import teacher.menu_frame as tmf
 import teacher.classes_frame as tcf
 import teacher.new_class_frame as tnc
 import gui.window as wd
+import teacher.current_workouts_frame as cw
+import teacher.workouts as tw
 import teacher.workouts as tw
 import teacher.new_workout as tnw
 
@@ -45,6 +47,10 @@ class TeacherFrameFactory(ff.FrameFactory):
             return tnc.NewClassFrame(window)
         elif type_ == "WorkoutsFrame":
             return tw.InitialWorkoutsFrame(window)
+        elif type_ == "CurrentWorkoutsFrame":
+            return cw.CurrentWorkouts(window)
+        elif type_ == "WorkoutsFrame":
+            return tw.Workouts(window)
         else:
             raise fr.FrameNotFound()
         

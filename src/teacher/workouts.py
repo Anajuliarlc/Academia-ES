@@ -28,6 +28,12 @@ class InitialWorkoutsFrame(fr.Frame):
                 frame.destroy()
         ttf.TeacherFrameFactory.get_frame("CurrentWorkoutsFrame", self.window)
 
+    def button_current_workouts(self):
+        for frame in self.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
+        tff.TeacherFrameFactory.get_frame("CurrentWorkoutsFrame", self.window)
+
     def place_objects(self):
         button_new_workout = bt.DefaultButton(text = "Novo Treino", 
                          command= self.button_new_workout, 
