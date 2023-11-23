@@ -2,6 +2,8 @@ import tkinter as tk
 import sys
 sys.path.append("./src")
 import gui.frame as fr
+import student_frame_factory as sff
+from gui.buttons import DefaultButton
 
 class GoalsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 2*480,
@@ -30,35 +32,30 @@ class GoalsFrame(fr.Frame):
                                            fg = "#FEFAD2")
         self.label_manage_goals.place(x = 0, y = 20, height = 30, width = 480)
         
-        # Create a button to view goals
-        self.button_view_goals = tk.Button(self,
-                                           text = "Visualizar metas",
-                                           font = ("Arial", 20),
-                                           bg = "#E29E6C",
-                                           fg = "#FEFAD2")
-        self.button_view_goals.place(x = 50, y = 100, height = 50, width = 380)
-
-        # Create a button set goals
-        self.button_set_goals = tk.Button(self,
-                                          text = "Definir metas",
-                                          font = ("Arial", 20),
-                                          bg = "#E29E6C",
-                                          fg = "#FEFAD2")
-        self.button_set_goals.place(x = 50, y = 200, height = 50, width = 380)
-        
         def view_goals() -> None:
             self.destroy()
-            import student_frame_factory as sff
             self.window.change_frame(sff.StudentFrameFactory.get_frame("ViewGoalsFrame", self.window))
-        
-        self.button_view_goals["command"] = view_goals
 
         def set_goals() -> None:
             self.destroy()
-            import student_frame_factory as sff
             self.window.change_frame(sff.StudentFrameFactory.get_frame("SetGoalsFrame", self.window))
+
+        # Create a button to view goals
+        self.button_view_goals = DefaultButton(text = "Visualizar metas",
+                                               command = view_goals,
+                                               window = self.window,
+                                               pos_x = 770, pos_y = 340,
+                                               height = 50, width = 380,
+                                               font = ("Arial", 20),)
         
-        self.button_set_goals["command"] = set_goals
+        # Create a button set goals
+        self.button_set_goals = DefaultButton(text = "Definir metas",
+                                              command = set_goals,
+                                              window = self.window,
+                                              pos_x = 770, pos_y = 440,
+                                              height = 50, width = 380,
+                                              font = ("Arial", 20),)
+        
 
     def destroy(self) -> None:
         super().destroy()
