@@ -42,7 +42,72 @@ class TestRegister(unittest.TestCase):
     def test_validate_cpf_invalid(self):
         self.assertRaises(exc.InvalidCPFError, self.reg.validate_cpf, "000.000.000-0a")
         self.assertRaises(exc.EmptyFieldError, self.reg.validate_cpf, "")
-        self.assertRaises(exc.EmptyFieldError, self.reg.validate_cpf, "CPF do aluno")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_cpf, "CPF")
+
+    def test_validate_cpf_already_exists(self):
+        self.assertRaises(exc.CPFAlreadyExistsError, self.reg.validate_cpf, "123.456.789-01")
+
+    def test_validate_cpf_valid(self):
+        self.assertEqual(self.reg.validate_cpf("123.456.789-00"), "12345678900")
+
+    def test_validate_rg_invalid(self):
+        self.assertRaises(exc.InvalidRGError, self.reg.validate_rg, "000000000a")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_rg, "")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_rg, "RG")
+
+    def test_validate_rg_invalid_lenght(self):
+        self.assertRaises(exc.WrongLengthError, self.reg.validate_rg, "0"*12)
+
+    def test_validate_rg_valid(self):
+        self.assertEqual(self.reg.validate_rg("123456789"), "123456789")
+    
+    def test_validate_password_empty(self):
+        """Testa o caso da senha estar vazia"""
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_password, "")
+
+    def test_validate_password_invalid_chars(self):
+        """Testa o caso da senha conter espaços"""
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                        "1Aa 456")
+    
+    def test_validate_password_invalid_lenght(self):
+        """Testa o caso da senha ter tamanho incorreto"""
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1Aa456")
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1Aa000000000000")
+        
+    def test_validate_password_invalid_format(self):
+        """Testa os casos da senha não conter pelo menos um número, uma letra 
+        maiúscula e uma letra minúscula"""
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "AaAaAaAa")
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1a1a1a1a")
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1A1A1A1A")
+        
+    def test_validate_password_invalid_format(self):
+        """Testa os casos da senha não conter pelo menos um número, uma letra 
+        maiúscula e uma letra minúscula"""
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "AaAaAaAa")
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1a1a1a1a")
+        self.assertRaises(exc.InvalidPasswordError, self.reg.validate_password,
+                           "1A1A1A1A")
+        
+    def test_validate_password_valid(self):
+        """Testa o caso da senha ser válida"""
+        self.assertEqual(self.reg.validate_password("1Aaa456"), "1Aaa456")
+
+    def test_validate_phone_invalid(self):
+        """Testa o caso do telefone ser inválido"""
+        self.assertRaises(exc.InvalidPhoneError, 
+                        self.reg.validate_phone,
+                        "123456789a")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_phone, "")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_phone, "Telefone ((XX) XXXXX-XXXX)")
 
 if __name__ == "__main__":
     unittest.main()

@@ -61,7 +61,7 @@ class CreateRegisterFrame(fr.Frame):
                                         height=20, 
                                         width=400, 
                                         font=("Arial", 12))
-        self.entry_phone.insert(-1, "Telefone (+XX (XX) XXXXX-XXXX)")
+        self.entry_phone.insert(-1, "Telefone ((XX) XXXXX-XXXX)")
         
         self.entry_uf = et.EntryText(self, 20, 250, 
                                         height=20, 
