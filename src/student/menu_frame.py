@@ -5,8 +5,8 @@ import gui.frame as fr
 import gui.window as wd
 import student.student_frame_factory as sff
 import gui.buttons as bt
+import student.menu as mn
 import login.login_frame_factory as lff
-
 
 class MenuFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 240, 
@@ -52,8 +52,8 @@ class MenuFrame(fr.Frame):
         menu_label.place(x = 70, y = 50)
 
         button_workouts = bt.MenuButton(text = "Meus Treinos", 
-                                        command = self.button_workouts,
-                                        window = self, pos_x = 20, pos_y = 150)
+                                        command = lambda: mn.go_to_workouts(self),
+                                        window = self.window, pos_x = 20, pos_y = 150)
 
         button_progress = bt.MenuButton(text = "Progresso",
                                         command = self.button_progress,
@@ -64,8 +64,8 @@ class MenuFrame(fr.Frame):
                                         window = self, pos_x = 20, pos_y = 330)
 
         button_profile = bt.MenuButton(text = "Perfil",
-                                        command = self.button_profile,
-                                        window = self, pos_x = 20, pos_y = 420)
+                                        command = lambda: mn.go_to_profile(self),
+                                        window = self.window, pos_x = 20, pos_y = 420)
         
         button_logout = bt.MenuButton(text = "Sair", 
                                       command = self.button_logout,
@@ -76,6 +76,6 @@ class MenuFrame(fr.Frame):
 
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window(connect = True)
     MenuFrame(mainframe)
     mainframe.mainloop()

@@ -6,6 +6,15 @@ import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
 import student.menu_frame as smf
+import student.workouts_frame as swf
+import student.request_change_frame as scf
+import student.increase_frame as sif
+import student.thank_you_frame as styf
+import student.profile_frame as spf
+import student.register_card_frame as rcf
+import student.goals_frame as gf
+import student.set_goals_frame as sgf
+import student.view_goals_frame as vgf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -30,6 +39,18 @@ class StudentFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
+        elif type_ == "WorkoutsFrame":
+            return swf.WorkoutsFrame(window)
+        elif type_ == "RequestChangeFrame":
+            return scf.RequestChangeFrame(window)
+        elif type_ == "IncreaseFrame":
+            return sif.IncreaseFrame(window)
+        elif type_ == "ThankYouFrame":
+            return styf.ThankYouFrame(window)
+        elif type_ == "ProfileFrame":
+            return spf.ProfileFrame(window)
+        elif type_ == "RegisterCardFrame":
+            return rcf.RegisterCardFrame(window)
         elif type_ == "ProgressFrame":
             return gf.GoalsFrame(window)
         elif type_ == "SetGoalsFrame":
