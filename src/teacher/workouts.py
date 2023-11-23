@@ -5,8 +5,9 @@ import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
 import teacher.menu_frame as mf
+import teacher.teacher_frame_factory as ttf
 
-class Workouts(fr.Frame):
+class InitialWorkoutsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
                  pos_x: int = 240, pos_y: int = 200):
         """Create a frame to be used as login in the application """
@@ -16,14 +17,23 @@ class Workouts(fr.Frame):
         self.config(bg = "#000F31")
 
     def button_new_workout(self):
-        
+        for frame in self.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
+        ttf.TeacherFrameFactory.get_frame("NewWorkoutFrame", self.window)
+
+    def button_workout(self):
+        for frame in self.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
+        ttf.TeacherFrameFactory.get_frame("CurrentWorkoutsFrame", self.window)
 
     def place_objects(self):
         button_new_workout = bt.DefaultButton(text = "Novo Treino", 
-                         command= lambda: self.window.change_frame("NewWorkoutFrame"), 
+                         command= self.button_new_workout, 
                           window = self.window, pos_x = 340, pos_y = 300)
         button_workout = bt.DefaultButton(text = "Treinos atuais", 
-                         command= lambda: self.window.change_frame("CurrentWorkoutsFrame"), 
+                         command= self.button_workout, 
                           window = self.window, pos_x = 740, pos_y = 300)
         
     def destroy(self):
@@ -32,5 +42,5 @@ class Workouts(fr.Frame):
 if __name__ == "__main__":
     mainframe = wd.Window(connect = False)
     mf.MenuFrame(mainframe)
-    Workouts(mainframe)
+    InitialWorkoutsFrame(mainframe)
     mainframe.mainloop()
