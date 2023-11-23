@@ -56,6 +56,7 @@ class NewClassFrame(fr.Frame):
                                          width = 100, height = 30)
 
     def destroy(self) -> None:
+        tff.TeacherFrameFactory.get_frame("ClassesFrame", self.window)
         super().destroy()
 
 

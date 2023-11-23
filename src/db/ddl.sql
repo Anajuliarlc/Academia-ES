@@ -68,7 +68,7 @@ CREATE TABLE Class
   IdUser INT NOT NULL,
   ClassName VARCHAR(255) NOT NULL,
   ClassDate DATETIME NOT NULL,
-  ClassDescriprion VARCHAR(800) NOT NULL,
+  ClassDescription VARCHAR(800) NOT NULL,
   StudentsMax INT NOT NULL,
   PRIMARY KEY (IdClass, IdUser),
   FOREIGN KEY (IdUser) REFERENCES Teacher(IdUser)
@@ -110,3 +110,12 @@ CREATE TABLE Take
   FOREIGN KEY (IdClass, IdTeacher) REFERENCES Class(IdClass, IdUser)
 );
 
+CREATE TABLE Request
+(
+  IdRequest INT NOT NULL AUTO_INCREMENT,
+  IdUser INT NOT NULL,
+  RequestDate DATETIME NOT NULL,
+  RequestDescription VARCHAR(800) NOT NULL,
+  RequestClosed BOOLEAN NOT NULL,
+  PRIMARY KEY (IdRequest, IdUser),
+)

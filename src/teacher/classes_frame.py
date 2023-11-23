@@ -6,6 +6,7 @@ import gui.window as wd
 import gui.buttons as bt
 import teacher.class_frame as cf
 import teacher.teacher_frame_factory as tff
+import classes as cl
 
 class ClassesFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
@@ -14,6 +15,7 @@ class ClassesFrame(fr.Frame):
         self.init_class = 0
         self.end_class = 2
         self.actual_classes = {}
+        self.classes_functions = cl.Classes()
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
@@ -23,29 +25,35 @@ class ClassesFrame(fr.Frame):
         for i in range(self.init_class, self.end_class):
             self.actual_classes[i].destroy()
             self.actual_classes.pop(i)
-        if right and (self.end_class < len(self.classes) - 1):
+        if right and (self.end_class < len(self.classes)):
             self.init_class += 1
             self.end_class += 1
-        elif (not right) and self.init_class > 0:
+        elif (not right) and self.init_class > 1:
             self.init_class -= 1
             self.end_class -= 1
 
         self.place_classes()
 
     def place_classes(self) -> None:
-        classes = [["Aula 1", "01/01/2021", "Descrição da aula 1"],
-                   ["Aula 2", "02/01/2021", "Descrição da aula 2"],
-                   ["Aula 3", "03/01/2021", "Descrição da aula 3"],
-                   ["Aula 4", "03/01/2021", "Descrição da aula 3"]]
-        self.classes = classes
-        for i in range(self.init_class, self.end_class + 1):
+        self.classes = self.classes_functions.get_classes()
+
+        size = len(self.classes)
+        if size < 3:
+            end = self.init_class + size
+        else:
+            end = self.init_class + 3
+
+        for i in range(self.init_class, end):
             pos_x = 100 + 280*(i - self.init_class)
-            class_i = cf.Class(self, self.classes[i][0], self.classes[i][1],
-                                self.classes[i][2], pos_x = pos_x,
-                                pos_y = 80)
+            class_name = self.classes["ClassName"][i]
+            class_date = self.classes["ClassDate"][i]
+            class_description = self.classes["ClassDescription"][i]
+            class_i = cf.Class(self, class_name, class_date, class_description,
+                                pos_x = pos_x, pos_y = 80)
             self.actual_classes[i] = class_i
     
     def open_new_class(self) -> None:
+        self.destroy()
         tff.TeacherFrameFactory.get_frame("NewClass", self.window)
 
     def place_objects(self) -> None:
