@@ -8,6 +8,8 @@ import gui.frame as fr
 import gui.window as wd
 import teacher.menu_frame as tmf
 import teacher.register_frame as rf
+import teacher.create_register_frame as crf
+import teacher.view_register_frame as vrf
 
 class TeacherFrameFactory(ff.FrameFactory):
     @staticmethod

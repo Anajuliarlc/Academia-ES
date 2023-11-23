@@ -5,12 +5,8 @@ sys.path.append(os.path.abspath("./src"))
 import tkinter as tk
 
 import gui.frame as fr
-from gui.buttons import DefaultButton
-
+import gui.buttons as bt 
 import teacher.teacher_frame_factory as tff
-import exc.exceptions as exc
-from login.login_class import Login
-from main import System
 
 class RegisterFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 960,
@@ -33,12 +29,12 @@ class RegisterFrame(fr.Frame):
             self.destroy()
             tff.TeacherFrameFactory.get_frame(next_frame, self.window)
 
-        self.button1 = DefaultButton("Criar Matrícula", 
+        self.button1 = bt.DefaultButton("Criar Matrícula", 
                                     lambda: button_press("CreateRegisterFrame"),
                                     self, 
                                     60, 100)
         
-        self.button2 = DefaultButton("Visualizar Matrículas", 
+        self.button2 = bt.DefaultButton("Visualizar Matrículas", 
                                     lambda: button_press("ViewRegisterFrame"),
                                     self, 
                                     510, 100)
