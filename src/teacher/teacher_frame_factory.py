@@ -10,7 +10,6 @@ import teacher.new_class_frame as tnc
 import gui.window as wd
 import teacher.current_workouts_frame as cw
 import teacher.workouts as tw
-import teacher.workouts as tw
 import teacher.new_workout as tnw
 
 class TeacherFrameFactory(ff.FrameFactory):
@@ -37,7 +36,7 @@ class TeacherFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
-        elif type == "NewWorkoutFrame":
+        elif type_ == "NewWorkoutFrame":
             return tnw.NewWorkoutFrame(window)
         elif type_ == "MenuFrame":
             return tmf.MenuFrame(window)
@@ -50,7 +49,7 @@ class TeacherFrameFactory(ff.FrameFactory):
         elif type_ == "CurrentWorkoutsFrame":
             return cw.CurrentWorkouts(window)
         elif type_ == "WorkoutsFrame":
-            return tw.Workouts(window)
+            return tw.InitialWorkoutsFrame(window)
         else:
             raise fr.FrameNotFound()
         

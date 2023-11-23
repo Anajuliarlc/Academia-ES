@@ -69,10 +69,7 @@ class CurrentWorkouts(fr.Frame):
         self.title_label.place(x = 230, y = 0, height = 30, width = 400)
 
         self.students = self.get_student()
-        print(self.students.values())
-        print(self.students.keys())
-        print(self.students)
-
+    
         # drop-down menu
         self.clicked = tk.StringVar()
         self.clicked.set("Escolha um aluno")
@@ -82,7 +79,7 @@ class CurrentWorkouts(fr.Frame):
         self.drop.config(background='#E29E6C', foreground='#FEFAD2', activebackground='#DF8350')
         self.drop.place(x=60, y=100, width=200, height=50)
 
-        bt.DefaultButton(text = "Carregar", 
+        self.buttun_load = bt.DefaultButton(text = "Carregar", 
                          command= self.button_load_workouts, 
                          window = self.window, pos_x = 300, pos_y = 400,
                          height = 50, width = 200)
