@@ -40,7 +40,7 @@ class TeacherFrameFactory(ff.FrameFactory):
         elif type_ == "RegisterFrame":
             return rf.RegisterFrame(window)
         elif type_ == "CreateRegisterFrame":
-            ...
+            return crf.CreateRegisterFrame(window)
         elif type_ == "ViewRegisterFrame":
             ...
         else:
