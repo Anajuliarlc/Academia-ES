@@ -17,7 +17,7 @@ class Table():
         self.create_table()
 
     def create_table(self) -> None:
-        for i in range(len(self.columns) - 1):
+        for i in range(len(self.columns)):
             self.label_index = tk.Label(self.window,
                                         text = f"{self.columns[i]}",
                                         font = ("Arial", self.font_size, "bold"),

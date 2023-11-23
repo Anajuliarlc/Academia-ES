@@ -25,6 +25,7 @@ class Measurements():
         
         
         result = self.system.database.insert(table = table, values = values)
+        print(result)
         if "1 row affected" in result:
             return True
         else:
@@ -40,6 +41,12 @@ class Measurements():
         condition = "WHERE IdUser = " + str(self.system.user)
         df = self.system.database.select(table = table, condition = condition)
         df["MeasDate"] = pd.to_datetime(df["MeasDate"], format = "%Y-%m-%d")
-        df = df.sort_values(by = "MeasDate", ascending = False)
+        df["MeasDate"] = df["MeasDate"].dt.strftime("%d/%m/%Y")
+        df = df.drop(columns = ["IdUser"])
+        df = df.drop(columns = ["IdMeas"])
+        columns = ["Data", "Peso", "Altura", "Cintura Alta", "Cintura Baixa",
+                    "Busto", "Biceps", "Coxa"]
+        df.columns = columns
+        df = df.sort_values(by = "Data", ascending = False)
         return df
     
