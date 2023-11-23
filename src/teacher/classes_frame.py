@@ -6,7 +6,7 @@ import gui.window as wd
 import gui.buttons as bt
 import teacher.class_frame as cf
 import teacher.teacher_frame_factory as tff
-import classes as cl
+import teacher.classes as cl
 
 class ClassesFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
@@ -39,11 +39,11 @@ class ClassesFrame(fr.Frame):
 
         size = len(self.classes)
         if size < 3:
-            end = self.init_class + size
+            self.end_class = self.init_class + size
         else:
-            end = self.init_class + 3
+            self.end_class = self.init_class + 3
 
-        for i in range(self.init_class, end):
+        for i in range(self.init_class, self.end_class):
             pos_x = 100 + 280*(i - self.init_class)
             class_name = self.classes["ClassName"][i]
             class_date = self.classes["ClassDate"][i]

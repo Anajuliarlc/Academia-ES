@@ -3,13 +3,16 @@ import sys
 sys.path.append("./src")
 import gui.frame as fr
 
-class Class(fr.Frame):
-    def __init__(self, window: fr.Frame, name: str, date: str, description: str,
+class Class(tk.Frame):
+    def __init__(self, window: tk.Frame, name: str, date: str, description: str,
                  pos_x: int = 0, pos_y: int = 0) -> None:
         self.name = name
         self.date = date
         self.description = description
-        super().__init__(window, 250, 200, pos_x, pos_y)
+        super().__init__(window)
+        self.design()
+        self.place_objects()
+        self.place(x = pos_x, y = pos_y, width = 200, height = 250)
 
     def design(self):
         self.config(bg = "#E29E6C")

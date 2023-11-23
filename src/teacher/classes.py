@@ -20,7 +20,6 @@ class Classes():
         values = f"({self.system.user},'{name}', '{date}',\
                      '{description}', {max_students})"
         return_query = self.system.database.insert(table, values)
-        print(return_query)
         if "ERROR" in return_query:
             return False
         else:
