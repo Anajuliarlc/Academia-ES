@@ -5,7 +5,6 @@ sys.path.append("./src")
 
 import gui.frame_factory as ff
 import gui.frame as fr
-import teacher.menu_frame as tmf
 import teacher.classes_frame as tcf
 import teacher.new_class_frame as tnc
 import gui.window as wd
