@@ -111,18 +111,14 @@ class WrongLengthError(ValueError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length})." + msg
+        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length}). " + msg
         super().__init__(self.message)
 
 class InvalidCardTypeError(ValueError):
     """Exception raised when inputed card type is invalid."""
 
     def __init__(self, msg: str = ""):
-        """Raises an exception when a card type is invalid.
-
-        :param msg: Additional message to be displayed, defaults to ""
-        :type msg: str, optional
-        """
+        """Raises an exception when a card type is invalid."""
         self.message = "O tipo de cartão digitado é inválido." + msg
         super().__init__(self.message)
 
@@ -160,4 +156,59 @@ class TimeConflictError(ValueError):
         :type msg: str, optional
         """
         self.message = "O horário está em conflito com outro horário. " + msg
+        super().__init__(self.message)
+
+class InvalidDateError(ValueError):
+    """Exception raised when inputed date is invalid."""
+
+    def __init__(self, input, msg: str = ""):
+        """Raises an exception when a date is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"{input} não é uma data válida. " + msg
+        super().__init__(self.message)
+    
+class InvalidRGError(ValueError):
+    """Exception raised when inputed RG is invalid."""
+
+    def __init__(self, rg: str, msg: str = ""):
+        """Raises an exception when a RG is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O RG digitado '{rg}' é inválido. " + msg
+        super().__init__(self.message)
+
+class CPFAlreadyExistsError(KeyError):
+    """Exception raised when inputed CPF is already registered."""
+
+    def __init__(self, cpf: str, msg: str = ""):
+        self.message = f"O CPF '{cpf}' já está cadastrado. " + msg
+        super().__init__(self.message)
+
+class InvalidPhoneError(ValueError):
+    """Exception raised when inputed phone is invalid."""
+
+    def __init__(self, phone: str, msg: str = ""):
+        """Raises an exception when a phone is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O telefone '{phone}' é inválido. " + msg
+        super().__init__(self.message)
+
+class InvalidUFError(ValueError):
+    """Exception raised when inputed state is invalid."""
+
+    def __init__(self, state: str, msg: str = ""):
+        """Raises an exception when a state is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O estado '{state}' é inválido. " + msg
         super().__init__(self.message)

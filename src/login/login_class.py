@@ -6,7 +6,7 @@ import os
 # Adds src directory to python modules path.
 sys.path.append(os.path.abspath("./src")) 
 
-from main import System
+import main
 import exc.exceptions as exc
 
 class Login():
@@ -21,7 +21,7 @@ class Login():
         :type password: str
         :raises EmptyFieldError: Se o campo senha estiver vazio.
         """
-        self.system = System() # Access the system singleton instance.
+        self.system = main.System() # Access the system singleton instance.
         self.cpf = self.validate_cpf(cpf)
 
         if password == "":

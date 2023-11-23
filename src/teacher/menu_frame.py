@@ -8,7 +8,6 @@ import gui.buttons as bt
 import login.login_frame_factory as lff
 import gui.logo_frame as lf
 
-
 class MenuFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 240, 
                  pos_x: int = 0, pos_y: int = 0) -> None:
@@ -64,7 +63,6 @@ class MenuFrame(fr.Frame):
                                       command = self.button_logout,
                                       window = self, pos_x = 20, pos_y = 500)
 
-
     def destroy(self) -> None:
         super().destroy() 
 
@@ -72,3 +70,4 @@ if __name__ == "__main__":
     mainframe = wd.Window(connect = False)
     MenuFrame(mainframe)
     mainframe.mainloop()
+    

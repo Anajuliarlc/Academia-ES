@@ -2,12 +2,16 @@ import tkinter as tk
 
 import sys
 sys.path.append("./src")
+
 import gui.frame_factory as ff
 import gui.frame as fr
-import teacher.menu_frame as tmf
 import teacher.classes_frame as tcf
 import teacher.new_class_frame as tnc
 import gui.window as wd
+import teacher.menu_frame as tmf
+import teacher.register_frame as rf
+import teacher.create_register_frame as crf
+import teacher.view_register_frame as vrf
 import teacher.current_workouts_frame as cw
 import teacher.workouts as tw
 import teacher.new_workout as tnw
@@ -40,6 +44,12 @@ class TeacherFrameFactory(ff.FrameFactory):
             return tnw.NewWorkoutFrame(window)
         elif type_ == "MenuFrame":
             return tmf.MenuFrame(window)
+        elif type_ == "RegisterFrame":
+            return rf.RegisterFrame(window)
+        elif type_ == "CreateRegisterFrame":
+            return crf.CreateRegisterFrame(window)
+        elif type_ == "ViewRegisterFrame":
+            ...
         elif type_ == "ClassesFrame":
             return tcf.ClassesFrame(window)
         elif type_ == "NewClass":
