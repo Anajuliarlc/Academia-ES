@@ -34,7 +34,9 @@ def send_request(frame):
         return_message = system.database.query(query)
         print(return_message)
         
-        frame.destroy()
+        for frame in frame.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
         sff.StudentFrameFactory.get_frame("ThankYouFrame", frame.window)
     
     except (exc.EmptyFieldError,

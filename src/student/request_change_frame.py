@@ -5,7 +5,10 @@ import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
 import gui.entrytext as et
-import student.request_change as rc
+import gui.errorlabel as el
+import main
+import student.student_frame_factory as sff
+import datetime
 
 class RequestChangeFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
@@ -14,6 +17,28 @@ class RequestChangeFrame(fr.Frame):
 
     def design(self) -> None:
         self.config(bg = "#000F31")
+
+    def button_send_request(self) -> None:
+        if self.clicked.get() == "Motivo da solicitação":
+            # show error message
+            error = el.ErrorLabel(self, "Selecione um motivo", pos_x=280,
+                                    pos_y=300, width=400, height=50)
+        elif self.entry_text.get() == "":
+            # show error message
+            error = el.ErrorLabel(self, "Descreva sua situação", pos_x=280,
+                                    pos_y=300, width=400, height=50)
+        else:
+            system = main.System()
+            datetime_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            details = self.clicked.get() + ": " + self.entry_text.get()
+            return_message = system.database.insert("Request (IdUser, RequestDate, RequestDescription, RequestClosed)", f"({system.user}, \'{datetime_str}\', \'{details}\', false)")
+            print(return_message)
+
+            
+            for frame in self.window.active_frames:
+                if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                    frame.destroy()
+            sff.StudentFrameFactory.get_frame("ThankYouFrame", self.window)
 
     def place_objects(self) -> None:
         title_label = tk.Label(self, text="Solicitar Alteração",
@@ -42,7 +67,7 @@ class RequestChangeFrame(fr.Frame):
         self.button_request_change = bt.MenuButton(text = "Enviar solicitação",
                                         window = self, pos_x = 280,
                                         pos_y = 240, width=400, height=50,
-                                        command = lambda: rc.send_request(self))
+                                        command = self.button_send_request)
 
     def destroy(self) -> None:
         super().destroy()
