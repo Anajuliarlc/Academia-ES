@@ -2,19 +2,25 @@ import tkinter as tk
 
 import sys
 sys.path.append("./src")
+import main
 import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
 import student.menu_frame as smf
+import student.progress_frame as pf
+import student.measurements_frame as msf
+import student.view_measurements_frame as svmsf
+import student.set_measurement_frame as ssmf
+import student.goals_frame as gf
+import student.set_goals_frame as sgf
+import student.view_goals_frame as vgf
 import student.workouts_frame as swf
 import student.request_change_frame as scf
 import student.increase_frame as sif
 import student.thank_you_frame as styf
 import student.profile_frame as spf
 import student.register_card_frame as rcf
-import student.goals_frame as gf
-import student.set_goals_frame as sgf
-import student.view_goals_frame as vgf
+
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -52,17 +58,28 @@ class StudentFrameFactory(ff.FrameFactory):
         elif type_ == "RegisterCardFrame":
             return rcf.RegisterCardFrame(window)
         elif type_ == "ProgressFrame":
+            return pf.ProgressFrame(window)
+        elif type_ == "GoalsFrame":
             return gf.GoalsFrame(window)
         elif type_ == "SetGoalsFrame":
             return sgf.SetGoalsFrame(window)
         elif type_ == "ViewGoalsFrame":
             return vgf.ViewGoalsFrame(window)
+        elif type_ == "MeasurementsFrame":
+            return msf.MeasurementsFrame(window)
+        elif type_ == "SetMeasurementFrame":
+            return ssmf.SetMeasurementFrame(window)
+        elif type_ == "ViewMeasurementsFrame":
+            return svmsf.ViewMeasurementsFrame(window)
         else:
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
     window = wd.Window(connect = False)
     frame = StudentFrameFactory("MenuFrame", window)
+    system = main.System()
+    system.user = 3
+    StudentFrameFactory("ProgressFrame", window)
     window.mainloop()
 
     

@@ -20,6 +20,9 @@ class Window(tk.Tk):
             self.database = db.DBConnector()
 
         self.design()
+    
+    def change_frame(self, frame: tk.Frame) -> None:
+        pass
 
     def change_frame(self, frame: tk.Frame) -> None:
         """Changes the current frame to the one passed as argument

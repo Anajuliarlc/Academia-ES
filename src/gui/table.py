@@ -3,12 +3,12 @@ import pandas as pd
 
 class Table():
     def __init__(self, window: tk.Frame, data: pd.DataFrame,
-                  width: int, height: int, font_size: int = 10,
+                  widht: int, height: int, font_size: int = 10,
                   pos_x: int = 0, pos_y: int = 0) -> None:
         self.window = window
         self.columns = data.columns
         self.data = data
-        self.width = width
+        self.width = widht
         self.height = height
         self.font_size = font_size
         self.pos_x = pos_x
