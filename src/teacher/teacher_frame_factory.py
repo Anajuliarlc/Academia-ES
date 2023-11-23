@@ -5,6 +5,8 @@ sys.path.append("./src")
 import gui.frame_factory as ff
 import gui.frame as fr
 import teacher.menu_frame as tmf
+import teacher.classes_frame as tcf
+import teacher.new_class_frame as tnc
 import gui.window as wd
 
 class TeacherFrameFactory(ff.FrameFactory):
@@ -33,6 +35,10 @@ class TeacherFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return tmf.MenuFrame(window)
+        elif type_ == "ClassesFrame":
+            return tcf.ClassesFrame(window)
+        elif type_ == "NewClass":
+            return tnc.NewClassFrame(window)
         else:
             raise fr.FrameNotFound()
         

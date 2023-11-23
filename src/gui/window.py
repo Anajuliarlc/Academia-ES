@@ -22,7 +22,12 @@ class Window(tk.Tk):
         self.design()
 
     def change_frame(self, frame: tk.Frame) -> None:
-        ...
+        """Changes the current frame to the one passed as argument
+
+        :param frame: Frame to be displayed
+        :type frame: tk.Frame
+        """    
+        pass
 
     def design(self):
         self.geometry(f"{self.width}x{self.height}")
@@ -35,5 +40,4 @@ class Window(tk.Tk):
 if __name__ == "__main__":
     import login.login_frame_factory as lff
     mainframe = Window(connect = False)
-    
     mainframe.mainloop()

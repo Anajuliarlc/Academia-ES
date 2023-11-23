@@ -12,6 +12,9 @@ import student.increase_frame as sif
 import student.thank_you_frame as styf
 import student.profile_frame as spf
 import student.register_card_frame as rcf
+import student.goals_frame as gf
+import student.set_goals_frame as sgf
+import student.view_goals_frame as vgf
 
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -48,6 +51,12 @@ class StudentFrameFactory(ff.FrameFactory):
             return spf.ProfileFrame(window)
         elif type_ == "RegisterCardFrame":
             return rcf.RegisterCardFrame(window)
+        elif type_ == "ProgressFrame":
+            return gf.GoalsFrame(window)
+        elif type_ == "SetGoalsFrame":
+            return sgf.SetGoalsFrame(window)
+        elif type_ == "ViewGoalsFrame":
+            return vgf.ViewGoalsFrame(window)
         else:
             raise fr.FrameNotFound()
         

@@ -149,3 +149,15 @@ class LeftZeroError(ValueError):
         """
         self.message = "Primeiro dígito não pode ser 0." + msg
         super().__init__(self.message)
+
+class TimeConflictError(ValueError):
+    """Exception raised when a time conflict is found."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a time conflict is found.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "O horário está em conflito com outro horário. " + msg
+        super().__init__(self.message)
