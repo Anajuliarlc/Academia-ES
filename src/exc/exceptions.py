@@ -65,13 +65,95 @@ class InvalidPasswordError(ValueError):
         self.message = "A senha digitada é inválida. " + msg
         super().__init__(self.message)
 
-class InvalidLenghtError(ValueError):
-    """Exception raised when an input has an invalid lenght."""
-    def __init__(self, max_len: int, field: str = "", msg: str = ""):
-        """Raises an exception when a input has an invalid lenght.
+class WrongTypeError(TypeError):
+    """Exception raised when inputed type is wrong."""
+
+    def __init__(self, field: str, expected_type: type, actual_type: type, msg: str = "", verbose: bool = False):
+        """Raises an exception when a type is wrong.
+
+        :param field: Name of the field with the wrong type.
+        :type field: str
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        if verbose:
+            self.message = f"{field} esperava {expected_type}, (recebido = {actual_type})." + msg
+        else:
+            self.message = msg
+        super().__init__(self.message)
+
+class NonLetterError(ValueError):
+    """Exception raised when inputed name contains non letters."""
+
+    def __init__(self, field: str, msg: str = ""):
+        """Raises an exception when a name contains non letters.
+
+        :param field: Name of the field with the wrong type.
+        :type field: str
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"{field} não pode conter números ou caracteres especiais." + msg
+        super().__init__(self.message)
+
+class WrongLengthError(ValueError):
+    """Exception raised when inputed length is wrong."""
+
+    def __init__(self, field: str, expected_length: int, actual_length: int, msg: str = ""):
+        """Raises an exception when a length is wrong.
+
+        :param field: Name of the field with the wrong length.
+        :type field: str
+        :param expected_length: Expected length of the field.
+        :type expected_length: int
+        :param actual_length: Actual length of the field.
+        :type actual_length: int
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length})." + msg
+        super().__init__(self.message)
+
+class InvalidCardTypeError(ValueError):
+    """Exception raised when inputed card type is invalid."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a card type is invalid."""
+        self.message = "O tipo de cartão digitado é inválido." + msg
+        super().__init__(self.message)
+
+class WrongFormatError(ValueError):
+    """Exception raised when inputed date is in the wrong format."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a date is in the wrong format.
 
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"O campo {field} só aceita {max_len} caracteres. " + msg
+        self.message = "O formato para datas é 'MM/AA'." + msg
+        super().__init__(self.message)
+
+class LeftZeroError(ValueError):
+    """Exception raised when inputed number has left zeros."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a number has left zeros.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "Primeiro dígito não pode ser 0." + msg
+        super().__init__(self.message)
+
+class TimeConflictError(ValueError):
+    """Exception raised when a time conflict is found."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a time conflict is found.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "O horário está em conflito com outro horário. " + msg
         super().__init__(self.message)
