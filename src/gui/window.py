@@ -4,6 +4,7 @@ sys.path.append("./src")
 import db.db_connector as db
 import gui.logo_frame as lf
 
+
 class Window(tk.Tk):
     def __init__(self, title: str = "Chi-Trapézio", height: int = 600, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 0, connect: bool = False) -> None:
@@ -13,6 +14,7 @@ class Window(tk.Tk):
         self.width = width
         self.pos_x = pos_x
         self.pos_y = pos_y
+        self.active_frames = []
         
         if connect:
             self.database = db.DBConnector()
@@ -29,7 +31,7 @@ class Window(tk.Tk):
         self.iconbitmap("img/icon.ico")
         lf.LogoFrame(self)
 
-
+    
 if __name__ == "__main__":
     import login.login_frame_factory as lff
     mainframe = Window(connect = False)

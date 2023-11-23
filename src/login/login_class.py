@@ -37,8 +37,8 @@ class Login():
         :return: The validated CPF number without any formatting characters.
         :rtype: str
         :raises EmptyFieldError: If the CPF is an empty string.
-        :raises InvalidCPFError: If the CPF contains non-digit characters, or if 
-        it does not have exactly 11 digits.
+        :raises InvalidCPFError: If the CPF contains non-digit characters, 
+        or if it does not have exactly 11 digits.
         """
         if cpf == "":
             raise exc.EmptyFieldError("CPF")
@@ -59,7 +59,7 @@ class Login():
         
         if attempt.empty:
             raise exc.CPFNotFoundError(self.cpf, 
-                "Verifique se a entrada está correta ou solicite uma nova conta.")
+            "Verifique se a entrada está correta ou solicite uma nova conta.")
         
         if attempt["UserPassword"].iloc[0] != self.password:
             raise exc.IncorrectPasswordError()
