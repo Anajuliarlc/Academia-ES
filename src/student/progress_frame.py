@@ -2,7 +2,7 @@ import tkinter as tk
 import sys
 sys.path.append("./src")
 import gui.frame as fr
-import student_frame_factory as sff
+import student.student_frame_factory as sff
 
 class ProgressFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 480,
