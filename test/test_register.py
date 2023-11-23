@@ -108,6 +108,34 @@ class TestRegister(unittest.TestCase):
                         "123456789a")
         self.assertRaises(exc.EmptyFieldError, self.reg.validate_phone, "")
         self.assertRaises(exc.EmptyFieldError, self.reg.validate_phone, "Telefone ((XX) XXXXX-XXXX)")
+    
+    def test_validate_phone_valid(self):
+        """Testa o caso do telefone ser válido"""
+        self.assertEqual(self.reg.validate_phone("12345678910"), "12345678910")
+
+    def test_validate_state_invalid(self):
+        """Testa o caso do estado ser inválido"""
+        self.assertRaises(exc.InvalidUFError, self.reg.validate_uf, "São Paulo")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_uf, "")
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_uf, "UF")
+
+    def test_validate_state_valid(self):
+        """Testa o caso do estado ser válido"""
+        self.assertEqual(self.reg.validate_uf("SP"), "SP")
+
+    def test_validate_neighbourhood_invalid(self):
+        """Testa o caso do bairro ser inválido"""
+        self.assertRaises(exc.EmptyFieldError, self.reg.validate_neigh, "")
+        self.assertRaises(exc.WrongLengthError, self.reg.validate_neigh, "A"*256)
+
+    def test_validate_neighbourhood_valid(self):
+        """Testa o caso do bairro ser válido"""
+        self.assertEqual(self.reg.validate_neigh("Jardim Botânico"), "Jardim Botânico")
+
+    def test_validate_medic_info(self):
+        self.assertEqual(self.reg.validate_medic("Possui depressão e dor na coluna"), "Possui depressão e dor na coluna")
+        self.assertEqual(self.reg.validate_medic(""), "")
+        self.assertEqual(self.reg.validate_medic("Dados médicos"), "")
 
 if __name__ == "__main__":
     unittest.main()

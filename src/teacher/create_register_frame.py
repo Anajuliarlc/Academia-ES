@@ -9,6 +9,9 @@ import gui.frame as fr
 import gui.entrytext as et
 import gui.buttons as bt 
 import teacher.teacher_frame_factory as tff
+import teacher.register as reg
+import gui.errorlabel as el
+import exc.exceptions as exc
 
 class CreateRegisterFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 960,
@@ -69,7 +72,13 @@ class CreateRegisterFrame(fr.Frame):
                                         font=("Arial", 12))
         self.entry_uf.insert(-1, "UF")
         
-        self.entry_neigh = et.EntryText(self, 20, 280, 
+        self.entry_city = et.EntryText(self, 20, 280, 
+                                        height=20, 
+                                        width=400, 
+                                        font=("Arial", 12))
+        self.entry_city.insert(-1, "Cidade")
+  
+        self.entry_neigh = et.EntryText(self, 20, 310, 
                                         height=20, 
                                         width=400, 
                                         font=("Arial", 12))
@@ -84,13 +93,48 @@ class CreateRegisterFrame(fr.Frame):
         self.entry_medic.place(x = 450, y = 70)
         self.entry_medic.insert(tk.INSERT, "Dados médicos")
 
-        def button_press():
-            print("au")
+        self.warning = tk.Label()
+
+        def register_request():
+            try:
+                self.warning.destroy()
+                request = reg.Register(self.entry_name.get(),
+                                        self.entry_birth.get(),
+                                        self.entry_cpf.get(),
+                                        self.entry_rg.get(),
+                                        self.entry_password.get(),
+                                        self.entry_phone.get(),
+                                        self.entry_uf.get(),
+                                        self.entry_city.get(),
+                                        self.entry_neigh.get(),
+                                        self.entry_medic.get("1.0", tk.END)
+                                        )
+                request.run()
+                self.destroy()
+                print("Registrado eu acho")
+
+            except (exc.WrongLengthError,
+                    exc.EmptyFieldError,
+                    exc.InvalidDateError,
+                    exc.InvalidCPFError,
+                    exc.CPFAlreadyExistsError,
+                    exc.InvalidRGError,
+                    exc.InvalidPasswordError,
+                    exc.InvalidPhoneError,
+                    exc.InvalidUFError) as error:
+                
+                self.warning = el.ErrorLabel(self, 
+                                          error, 
+                                          480-len(str(error))*5, 
+                                          350, 
+                                          width=len(str(error))*10 , 
+                                          height=60)
+                self.after(8000, self.warning.destroy)
 
         self.button1 = bt.DefaultButton("Enviar", 
-                                    button_press,
+                                    register_request,
                                     self,
-                                    450, 267, 473, 35,
+                                    450, 267, 473, 64,
                                     font=("Arial", 12, "bold"))
         
     def destroy(self) -> None:

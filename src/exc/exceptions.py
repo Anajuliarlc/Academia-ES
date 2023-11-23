@@ -200,3 +200,15 @@ class InvalidPhoneError(ValueError):
         """
         self.message = f"O telefone '{phone}' é inválido. " + msg
         super().__init__(self.message)
+
+class InvalidUFError(ValueError):
+    """Exception raised when inputed state is invalid."""
+
+    def __init__(self, state: str, msg: str = ""):
+        """Raises an exception when a state is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O estado '{state}' é inválido. " + msg
+        super().__init__(self.message)
