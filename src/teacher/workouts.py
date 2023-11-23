@@ -5,6 +5,7 @@ import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
 import teacher.menu_frame as mf
+import teacher.teacher_frame_factory as tff
 
 class Workouts(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
@@ -14,6 +15,12 @@ class Workouts(fr.Frame):
     
     def design(self):
         self.config(bg = "#000F31")
+
+    def button_current_workouts(self):
+        for frame in self.window.active_frames:
+            if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
+                frame.destroy()
+        tff.TeacherFrameFactory.get_frame("CurrentWorkoutsFrame", self.window)
 
     def place_objects(self):
         bt.DefaultButton(text = "Novo Treino", 

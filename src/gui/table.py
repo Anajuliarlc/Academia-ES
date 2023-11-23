@@ -3,12 +3,12 @@ import pandas as pd
 
 class Table():
     def __init__(self, window: tk.Frame, data: pd.DataFrame,
-                  widht: int, height: int, font_size: int = 10,
+                  width: int, height: int, font_size: int = 10,
                   pos_x: int = 0, pos_y: int = 0) -> None:
         self.window = window
         self.columns = data.columns
         self.data = data
-        self.width = widht
+        self.width = width
         self.height = height
         self.font_size = font_size
         self.pos_x = pos_x
@@ -17,7 +17,7 @@ class Table():
         self.create_table()
 
     def create_table(self) -> None:
-        for i in range(len(self.columns) - 1):
+        for i in range(len(self.columns)):
             self.label_index = tk.Label(self.window,
                                         text = f"{self.columns[i]}",
                                         font = ("Arial", self.font_size, "bold"),
