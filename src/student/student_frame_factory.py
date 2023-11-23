@@ -20,6 +20,8 @@ import student.increase_frame as sif
 import student.thank_you_frame as styf
 import student.profile_frame as spf
 import student.register_card_frame as rcf
+import student.student_classes_frame as sclf
+import student.student_new_class_frame as sncf
 
 
 class StudentFrameFactory(ff.FrameFactory):
@@ -71,6 +73,10 @@ class StudentFrameFactory(ff.FrameFactory):
             return ssmf.SetMeasurementFrame(window)
         elif type_ == "ViewMeasurementsFrame":
             return svmsf.ViewMeasurementsFrame(window)
+        elif type_ == "ClassesFrame":
+            return sclf.StudentClassesFrame(window)
+        elif type_ == "NewClass":
+            return sncf.NewClassFrame(window)
         else:
             raise fr.FrameNotFound()
         
@@ -81,5 +87,3 @@ if __name__ == "__main__":
     system.user = 3
     StudentFrameFactory("ProgressFrame", window)
     window.mainloop()
-
-    
