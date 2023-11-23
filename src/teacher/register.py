@@ -847,4 +847,4 @@ class Register:
 
         self.system.database.insert("Student (IdUser, PhoneNumber, State, City, Neighbourhood, RegistrationDate, MedicalData)", 
                                     f"({user_id}, \'{self.phone}\', \'{self.uf}\', \'{self.city}\', \'{self.neigh}\', \'{current_date}\', \'{self.medic}\')")
-        
+               

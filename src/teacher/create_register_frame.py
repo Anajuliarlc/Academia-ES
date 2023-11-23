@@ -92,6 +92,12 @@ class CreateRegisterFrame(fr.Frame):
                                       fg = "#FEFAD2")
         self.entry_medic.place(x = 450, y = 70)
         self.entry_medic.insert(tk.INSERT, "Dados médicos")
+        
+        self.thanks = tk.Label(self, 
+                          text = "Registrado com sucesso!", 
+                          font = ("Arial", 20), 
+                          bg = "#000F31", 
+                          fg = "#DF8350")
 
         self.warning = tk.Label()
 
@@ -110,8 +116,9 @@ class CreateRegisterFrame(fr.Frame):
                                         self.entry_medic.get("1.0", tk.END)
                                         )
                 request.run()
-                self.destroy()
-                print("Registrado eu acho")
+                self.thanks.place(x = 380, y = 350)
+                self.after(4000, self.destroy)
+                tff.TeacherFrameFactory("RegisterFrame", self.window)
 
             except (exc.WrongLengthError,
                     exc.EmptyFieldError,
