@@ -26,7 +26,7 @@ class DefaultButton(tk.Button):
                                     highlightbackground="#000F31", 
                                     command = command)
         self.place(x = self.pos_x, y = self.pos_y, width = self.width, height = self.height)
-
+   
 
 """
 COMENTÁRIO PARA APAGAR DEPOIS:
