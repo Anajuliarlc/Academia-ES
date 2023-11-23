@@ -78,10 +78,16 @@ class NewWorkoutFrame(fr.Frame):
         series_entry9 = et.EntryText(self, width = 40, height=30, pos_x = 530, pos_y = 345, font = ("Arial", 16, "bold"))
         repetition_entry9 = et.EntryText(self, width = 40, height=30, pos_x = 585, pos_y = 345, font = ("Arial", 16, "bold"))
 
-        name_student = tk.OptionMenu(self, "Aluno 1", "Aluno 2", "Aluno 3", "Aluno 4", "Aluno 5", "Aluno 6", "Aluno 7", "Aluno 8", "Aluno 9")
-        name_student.config(background='#E29E6C', foreground='#FEFAD2', activebackground='#DF8350', font = ("Arial", 16, "bold"), fg='#FEFAD2', borderwidth=2, highlightbackground="#000F31")
-        name_student.place(x = 700, y = 25, height = 30, width = 200)
+        clicked = tk.StringVar()
+        clicked.set("Nome do aluno")
+        name_student = tk.OptionMenu(self, clicked, "Aluno 1", "Aluno 2", "Aluno 3", "Aluno 4", "Aluno 5", "Aluno 6", "Aluno 7", "Aluno 8", "Aluno 9")
+        name_student.config(background='#E29E6C', foreground='#FEFAD2', activebackground='#DF8350', font = ("Arial", 12, "bold"), fg='#FEFAD2', borderwidth=2, highlightbackground="#000F31")
+        name_student.place(x = 642, y = 25, height = 50, width = 300)
 
+        button_save = bt.DefaultButton(text = "Salvar", command = self.destroy, window = self, pos_x = 690, pos_y = 165, width = 200, height = 50)
+        button_cancel = bt.DefaultButton(text = "Cancelar", command = self.destroy, window = self, pos_x = 690, pos_y = 285, width = 200, height = 50)
+
+        
         
 
 
