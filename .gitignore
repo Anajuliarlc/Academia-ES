@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.pyc
+src/exc/__pycache__/exceptions.cpython-311.pyc

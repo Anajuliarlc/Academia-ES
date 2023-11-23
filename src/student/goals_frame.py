@@ -2,7 +2,7 @@ import tkinter as tk
 import sys
 sys.path.append("./src")
 import gui.frame as fr
-import student_frame_factory as sff
+import student.student_frame_factory as sff
 from gui.buttons import DefaultButton
 
 class GoalsFrame(fr.Frame):
