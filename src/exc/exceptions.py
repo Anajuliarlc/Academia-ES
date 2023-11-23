@@ -68,7 +68,7 @@ class InvalidPasswordError(ValueError):
 class WrongTypeError(TypeError):
     """Exception raised when inputed type is wrong."""
 
-    def __init__(self, field: str, expected_type: type, actual_type: type, msg: str = ""):
+    def __init__(self, field: str, expected_type: type, actual_type: type, msg: str = "", verbose: bool = False):
         """Raises an exception when a type is wrong.
 
         :param field: Name of the field with the wrong type.
@@ -76,7 +76,10 @@ class WrongTypeError(TypeError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"O campo {field} está com o tipo errado. Era esperado que fosse {expected_type}, mas {actual_type} foi recebido." + msg
+        if verbose:
+            self.message = f"{field} esperava {expected_type}, (recebido = {actual_type})." + msg
+        else:
+            self.message = msg
         super().__init__(self.message)
 
 class NonLetterError(ValueError):
@@ -90,7 +93,7 @@ class NonLetterError(ValueError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"O campo {field} não pode conter números ou caracteres especiais." + msg
+        self.message = f"{field} não pode conter números ou caracteres especiais." + msg
         super().__init__(self.message)
 
 class WrongLengthError(ValueError):
@@ -108,7 +111,7 @@ class WrongLengthError(ValueError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"O campo {field} está com o tamanho errado. Era esperado que tivesse {expected_length} dígitos, mas {actual_length} dígitos foram recebidos." + msg
+        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length})." + msg
         super().__init__(self.message)
 
 class InvalidCardTypeError(ValueError):
@@ -132,5 +135,5 @@ class WrongFormatError(ValueError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = "A data digitada está no formato errado. O formato correto é 'MM/AA'." + msg
+        self.message = "O formato para datas é 'MM/AA'." + msg
         super().__init__(self.message)

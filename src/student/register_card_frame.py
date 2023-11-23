@@ -9,6 +9,7 @@ class RegisterCardFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
                  pos_x: int = 240, pos_y: int = 200) -> None:
         super().__init__(window, height, width, pos_x, pos_y)
+        self.warning = None
 
     def design(self) -> None:
         self.config(bg = "#000F31")
@@ -70,7 +71,7 @@ class RegisterCardFrame(fr.Frame):
 
         self.button_register_card = bt.MenuButton(text = "Registrar Cartão",
                                         command = lambda: rc.send_request(self),
-                                        window = self, pos_x = 180, pos_y = 310,
+                                        window = self, pos_x = 180, pos_y = 300,
                                         width=600, height=50)
 
     def destroy(self) -> None:

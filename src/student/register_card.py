@@ -4,22 +4,28 @@ sys.path.append("./src")
 import student.student_frame_factory as sff
 import exc.exceptions as exc
 import main
+import gui.errorlabel as el
 
 def send_request(frame):
-    name = frame.name_entry.get()
-    number = frame.card_num_entry.get()
-    card_type = frame.clicked.get()
-    date = frame.date_entry.get()
-    cvv = frame.cvv_entry.get()
+    if frame.warning != None:
+        frame.warning.destroy()
 
     try:
+        name = str(frame.name_entry.get())
+        number = int(frame.card_num_entry.get())
+        card_type = str(frame.clicked.get())
+        date = str(frame.card_date_entry.get())
+        cvv = int(frame.card_cvv_entry.get())
+
         has_errors(name, number, card_type, date, cvv)
+
+        date = "20" + date[0:2] + "-" + date[3:5] + "-01"
         
         query = (f"UPDATE Card SET CardHolderName = \'{name}\'," +
                                  f"CardNum = \'{number}\'," +
                                  f"CardType = \'{card_type}\', " +
                                  f"ValidityDate = \'{date}\', " +
-                                 f"CardCVV = \'{cvv}\' " + 
+                                 f"CVV = \'{cvv}\' " + 
                                  f"WHERE IdUser = {main.System().user};")
 
         system = main.System()
@@ -28,8 +34,23 @@ def send_request(frame):
         
         frame.destroy()
         sff.StudentFrameFactory.get_frame("ThankYouFrame", frame.window)
-    except exc.EmptyFieldError as e:
-        ...
+    
+    except (exc.EmptyFieldError,
+            exc.WrongTypeError,
+            exc.NonLetterError,
+            exc.WrongLengthError,
+            exc.WrongFormatError,
+            exc.InvalidCardTypeError) as error: 
+            frame.warning = el.ErrorLabel(frame, 
+                                    str(error), 
+                                    pos_x = 180, pos_y = 350,
+                                    width=600, height=40)
+            
+    except (ValueError, TypeError) as error:
+        frame.warning = el.ErrorLabel(frame, 
+                                    "Preencha todos os campos corretamente", 
+                                    pos_x = 180, pos_y = 350,
+                                    width=600, height=40)
 
 """ Version 0.0.0: test_none_name - red
 def has_errors(name, number, card_type, date, cvv):
