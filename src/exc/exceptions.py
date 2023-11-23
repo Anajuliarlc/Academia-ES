@@ -111,7 +111,7 @@ class WrongLengthError(ValueError):
         :param msg: Additional message to be displayed, defaults to ""
         :type msg: str, optional
         """
-        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length})." + msg
+        self.message = f"{field} espera {expected_length} dígitos (recebidos = {actual_length}). " + msg
         super().__init__(self.message)
 
 class InvalidCardTypeError(ValueError):
@@ -156,4 +156,16 @@ class TimeConflictError(ValueError):
         :type msg: str, optional
         """
         self.message = "O horário está em conflito com outro horário. " + msg
+        super().__init__(self.message)
+
+class InvalidDateError(ValueError):
+    """Exception raised when inputed date is invalid."""
+
+    def __init__(self, input, msg: str = ""):
+        """Raises an exception when a date is invalid.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"{input} não é uma data válida. " + msg
         super().__init__(self.message)
