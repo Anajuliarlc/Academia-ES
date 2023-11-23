@@ -64,3 +64,14 @@ class InvalidPasswordError(ValueError):
         """
         self.message = "A senha digitada é inválida. " + msg
         super().__init__(self.message)
+
+class InvalidLenghtError(ValueError):
+    """Exception raised when an input has an invalid lenght."""
+    def __init__(self, max_len: int, field: str = "", msg: str = ""):
+        """Raises an exception when a input has an invalid lenght.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = f"O campo {field} só aceita {max_len} caracteres. " + msg
+        super().__init__(self.message)
