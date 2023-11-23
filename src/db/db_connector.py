@@ -102,5 +102,8 @@ class DBConnector:
 if __name__ == "__main__":
     db = DBConnector()
     print(db.select("User"))
-    print(db.select("Student"))
+    table = "User (IdUser, UserName, BirthDate, CPF, RG, UserPassword)"
+    value = "(100, 'teste', '1999-01-01', '12345678910', '123456789', '123456789')"
+    print(db.insert(table = table, values = value))
+    print(db.delete("User", "WHERE IdUser = 100"))
     db.destroy()

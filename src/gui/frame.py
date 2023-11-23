@@ -50,7 +50,7 @@ class Frame(ABC, tk.Frame):
 class FrameNotFound(ValueError):
     def __init__(self) -> None:
         """Raise when the frame type is not implemented"""        
-        super().__init__("Login frame not found")
+        super().__init__("Frame not found")
 
 class ExampleFrame(Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 800,

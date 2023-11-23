@@ -13,6 +13,9 @@ import teacher.menu_frame as tmf
 import teacher.register_frame as rf
 import teacher.create_register_frame as crf
 import teacher.view_register_frame as vrf
+import teacher.current_workouts_frame as cw
+import teacher.workouts as tw
+import teacher.new_workout as tnw
 
 class TeacherFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -38,6 +41,8 @@ class TeacherFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
+        elif type_ == "NewWorkoutFrame":
+            return tnw.NewWorkoutFrame(window)
         elif type_ == "MenuFrame":
             return tmf.MenuFrame(window)
         elif type_ == "RegisterFrame":
@@ -50,6 +55,12 @@ class TeacherFrameFactory(ff.FrameFactory):
             return tcf.ClassesFrame(window)
         elif type_ == "NewClass":
             return tnc.NewClassFrame(window)
+        elif type_ == "WorkoutsFrame":
+            return tw.InitialWorkoutsFrame(window)
+        elif type_ == "CurrentWorkoutsFrame":
+            return cw.CurrentWorkouts(window)
+        elif type_ == "WorkoutsFrame":
+            return tw.InitialWorkoutsFrame(window)
         else:
             raise fr.FrameNotFound()
         

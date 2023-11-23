@@ -6,7 +6,7 @@ import student.student_frame_factory as sff
 from gui.buttons import DefaultButton
 
 class GoalsFrame(fr.Frame):
-    def __init__(self, window: tk.Tk, height: int = 600, width: int = 2*480,
+    def __init__(self, window: tk.Tk, height: int = 400, width: int = 480,
                  pos_x: int = 720, pos_y: int = 200) -> None:
         super().__init__(window, height, width, pos_x, pos_y)
 
@@ -34,27 +34,25 @@ class GoalsFrame(fr.Frame):
         
         def view_goals() -> None:
             self.destroy()
-            self.window.change_frame(sff.StudentFrameFactory.get_frame("ViewGoalsFrame", self.window))
+            sff.StudentFrameFactory.get_frame("ViewGoalsFrame", self.window)
 
         def set_goals() -> None:
             self.destroy()
-            self.window.change_frame(sff.StudentFrameFactory.get_frame("SetGoalsFrame", self.window))
+            sff.StudentFrameFactory.get_frame("SetGoalsFrame", self.window)
 
         # Create a button to view goals
         self.button_view_goals = DefaultButton(text = "Visualizar metas",
                                                command = view_goals,
-                                               window = self.window,
-                                               pos_x = 770, pos_y = 340,
-                                               height = 50, width = 380,
-                                               font = ("Arial", 20),)
+                                               window = self,
+                                               pos_x = 80, pos_y = 140,
+                                               height = 50, width = 340)
         
         # Create a button set goals
         self.button_set_goals = DefaultButton(text = "Definir metas",
                                               command = set_goals,
-                                              window = self.window,
-                                              pos_x = 770, pos_y = 440,
-                                              height = 50, width = 380,
-                                              font = ("Arial", 20),)
+                                              window = self,
+                                              pos_x = 80, pos_y = 240,
+                                              height = 50, width = 340)
         
 
     def destroy(self) -> None:
