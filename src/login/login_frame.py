@@ -11,8 +11,8 @@ from gui.errorlabel import ErrorLabel
 
 import exc.exceptions as exc
 from login.login_class import Login
-from teacher.teacher_frame_factory import TeacherFrameFactory
-from student.student_frame_factory import StudentFrameFactory
+import teacher.teacher_frame_factory as tff
+import student.student_frame_factory as sff
 from main import System
 
 class LoginFrame(fr.Frame):
@@ -82,10 +82,10 @@ class LoginFrame(fr.Frame):
         if not system.database.select("Teacher", 
                                       "IdUser", 
                                       f"WHERE IdUser = {system.user}").empty:
-            TeacherFrameFactory("MenuFrame", self.window)
+            tff.TeacherFrameFactory("MenuFrame", self.window)
         elif not system.database.select("Student", 
                                       "IdUser", 
                                       f"WHERE IdUser = {system.user}").empty:
-            StudentFrameFactory("MenuFrame", self.window)
+            sff.StudentFrameFactory("MenuFrame", self.window)
         
         

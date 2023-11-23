@@ -13,7 +13,7 @@ from gui.buttons import DefaultButton
 from gui.errorlabel import ErrorLabel
 
 class SetGoalsFrame(fr.Frame):
-    def __init__(self, window: tk.Tk, height: int = 600, width: int = 2*480,
+    def __init__(self, window: tk.Tk, height: int = 600, width: int = 960,
                  pos_x: int = 720, pos_y: int = 200) -> None:
         self.system = System()
 
@@ -178,8 +178,7 @@ class SetGoalsFrame(fr.Frame):
             elif (self.entry_lean_mass.get() != ""
                     and not self.entry_lean_mass.get().isnumeric()):
                 self.warning = ErrorLabel(window = self,
-                                          text = "Insira um valor numérico \
-                                            para a massa magra",
+                                          text = "Insira um valor numérico para a massa magra",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
@@ -187,8 +186,7 @@ class SetGoalsFrame(fr.Frame):
             elif (self.entry_fat_mass.get() != ""
                   and not self.entry_fat_mass.get().isnumeric()):
                 self.warning = ErrorLabel(window = self,
-                                          text = "Insira um valor numérico \
-                                            para a massa gorda",
+                                          text = "Insira um valor numérico para a massa gorda",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
@@ -205,27 +203,8 @@ class SetGoalsFrame(fr.Frame):
                                       "FatPct": [self.entry_fat_mass.get()]})
                 self.update_db(goals)
 
-                self.label1.destroy()
-                self.label_goal_name.destroy()
-                self.entry_goal_name.destroy()
-                self.label_cardio_min.destroy()
-                self.entry_cardio_min.destroy()
-                self.label_goal_weight.destroy()
-                self.entry_goal_weight.destroy()
-                self.label_start_date.destroy()
-                self.entry_start_date.destroy()
-                self.label_final_date.destroy()
-                self.entry_final_date.destroy()
-                self.label_lean_mass.destroy()
-                self.entry_lean_mass.destroy()
-                self.label_fat_mass.destroy()
-                self.entry_fat_mass.destroy()
-                self.button_confirm.destroy()
                 self.destroy()
-
-                #import student_frame_factory as sff
-                #sff.StudentFrameFactory("ThankYouCard", self.window)
-
+        
         self.button_confirm = DefaultButton(text = "Confirmar",
                                             command = confirm_set_goals,
                                             window = self,

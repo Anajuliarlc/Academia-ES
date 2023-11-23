@@ -22,10 +22,10 @@ VALUES
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Exercise
-INSERT INTO Exercise (IdUser, ExerciseName, SerNum, RepNum)
+INSERT INTO Exercise (IdUser, ExerciseName, SerNum, RepNum, WeightExercise)
 VALUES
-(3, 'Jogging', 3, 10),
-(4, 'Weightlifting', 4, 12);
+(3, 'Jogging', 3, 10, 20.0),
+(4, 'Weightlifting', 4, 12, 20.0);
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Measurements
@@ -36,10 +36,10 @@ VALUES
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Class
-INSERT INTO Class (IdUser, ClassName, ClassDate, ClassDescriprion, StudentsMax)
+INSERT INTO Class (IdUser, ClassName, ClassDate, ClassDescription, StudentsMax)
 VALUES
-(1, 'Yoga Class', '2022-04-05', 'Relaxation and flexibility exercises', 15),
-(2, 'High-Intensity Training', '2022-04-10', 'Intense workout for strength and endurance', 20);
+(1, 'Yoga Class', '2022-04-05 14:30:00', 'Relaxation and flexibility exercises', 15),
+(2, 'High-Intensity Training', '2022-04-10 15:30:00', 'Intense workout for strength and endurance', 20);
 -- Adicione mais linhas conforme necessário
 
 -- Inserindo dados fictícios na tabela Goal
@@ -61,3 +61,9 @@ INSERT INTO Take (IdStudent, IdClass, IdTeacher)
 VALUES
 (3, 1, 1),
 (4, 2, 2);
+
+-- Inserindo dados fictícios na tabela Request
+INSERT INTO Request (IdUser, RequestDate, RequestDescription, RequestClosed)
+VALUES
+(3, '2022-03-01', 'Descrição da primeira requisição', false),
+(4, '2022-03-01', 'Descrição da segunda requisição', false);
