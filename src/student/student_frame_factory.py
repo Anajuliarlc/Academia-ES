@@ -2,6 +2,7 @@ import tkinter as tk
 
 import sys
 sys.path.append("./src")
+import main
 import gui.window as wd
 import gui.frame_factory as ff
 import gui.frame as fr
@@ -39,6 +40,8 @@ class StudentFrameFactory(ff.FrameFactory):
 if __name__ == "__main__":
     window = wd.Window(connect = False)
     frame = StudentFrameFactory("MenuFrame", window)
+    system = main.System()
+    system.user = 3
     StudentFrameFactory("MeasurementsFrame", window)
     window.mainloop()
 

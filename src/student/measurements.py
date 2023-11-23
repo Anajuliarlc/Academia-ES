@@ -2,6 +2,7 @@ import time
 import sys
 sys.path.append("./src")
 import main
+import pandas as pd
 
 class Measurements():
     def __init__(self) -> None:
@@ -28,3 +29,17 @@ class Measurements():
             return True
         else:
             return False
+        
+    def get_history(self) -> pd.DataFrame:
+        """ Get the measurements history of the user
+        
+        :return: Dataframe with the measurements history
+        :rtype: pd.DataFrame
+        """
+        table = "Measurements"
+        condition = "WHERE IdUser = " + str(self.system.user)
+        df = self.system.database.select(table = table, condition = condition)
+        df["MeasDate"] = pd.to_datetime(df["MeasDate"], format = "%Y-%m-%d")
+        df = df.sort_values(by = "MeasDate", ascending = False)
+        return df
+    
