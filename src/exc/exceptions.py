@@ -137,3 +137,15 @@ class WrongFormatError(ValueError):
         """
         self.message = "O formato para datas é 'MM/AA'." + msg
         super().__init__(self.message)
+
+class LeftZeroError(ValueError):
+    """Exception raised when inputed number has left zeros."""
+
+    def __init__(self, msg: str = ""):
+        """Raises an exception when a number has left zeros.
+
+        :param msg: Additional message to be displayed, defaults to ""
+        :type msg: str, optional
+        """
+        self.message = "Primeiro dígito não pode ser 0." + msg
+        super().__init__(self.message)

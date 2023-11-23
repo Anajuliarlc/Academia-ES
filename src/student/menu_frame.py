@@ -65,7 +65,7 @@ class MenuFrame(fr.Frame):
 
         button_profile = bt.MenuButton(text = "Perfil",
                                         command = lambda: mn.go_to_profile(self),
-                                        window = self.window, pos_x = 20, pos_y = 450)
+                                        window = self.window, pos_x = 20, pos_y = 420)
         
         button_logout = bt.MenuButton(text = "Sair", 
                                       command = self.button_logout,

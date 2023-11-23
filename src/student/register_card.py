@@ -12,6 +12,8 @@ def send_request(frame):
 
     try:
         name = str(frame.name_entry.get())
+        if frame.card_num_entry.get()[0] == "0":
+            raise exc.LeftZeroError
         number = int(frame.card_num_entry.get())
         card_type = str(frame.clicked.get())
         date = str(frame.card_date_entry.get())
@@ -40,7 +42,8 @@ def send_request(frame):
             exc.NonLetterError,
             exc.WrongLengthError,
             exc.WrongFormatError,
-            exc.InvalidCardTypeError) as error: 
+            exc.InvalidCardTypeError,
+            exc.LeftZeroError) as error: 
             frame.warning = el.ErrorLabel(frame, 
                                     str(error), 
                                     pos_x = 180, pos_y = 350,
@@ -48,9 +51,9 @@ def send_request(frame):
             
     except (ValueError, TypeError) as error:
         frame.warning = el.ErrorLabel(frame, 
-                                    "Preencha todos os campos corretamente", 
-                                    pos_x = 180, pos_y = 350,
-                                    width=600, height=40)
+                                "Preencha todos os campos corretamente", 
+                                pos_x = 180, pos_y = 350,
+                                width=600, height=40)
 
 """ Version 0.0.0: test_none_name - red
 def has_errors(name, number, card_type, date, cvv):
