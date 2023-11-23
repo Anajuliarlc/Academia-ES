@@ -26,9 +26,9 @@ class NewWorkoutFrame(fr.Frame):
         pass
 
     def get_student(self):
-        columns = "u.Iduser, u.UserName"
-        table = "User u, Student s"
-        condition = "WHERE u.Iduser = s.Iduser"
+        columns = "User.IdUser, User.UserName"
+        table = "User, Student"
+        condition = "WHERE User.IdUser = Student.IdUser"
         self.students = self.system.database.select(table = table, columns = columns, condition = condition)
 
 
