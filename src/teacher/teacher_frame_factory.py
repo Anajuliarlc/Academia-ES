@@ -49,7 +49,7 @@ class TeacherFrameFactory(ff.FrameFactory):
         elif type_ == "CreateRegisterFrame":
             return crf.CreateRegisterFrame(window)
         elif type_ == "ViewRegisterFrame":
-            ...
+            vrf.ViewRegisterFrame(window)
         elif type_ == "ClassesFrame":
             return tcf.ClassesFrame(window)
         elif type_ == "NewClass":
