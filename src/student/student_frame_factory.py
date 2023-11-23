@@ -31,7 +31,11 @@ class StudentFrameFactory(ff.FrameFactory):
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
         elif type_ == "ProgressFrame":
+            return gf.GoalsFrame(window)
+        elif type_ == "SetGoalsFrame":
             return sgf.SetGoalsFrame(window)
+        elif type_ == "ViewGoalsFrame":
+            return vgf.ViewGoalsFrame(window)
         else:
             raise fr.FrameNotFound()
         
