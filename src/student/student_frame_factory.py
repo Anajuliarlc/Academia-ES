@@ -32,6 +32,12 @@ class StudentFrameFactory(ff.FrameFactory):
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "MenuFrame":
             return smf.MenuFrame(window)
+        elif type_ == "ProgressFrame":
+            return gf.GoalsFrame(window)
+        elif type_ == "SetGoalsFrame":
+            return sgf.SetGoalsFrame(window)
+        elif type_ == "ViewGoalsFrame":
+            return vgf.ViewGoalsFrame(window)
         elif type_ == "MeasurementsFrame":
             return smsf.MeasurementsFrame(window)
         else:
