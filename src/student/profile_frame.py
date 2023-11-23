@@ -56,7 +56,8 @@ class ProfileFrame(fr.Frame):
     
         self.button_register_card = bt.DefaultButton(text = "Registrar Cartão",
                                         command = self.button_register_card,
-                                        window = self, pos_x = 510, pos_y = 220)
+                                        window = self, pos_x = 560, pos_y = 220,
+                                        width=300)
         
         self.button_register_card.config(background='#E29E6C',
                                          foreground='#FEFAD2',

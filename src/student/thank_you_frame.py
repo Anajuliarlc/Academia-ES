@@ -26,7 +26,8 @@ class ThankYouFrame(fr.Frame):
 
         conclude_button = bt.DefaultButton(text = "Concluir",
                                         command = self.destroy,
-                                        window = self, pos_x = 280, pos_y = 120)
+                                        window = self, pos_x = 280, pos_y = 120,
+                                        width=400)
 
 
     def destroy(self) -> None:
