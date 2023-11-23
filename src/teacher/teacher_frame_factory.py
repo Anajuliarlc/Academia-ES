@@ -9,6 +9,7 @@ import teacher.classes_frame as tcf
 import teacher.new_class_frame as tnc
 import gui.window as wd
 import teacher.workouts as tw
+import teacher.new_workout as tnw
 
 class TeacherFrameFactory(ff.FrameFactory):
     @staticmethod
@@ -34,6 +35,8 @@ class TeacherFrameFactory(ff.FrameFactory):
         """        
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
+        elif type == "NewWorkoutFrame":
+            return tnw.NewWorkoutFrame(window)
         elif type_ == "MenuFrame":
             return tmf.MenuFrame(window)
         elif type_ == "ClassesFrame":
