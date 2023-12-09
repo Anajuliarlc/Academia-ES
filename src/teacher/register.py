@@ -709,9 +709,12 @@ class Register:
                  uf: str,
                  city: str,
                  neigh: str,
-                 medic: str) -> None:
+                 medic: str,
+                 debug: bool = False) -> None:
         
         self.system = main.System()
+
+        if debug: return
 
         self.name = self.validate_name(name)
         self.birth = self.validate_birth(birth)
@@ -733,14 +736,13 @@ class Register:
         return name
 
     def validate_birth(self, birth: str) -> str:
-        try: datetime.strptime(birth, "%d/%m/%Y")
-        except ValueError: raise exc.InvalidDateError(birth)
-        
         if "Data de nascimento (dd/mm/aaaa)" == birth: birth = ""
         if len(birth) == 0:
             raise exc.EmptyFieldError("data de nascimento")
-        if not re.match(r"\d{2}/\d{2}/\d{4}", birth):
-            raise exc.InvalidDateError(birth, "Use o formato (dd/mm/aaaa)")
+
+        try: datetime.strptime(birth, "%d/%m/%Y")
+        except ValueError: raise exc.InvalidDateError(birth, "Use o formato (dd/mm/aaaa)")
+        
         return birth
     
     def validate_cpf(self, cpf: str) -> str:

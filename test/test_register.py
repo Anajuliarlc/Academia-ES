@@ -13,11 +13,12 @@ class TestRegister(unittest.TestCase):
         super().__init__(methodName)
         self.reg = Register("George", 
                             "01/01/2000", 
-                            "12345678900", 
+                            "00000000000", 
                             "123456789", 
-                            "123456", 
-                            "123456789", 
-                            "SP", 
+                            "aA23456", 
+                            "12345678910", 
+                            "SP",
+                            "São Paulo",
                             "Jardim", 
                             "Possui depressão e dor na coluna")
         
@@ -48,7 +49,7 @@ class TestRegister(unittest.TestCase):
         self.assertRaises(exc.CPFAlreadyExistsError, self.reg.validate_cpf, "123.456.789-01")
 
     def test_validate_cpf_valid(self):
-        self.assertEqual(self.reg.validate_cpf("123.456.789-00"), "12345678900")
+        self.assertEqual(self.reg.validate_cpf("000.001.002-03"), "00000100203")
 
     def test_validate_rg_invalid(self):
         self.assertRaises(exc.InvalidRGError, self.reg.validate_rg, "000000000a")
