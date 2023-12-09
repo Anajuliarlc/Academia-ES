@@ -4,6 +4,7 @@ sys.path.append(os.path.abspath("./src"))
 
 import tkinter as tk
 from tkinter import scrolledtext
+import pandas as pd
 
 import gui.frame as fr
 import gui.entrytext as et
@@ -26,8 +27,13 @@ class ViewRegisterFrame(fr.Frame):
 
     def place_objects(self) -> None:
         self.system = main.System()
-        df = self.system.database.select("Student")
-        self.table = tb.Table(self, df, 800, 600, pos_x=20, pos_y=20)
+        df1 = self.system.database.select("User")
+        df2 = self.system.database.select("Student")
+        df = pd.merge(df1, df2, on="IdUser")[["UserName", "BirthDate", "CPF", "PhoneNumber", "City", "RegistrationDate", "MedicalData"]]
+        
+        self.table = tb.Table(self, df, 920, 30, pos_x=20, pos_y=20)
+
+        #TODO: implementar botões de sobe/desce na tabela quando for maior que a janela
 
         def press_button():
             self.destroy()
@@ -36,7 +42,8 @@ class ViewRegisterFrame(fr.Frame):
         self.button1 = bt.DefaultButton("Fechar", 
                                     press_button,
                                     self,
-                                    150, 267, 473, 64,
+                                    880, 400, 
+                                    60, 30,
                                     font=("Arial", 12, "bold"))
         
     def destroy(self) -> None:
