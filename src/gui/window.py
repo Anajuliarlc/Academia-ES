@@ -7,7 +7,7 @@ import gui.logo_frame as lf
 
 class Window(tk.Tk):
     def __init__(self, title: str = "Chi-Trapézio", height: int = 600, width: int = 1200,
-                  pos_x: int = 0, pos_y: int = 0, connect: bool = False) -> None:
+                  pos_x: int = 0, pos_y: int = 0) -> None:
         super().__init__()
         self.title = title
         self.height = height
@@ -15,9 +15,6 @@ class Window(tk.Tk):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.active_frames = []
-        
-        if connect:
-            self.database = db.DBConnector()
 
         self.design()
     

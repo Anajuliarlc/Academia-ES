@@ -1,4 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.abspath("./src"))
+
 from db.db_connector import DBConnector
+import gui.window as wd
+import login.login_frame_factory as lff
 
 class SystemMeta(type):
     """ System Metaclass for Singleton Pattern application. """
@@ -19,7 +25,9 @@ class System(metaclass = SystemMeta):
 
     def start(self) -> None:
         """ Starts the system. """
-        ... #TODO: Implement the window start
+        self.window = wd.Window()
+        frame = lff.LoginFrameFactory.get_frame("LoginFrame", self.window)
+        self.window.mainloop()
         
 if __name__ == "__main__":
     system = System()
