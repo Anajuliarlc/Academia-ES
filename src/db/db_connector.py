@@ -96,7 +96,7 @@ class DBConnector:
         query = "DELETE FROM " + table + " " + condition + ";"
         return self.query(query)
     
-    def destroy(self):
+    def destroy(self) -> None:
         self.db.close()
 
 if __name__ == "__main__":
