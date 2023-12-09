@@ -6,6 +6,14 @@ import gui.logo_frame as lf
 
 
 class Window(tk.Tk):
+    """ Creates a window to be used in the application
+    
+    >>> window = Window("Test", 600, 800, 0, 0, False)
+    >>> window.title, window.height, window.width, window.pos_x, window.pos_y
+    ('Test', 600, 800, 0, 0)
+    >>> window.active_frames
+    [<gui.logo_frame.LogoFrame object .!logoframe>]
+    """
     def __init__(self, title: str = "Chi-Trapézio", height: int = 600, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 0, connect: bool = False) -> None:
         super().__init__()
@@ -41,6 +49,9 @@ class Window(tk.Tk):
 
     
 if __name__ == "__main__":
-    import login.login_frame_factory as lff
-    mainframe = Window(connect = False)
-    mainframe.mainloop()
+    # import login.login_frame_factory as lff
+    # mainframe = Window(connect = False)
+    # mainframe.mainloop()
+
+    import doctest
+    doctest.testmod(verbose=True)

@@ -2,6 +2,14 @@ import tkinter as tk
 import pandas as pd
 
 class Table():
+    """ Create a table to be used in the application
+    
+    >>> window = tk.Tk()
+    >>> df = pd.DataFrame([["João", 20, 1.80, 80], ["Maria", 25, 1.70, 60]], columns = ["Nome", "Idade", "Altura", "Peso"])
+    >>> table = Table(window, df, 600, 400, 10, 0, 0)
+    >>> table.width, table.height, table.font_size, table.pos_x, table.pos_y
+    (600, 400, 10, 0, 0)
+    """
     def __init__(self, window: tk.Frame, data: pd.DataFrame,
                   widht: int, height: int, font_size: int = 10,
                   pos_x: int = 0, pos_y: int = 0) -> None:
@@ -38,10 +46,13 @@ class Table():
         
         
 if __name__ == "__main__":
-    window = tk.Tk()
-    window.geometry("800x600")
-    window.config(bg = "#FFFFFF")
-    df = pd.DataFrame([["João", 20, 1.80, 80], ["Maria", 25, 1.70, 60]],
-                        columns = ["Nome", "Idade", "Altura", "Peso"])
-    table = Table(window, df, 600, 400, 10, 0, 0)
-    window.mainloop()
+    # window = tk.Tk()
+    # window.geometry("800x600")
+    # window.config(bg = "#FFFFFF")
+    # df = pd.DataFrame([["João", 20, 1.80, 80], ["Maria", 25, 1.70, 60]],
+    #                     columns = ["Nome", "Idade", "Altura", "Peso"])
+    # table = Table(window, df, 600, 400, 10, 0, 0)
+    # window.mainloop()
+    
+    import doctest
+    doctest.testmod(verbose=True)

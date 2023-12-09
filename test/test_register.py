@@ -11,15 +11,16 @@ import exc.exceptions as exc
 class TestRegister(unittest.TestCase):
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
-        self.reg = Register("George", 
-                            "01/01/2000", 
-                            "12345678900", 
-                            "123456789", 
-                            "123456", 
-                            "123456789", 
-                            "SP", 
-                            "Jardim", 
-                            "Possui depressão e dor na coluna")
+        self.reg = Register(name="George", 
+                            birth="01/01/2000", 
+                            cpf="12340678900", 
+                            rg="123456789", 
+                            password="12aA5676", 
+                            phone="21123456789", 
+                            uf="SP",
+                            city="São Paulo", 
+                            neigh="Jardim", 
+                            medic="Possui depressão e dor na coluna")
         
     def test_validate_name_too_big(self):
         self.assertRaises(exc.WrongLengthError, self.reg.validate_name, "A"*256)

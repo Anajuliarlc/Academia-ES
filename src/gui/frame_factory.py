@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 import tkinter as tk
-import gui.frame as fr
 
 class FrameFactory(ABC):
 
@@ -26,7 +25,7 @@ class FrameFactory(ABC):
     @staticmethod
     @abstractmethod
     def get_frame(type_:str, window: tk.Tk, height: int = 600, width: int = 800,
-                  pos_x: int = 0, pos_y: int = 0) -> fr.Frame:
+                  pos_x: int = 0, pos_y: int = 0) -> 'fr.Frame':
         """Create a frame to be used in the application
         
         :param type_: Type of frame to be created
@@ -46,3 +45,22 @@ class FrameFactory(ABC):
 
     def destroy(self) -> None:
         self.frame.destroy()
+
+
+class TestFrameFactory(FrameFactory):
+    """ Solely for testing purposes
+    
+    >>> root = tk.Tk()
+    >>> factory = TestFrameFactory("test", root)
+    >>> factory.frame
+    <tkinter.Frame object ...>
+    >>> factory.destroy()
+    """
+    @staticmethod
+    def get_frame(type_:str, window: tk.Tk, height: int = 600, width: int = 800,
+                  pos_x: int = 0, pos_y: int = 0) -> 'fr.Frame':
+        return tk.Frame(window, height=height, width=width)
+    
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(optionflags=doctest.ELLIPSIS)
