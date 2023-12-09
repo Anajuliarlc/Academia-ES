@@ -32,13 +32,14 @@ class RegisterFrame(fr.Frame):
         self.button1 = bt.DefaultButton("Criar Matrícula", 
                                     lambda: button_press("CreateRegisterFrame"),
                                     self, 
-                                    60, 100)
+                                    127, 150,
+                                    font=("Arial", 20, "bold"))
         
         self.button2 = bt.DefaultButton("Visualizar Matrículas", 
                                     lambda: button_press("ViewRegisterFrame"),
                                     self, 
-                                    510, 100,
-                                    font=("Arial", 20))
+                                    536, 150,
+                                    font=("Arial", 20, "bold"))
     
     def destroy(self) -> None:
         super().destroy()

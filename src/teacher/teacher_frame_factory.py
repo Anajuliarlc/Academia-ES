@@ -64,8 +64,6 @@ class TeacherFrameFactory(ff.FrameFactory):
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
-    window = wd.Window(connect = False)
+    window = wd.Window()
     frame = TeacherFrameFactory("MenuFrame", window)
     window.mainloop()
-
-    

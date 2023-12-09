@@ -8,14 +8,14 @@ sys.path.append(os.path.abspath("./src"))
 
 import gui.frame as fr
 import pandas as pd
-from main import System
+import main
 from gui.buttons import DefaultButton
 from gui.errorlabel import ErrorLabel
 
 class SetGoalsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 960,
                  pos_x: int = 720, pos_y: int = 200) -> None:
-        self.system = System()
+        self.system = main.System()
 
         super().__init__(window, height, width, pos_x, pos_y)
 
