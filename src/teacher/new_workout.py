@@ -116,7 +116,7 @@ class NewWorkoutFrame(fr.Frame):
 
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     mf.MenuFrame(mainframe)
     tw.InitialWorkoutsFrame(mainframe)
     NewWorkoutFrame(mainframe)

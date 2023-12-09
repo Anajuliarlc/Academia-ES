@@ -39,5 +39,5 @@ class Window(tk.Tk):
     
 if __name__ == "__main__":
     import login.login_frame_factory as lff
-    mainframe = Window(connect = False)
+    mainframe = Window()
     mainframe.mainloop()

@@ -69,6 +69,6 @@ class IncreaseFrame(fr.Frame):
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     IncreaseFrame(mainframe)
     mainframe.mainloop()

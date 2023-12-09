@@ -93,7 +93,7 @@ class CurrentWorkouts(fr.Frame):
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     mf.MenuFrame(mainframe)
     CurrentWorkouts(mainframe)
     mainframe.mainloop()

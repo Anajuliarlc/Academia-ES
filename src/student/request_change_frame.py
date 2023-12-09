@@ -73,6 +73,6 @@ class RequestChangeFrame(fr.Frame):
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     RequestChangeFrame(mainframe)
     mainframe.mainloop()

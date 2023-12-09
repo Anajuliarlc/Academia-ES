@@ -34,7 +34,7 @@ class LogoFrame(fr.Frame):
 
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     LogoFrame(mainframe)
     mainframe.mainloop()
 

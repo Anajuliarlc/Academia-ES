@@ -81,7 +81,7 @@ class StudentFrameFactory(ff.FrameFactory):
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
-    window = wd.Window(connect = False)
+    window = wd.Window()
     frame = StudentFrameFactory("MenuFrame", window)
     system = main.System()
     system.user = 3

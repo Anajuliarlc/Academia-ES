@@ -103,6 +103,6 @@ class NewClassFrame(fr.Frame):
 if __name__ == "__main__":
     import main
     main.System().user = 1
-    window = wd.Window(connect = False)
+    window = wd.Window()
     frame = NewClassFrame(window)
     window.mainloop()

@@ -69,6 +69,6 @@ class ProfileFrame(fr.Frame):
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     ProfileFrame(mainframe)
     mainframe.mainloop()
