@@ -10,6 +10,16 @@ import login.login_frame as lf
 import gui.window as wd
 
 class LoginFrameFactory(ff.FrameFactory):
+    """Frame factory for the login frames
+    
+    >>> window = wd.Window(connect = False)
+    >>> frame = LoginFrameFactory.get_frame("LoginFrame", window)
+    >>> isinstance(frame, lf.LoginFrame)
+    True
+    >>> frame = LoginFrameFactory.get_frame("ExampleFrame", window)
+    >>> isinstance(frame, fr.ExampleFrame)
+    True
+    """  
     @staticmethod
     def get_frame(type_: str, 
                   window: tk.Tk, 
@@ -17,8 +27,8 @@ class LoginFrameFactory(ff.FrameFactory):
                   width: int = 800,
                    pos_x: int = 0, 
                    pos_y: int = 0) -> fr.Frame:
-        """Frame factory for the login frames
-
+        """ Create a frame to be used in the application
+        
         :param type_: Type of frame to be created
         :type type_: str
         :param window: Window that will contain the frame
@@ -31,7 +41,8 @@ class LoginFrameFactory(ff.FrameFactory):
         :type pos_x: int, optional
         :param pos_y: Position y of the frame on window, defaults to 0
         :type pos_y: int, optional
-        """        
+        """
+            
         if type_ == "ExampleFrame":
             return fr.ExampleFrame(window, height, width, pos_x, pos_y)
         elif type_ == "LoginFrame":
@@ -40,6 +51,9 @@ class LoginFrameFactory(ff.FrameFactory):
             raise fr.FrameNotFound()
         
 if __name__ == "__main__":
-    window = wd.Window(connect = False)
-    frame = LoginFrameFactory("LoginFrame", window)
-    window.mainloop()
+    # window = wd.Window(connect = False)
+    # frame = LoginFrameFactory("LoginFrame", window)
+    # window.mainloop()
+
+    import doctest
+    doctest.testmod()

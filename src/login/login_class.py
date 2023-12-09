@@ -10,7 +10,12 @@ import main
 import exc.exceptions as exc
 
 class Login():
-    """Login class for accessing a user's account."""
+    """Login class for accessing a user's account.
+    
+    >>> login = Login("12345678901", "password123")
+    >>> login.cpf, login.password
+    ('12345678901', 'password123')
+    """
     def __init__(self, cpf: str, password: str) -> None:
         """
         Initializes the Login class.
@@ -67,7 +72,10 @@ class Login():
         self.system.user = attempt["IdUser"].iloc[0]
 
 if __name__ == "__main__":
-    login = Login("12345678901", "password123")
-    login.run()
-    if login.system.user:
-        print("Login successful!")
+    # login = Login("12345678901", "password123")
+    # login.run()
+    # if login.system.user:
+    #     print("Login successful!")
+    
+    import doctest
+    doctest.testmod()

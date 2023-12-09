@@ -17,6 +17,16 @@ import student.student_frame_factory as sff
 import main 
 
 class LoginFrame(fr.Frame):
+    """ Create a frame to be used as login in the application
+    
+    >>> import gui.window as wd
+    >>> window = wd.Window(connect = False)
+    >>> frame = LoginFrame(window)
+    >>> frame.height, frame.width
+    (450, 1200)
+    >>> frame.pos_x, frame.pos_y
+    (0, 150)
+    """
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 150) -> None:
         """Create a frame to be used as example in the application """
@@ -91,3 +101,6 @@ class LoginFrame(fr.Frame):
                                       f"WHERE IdUser = {system.user}").empty:
             sff.StudentFrameFactory("MenuFrame", self.window)
         
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
