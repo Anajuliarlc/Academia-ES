@@ -1,3 +1,11 @@
+"""
+This module contains the LoginFrame class, which represents a frame used for login in the application.
+
+.. module:: login_frame
+   :platform: Windows
+   :synopsis: This module contains the LoginFrame class.
+"""
+
 import sys
 import os
 sys.path.append(os.path.abspath("./src"))
@@ -17,15 +25,38 @@ import student.student_frame_factory as sff
 import main 
 
 class LoginFrame(fr.Frame):
+    """
+    The LoginFrame class represents a frame used for login in the application.
+    """
+
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 150) -> None:
-        """Create a frame to be used as example in the application """
+        """
+        Create a LoginFrame object.
+
+        :param window: The parent window.
+        :type window: tk.Tk
+        :param height: The height of the frame.
+        :type height: int
+        :param width: The width of the frame.
+        :type width: int
+        :param pos_x: The x-coordinate position of the frame.
+        :type pos_x: int
+        :param pos_y: The y-coordinate position of the frame.
+        :type pos_y: int
+        """
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """
+        Design the LoginFrame.
+        """
         self.config(bg = "#000F31")
 
     def place_objects(self) -> None:
+        """
+        Place objects on the LoginFrame.
+        """
         label1 = tk.Label(self, 
                           text = "Insira suas credenciais:", 
                           font = ("Arial", 20), 
@@ -53,6 +84,14 @@ class LoginFrame(fr.Frame):
         self.warning = tk.Label()
 
         def request_login() -> None:
+            """
+            Requests login information from the user, validates it, and performs the login operation.
+
+            :raises EmptyFieldError: If any of the login fields are empty.
+            :raises CPFNotFoundError: If the provided CPF is not found in the system.
+            :raises InvalidCPFError: If the provided CPF is invalid.
+            :raises IncorrectPasswordError: If the provided password is incorrect.
+            """
             try:
                 self.warning.destroy()
                 login_command = lc.Login(self.entry_cpf.get(), 
@@ -78,6 +117,9 @@ class LoginFrame(fr.Frame):
                                     500, 310, 200, 40)
         
     def destroy(self) -> None:
+        """
+        Destroy the LoginFrame and create the appropriate frame based on the user's role.
+        """
         super().destroy()
         system = main.System()
         lf.LogoFrame(self.window, pos_x=119)
