@@ -53,6 +53,15 @@ class FrameNotFound(ValueError):
         super().__init__("Frame not found")
 
 class ExampleFrame(Frame):
+    """
+    >>> root = tk.Tk()
+    >>> root.active_frames = []
+    >>> frame = ExampleFrame(root, 600, 800, 0, 0)
+    >>> frame.pos_x, frame.pos_y, frame.width, frame.height
+    (0, 0, 800, 600)
+    >>> frame in root.active_frames
+    True
+    """
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 800,
                   pos_x: int = 0, pos_y: int = 0) -> None:
         """Create a frame to be used as example in the application """

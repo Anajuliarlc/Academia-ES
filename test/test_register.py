@@ -34,8 +34,8 @@ class TestRegister(unittest.TestCase):
     
     def test_validate_birth_invalid(self):
         self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "aaa")
-        self.assertRaises(exc.EmptyFieldError, self.reg.validate_birth, "")
-        self.assertRaises(exc.EmptyFieldError, self.reg.validate_birth, "Data de nascimento (dd/mm/aaaa)")
+        self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "")
+        self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "Data de nascimento (dd/mm/aaaa)")
 
     def test_validate_birth_valid(self):
         self.assertEqual(self.reg.validate_birth("01/01/2000"), "01/01/2000")

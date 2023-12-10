@@ -3,9 +3,7 @@ import sys
 sys.path.append("./src")
 
 class ErrorLabel(tk.Label):
-    def __init__(self, window, text, pos_x, pos_y, width=400, height=80, font=("Arial", 14)):
-        """
-        Initializes an ErrorLabel object.
+    """Initializes an ErrorLabel object.
 
         :param window: The parent window where the ErrorLabel will be placed.
         :type window: tkinter.Tk or tkinter.Toplevel
@@ -21,7 +19,13 @@ class ErrorLabel(tk.Label):
         :type height: int, optional
         :param font: The font of the ErrorLabel, defaults to ("Arial", 14).
         :type font: tuple, optional
-        """
+        
+    >>> root = tk.Tk()
+    >>> label = ErrorLabel(root, "Error", 10, 20, 400, 80)
+    >>> label.pos_x, label.pos_y, label.width, label.height
+    (10, 20, 400, 80)
+    """
+    def __init__(self, window, text, pos_x, pos_y, width = 400, height = 80, font = ("Arial", 14)):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width

@@ -6,6 +6,15 @@ import gui.window as wd
 
 
 class LogoFrame(fr.Frame):
+    """
+    >>> root = tk.Tk()
+    >>> root.active_frames = []
+    >>> frame = LogoFrame(root, 200, 1200, 0, 0)
+    >>> frame.pos_x, frame.pos_y, frame.width, frame.height
+    (0, 0, 1200, 200)
+    >>> frame in root.active_frames
+    True
+    """
     def __init__(self, window: tk.Tk, height: int = 200, width: int = 1200,
                   pos_x: int = 0, pos_y: int = 0) -> None:
         """
@@ -60,7 +69,9 @@ class LogoFrame(fr.Frame):
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window()
-    LogoFrame(mainframe)
-    mainframe.mainloop()
+    # mainframe = wd.Window()
+    # LogoFrame(mainframe)
+    # mainframe.mainloop()
 
+    import doctest
+    doctest.testmod(verbose=True)

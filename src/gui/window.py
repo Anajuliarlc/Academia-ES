@@ -6,22 +6,27 @@ import gui.logo_frame as lf
 
 
 class Window(tk.Tk):
-    def __init__(self, title: str = "Chi-Trapézio", height: int = 600, 
-                 width: int = 1200,pos_x: int = 0, pos_y: int = 0) -> None:
-        """
-        Initializes the Window class.
+    """ Initializes the Window class.
 
-        :param title: The title of the window, defaults to "Chi-Trapézio"
-        :type title: str, optional
-        :param height: The height of the window, defaults to 600
-        :type height: int, optional
-        :param width: The width of the window, defaults to 1200
-        :type width: int, optional
-        :param pos_x: The x-coordinate position of the window, defaults to 0
-        :type pos_x: int, optional
-        :param pos_y: The y-coordinate position of the window, defaults to 0
-        :type pos_y: int, optional
-        """
+    :param title: The title of the window, defaults to "Chi-Trapézio"
+    :type title: str, optional
+    :param height: The height of the window, defaults to 600
+    :type height: int, optional
+    :param width: The width of the window, defaults to 1200
+    :type width: int, optional
+    :param pos_x: The x-coordinate position of the window, defaults to 0
+    :type pos_x: int, optional
+    :param pos_y: The y-coordinate position of the window, defaults to 0
+    :type pos_y: int, optional
+    
+    >>> window = Window("Test", 600, 800, 0, 0, False)
+    >>> window.title, window.height, window.width, window.pos_x, window.pos_y
+    ('Test', 600, 800, 0, 0)
+    >>> window.active_frames
+    [<gui.logo_frame.LogoFrame object .!logoframe>]
+    """
+    def __init__(self, title: str = "Chi-Trapézio", height: int = 600, width: int = 1200,
+                  pos_x: int = 0, pos_y: int = 0, connect: bool = False) -> None:
         super().__init__()
         self.title(title)
         self.height = height
