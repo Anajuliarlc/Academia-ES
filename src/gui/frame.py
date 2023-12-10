@@ -59,22 +59,31 @@ class ExampleFrame(Frame):
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """Sets the background color of the frame to red."""
         self["bg"] = "red"
 
     def place_objects(self) -> None:
-        self.label = tk.Label(self, text = "Example Frame", font = ("Arial", 20))
-        self.button = tk.Button(self, text = "Change Label")
-        self.entry = tk.Entry(self)
-        
-        def change_label() -> None:
-            self.label.config(text = self.entry.get())
+            """Place the label, button, and entry objects in the frame.
 
-        self.button["command"] = change_label
+            This method creates and configures the label, button, and entry objects,
+            and places them in the frame using specific coordinates and dimensions.
+            """
+            self.label = tk.Label(self, text="Example Frame", font=("Arial", 20))
+            self.button = tk.Button(self, text="Change Label")
+            self.entry = tk.Entry(self)
+            
+            def change_label() -> None:
+                """Change the label text to the entry text."""
+                self.label.config(text=self.entry.get())
 
-        self.label.place(x = 20, y = 20, height = 40, width = 200)
-        self.button.place(x = 20, y = 60, height = 40, width = 200)
-        self.entry.place(x = 20, y = 100, height = 40, width = 200)
+            self.button["command"] = change_label
+
+            self.label.place(x=20, y=20, height=40, width=200)
+            self.button.place(x=20, y=60, height=40, width=200)
+            self.entry.place(x=20, y=100, height=40, width=200)
         
 
     def destroy(self) -> None:
+        """Destroy the frame and remove it from the window's active frames list.
+        """
         super().destroy()
