@@ -55,5 +55,5 @@ class System(metaclass = SystemMeta):
         self.window.mainloop()
         
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod(optionflags=doctest.ELLIPSIS)
+    system = System()
+    system.start()

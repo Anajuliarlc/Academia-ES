@@ -47,20 +47,65 @@ class ViewRegisterFrame(fr.Frame):
         df2 = self.system.database.select("Student")
         df = pd.merge(df1, df2, on="IdUser")[["UserName", "BirthDate", "CPF", "PhoneNumber", "City", "RegistrationDate", "MedicalData"]]
 
-        self.table = tb.Table(self, df, 920, 30, pos_x=20, pos_y=20)
+        self.table_index = 0
+        self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 30, pos_x=20, pos_y=20)
 
-        # TODO: implement scroll buttons for the table when it exceeds the window size
+        self.page = tk.Label(self, text=str(int(self.table_index/10)), width=3, font=("Arial", 12, "bold"), bg="#000F31", fg="#DF8350")
+        self.page.place(x=790, y=400)
 
-        def press_button():
+        def move_table_down():
+            """Command to move the table one page down.
+            """
+            if self.table_index + 10 >= df.shape[0]:
+                return
+
+            self.table_index += 10
+            self.table.destroy()
+            self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 30, pos_x=20, pos_y=20)
+
+            self.page.destroy()
+            self.page = tk.Label(self, text=str(int(self.table_index/10)), width=3, font=("Arial", 12, "bold"), bg="#000F31", fg="#DF8350")
+            self.page.place(x=790, y=400)
+
+        def move_table_up():
+            """Command to move the table one page up.
+            """
+            if self.table_index - 10 < 0:
+                return
+
+            self.table_index -= 10
+            self.table.destroy()
+            self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 30, pos_x=20, pos_y=20)
+
+            self.page.destroy()
+            self.page = tk.Label(self, text=str(int(self.table_index/10)), width=3, font=("Arial", 12, "bold"), bg="#000F31", fg="#DF8350")
+            self.page.place(x=790, y=400)
+        
+        def close_button():
             self.destroy()
             tff.TeacherFrameFactory("RegisterFrame", self.window)
-
-        self.button1 = bt.DefaultButton("Fechar",
-                                        press_button,
+            
+        self.close = bt.DefaultButton("Fechar",
+                                        close_button,
                                         self,
                                         870, 400,
                                         70, 30,
                                         font=("Arial", 12, "bold"))
+        
+        self.down_button = bt.DefaultButton("\\/",
+                                        move_table_down,
+                                        self,
+                                        830, 400,
+                                        30, 30,
+                                        font=("Arial", 12, "bold"))
+        
+        self.up_button = bt.DefaultButton("/\\",
+                                        move_table_up,
+                                        self,
+                                        750, 400,
+                                        30, 30,
+                                        font=("Arial", 12, "bold"))
+
 
     def destroy(self) -> None:
         """Destroy the frame.

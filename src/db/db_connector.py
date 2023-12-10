@@ -38,7 +38,7 @@ class DBConnector:
         """        
         self.db.send(query + "\n")
         time.sleep(1)
-        output = self.db.recv(4096).decode()
+        output = self.db.recv(100000).decode()
         return output
 
     def insert(self, table: str, values: str) -> str:

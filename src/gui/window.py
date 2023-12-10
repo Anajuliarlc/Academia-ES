@@ -45,7 +45,7 @@ class Window(tk.Tk):
 
         :param frame: Frame to be displayed
         :type frame: tk.Frame
-        """    
+        """
         pass
 
     def design(self):
