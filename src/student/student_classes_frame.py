@@ -59,7 +59,6 @@ class StudentClassesFrame(fr.Frame):
         """Place the classes on the frame.
         """
         self.classes = self.classes_functions.get_classes()
-        print(self.classes)
 
         size = len(self.classes)
         if size < 3:

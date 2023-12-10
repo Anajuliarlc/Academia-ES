@@ -36,79 +36,99 @@ class NewClassFrame(fr.Frame):
     def insert_class(self) -> None:
         """Inserts a new class into the database.
         """
-        name = self.name_entry.get()
-        date = self.date_entry.get()
-        description = self.description_entry.get()
-        max_students = self.max_students_entry.get()
-        if (name != "" and
-            date != "" and
-            description != "" and
-            max_students != ""):
-            result_query = self.student.insert_class(name, date,
-                                                      description, max_students)
-            if not result_query:
-                warning = el.ErrorLabel(self,
-                                    text = "Data no formato 2023-01-01 12:00:00",
-                                    pos_x = 300, pos_y = 340, height = 50)
-                warning.after(4000, warning.destroy)
-            else:
-                self.destroy()
+        idclass = self.classes["IdClass"][self.classes["ClassName"] == self.name.get()]
+        IdTeacher = self.classes["IdUser"][self.classes["ClassName"] == self.name.get()]
+        idStudent = self.student.system.user
+        table = "Take (IdClass, IdTeacher, IdStudent)"
+        values = f"({idclass.iloc[0]}, {IdTeacher.iloc[0]}, {idStudent})"
+        return_query = self.student.system.database.insert(table, values)
+        if "ERROR" in return_query:
+            self.warning = el.ErrorLabel(self, text = "Erro ao inserir a aula.",
+                                         pos_x = 350, pos_y = 400)
         else:
-            warning = el.ErrorLabel(self, text = "Preencha todos os campos",
-                                    pos_x = 300, pos_y = 340, height = 50)
-            warning.after(4000, warning.destroy)
+            self.destroy()
 
-    def validate_int(self, event):
-        """Validates if the input in the max_students_entry field is an integer.
-
-        :param event: The event object.
-        :type event: _type_
+    def change_label(self, event = None):
+        """Changes the label of the class.
         """
-        entry = self.max_students_entry.get()
-        if not entry.isdigit():
-            self.max_students_entry.delete(0, tk.END)
+        class_name = self.name.get()
+        date = self.classes["ClassDate"][self.classes["ClassName"] == class_name]
+        self.date.set(date.iloc[0] if not date.empty else "")
+
+        description = self.classes["ClassDescription"][self.classes["ClassName"] == class_name]
+        self.description.set(description.iloc[0] if not description.empty else "")
+
+        max_students = self.classes["StudentsMax"][self.classes["ClassName"] == class_name]
+        self.max_students.set(max_students.iloc[0] if not max_students.empty else "")
+
+        self.date_entry.config(text=self.date.get())
+        self.description_entry.config(text=self.description.get())
+        self.max_students_entry.config(text=self.max_students.get())
 
     def place_objects(self) -> None:
         """Places the objects within the frame.
         """
+        self.classes = self.student.get_all_classes()
         label = tk.Label(self, text = "Nova aula", font = ("Arial", 24, "bold"),
                          bg = "#000F31", fg = "#FEFAD2")
         
         label.place(x = 400, y = 30, width = 150, height = 30)
         name_label = tk.Label(self, text = "Nome:", font = ("Arial", 16, "bold"),
                               bg = "#000F31", fg = "#FEFAD2")
-        name_label.place(x = 200, y = 100, width = 100, height = 30)
-        self.name_entry = et.EntryText(self, font = ("Arial", 16, "bold"),
-                                        pos_x = 300, pos_y = 100,
-                                        width = 400, height = 40)
+        name_label.place(x = 200, y = 100, width = 100, height = 20)
+
+        self.name = tk.StringVar()
+        self.name.set(self.classes["ClassName"][0])
+        self.name_drop = tk.OptionMenu(self, self.name,
+                                        *self.classes["ClassName"],
+                                        command = self.change_label)
+        self.name_drop.config(background='#E29E6C', foreground='#FEFAD2',
+                                                    activebackground='#DF8350')
+        self.name_drop.place(x = 300, y = 100, width = 400, height = 30)
 
         date_label = tk.Label(self, text = "Data:", font = ("Arial", 16, "bold"),
                               bg = "#000F31", fg = "#FEFAD2")
-        date_label.place(x = 200, y = 160, width = 100, height = 30)
-        self.date_entry = et.EntryText(self, font = ("Arial", 16, "bold"),
-                                        pos_x = 300, pos_y = 160,
-                                        width = 400, height = 40)
+        date_label.place(x = 200, y = 150, width = 100, height = 20)
 
-        description_label = tk.Label(self, text = "Descrição:",
-                                     font = ("Arial", 16, "bold"),
-                                     bg = "#000F31", fg = "#FEFAD2")
-        description_label.place(x = 180, y = 220, width = 120, height = 30)
-        self.description_entry = et.EntryText(self, font = ("Arial", 16, "bold"),
-                                                pos_x = 300, pos_y = 220,
-                                                width = 400, height = 40)
+        self.date = tk.StringVar()
+        self.date.set(self.classes["ClassDate"][0])
+        self.date_entry = tk.Label(self,
+                                    text = self.date.get(),
+                                    font = ("Arial", 16, "bold"),
+                                    bg = "#DF8350",
+                                    fg = "#FEFAD2")
+        self.date_entry.place(x = 300, y = 150, width = 400, height = 30)
         
         max_students_label = tk.Label(self, text = "Máximo de alunos:",
                                         font = ("Arial", 16, "bold"),
                                         bg = "#000F31", fg = "#FEFAD2")
-        max_students_label.place(x = 100, y = 280, width = 200, height = 30)
-        self.max_students_entry = et.EntryText(self, font = ("Arial", 16, "bold"),
-                                                pos_x = 300, pos_y = 280,
-                                                width = 400, height = 40)
-        validation = (self.register(self.validate_int), "%P")
-        self.max_students_entry.config(validate = "key",
-                            validatecommand = validation)
+        max_students_label.place(x = 100, y = 200, width = 200, height = 20)
 
-        create_button = bt.DefaultButton(text = "Criar",
+        self.max_students = tk.StringVar()
+        self.max_students.set(self.classes["StudentsMax"][0])
+        self.max_students_entry = tk.Label(self,
+                                    text = self.max_students.get(),
+                                    font = ("Arial", 16, "bold"),
+                                    bg = "#DF8350",
+                                    fg = "#FEFAD2")
+        self.max_students_entry.place(x = 300, y = 200, width = 400, height = 30)
+
+        description_label = tk.Label(self, text = "Descrição:",
+                                     font = ("Arial", 16, "bold"),
+                                     bg = "#000F31", fg = "#FEFAD2")
+        description_label.place(x = 180, y = 280, width = 120, height = 20)
+
+        self.description = tk.StringVar()
+        self.description.set(self.classes["ClassDescription"][0])
+        self.description_entry = tk.Label(self,
+                                    text = self.description.get(),
+                                    font = ("Arial", 16, "bold"),
+                                    bg = "#DF8350",
+                                    fg = "#FEFAD2",
+                                    wraplength = 400)
+        self.description_entry.place(x = 300, y = 250, width = 400, height = 80)
+        
+        create_button = bt.DefaultButton(text = "Entrar",
                                          command = self.insert_class,
                                          window = self, pos_x = 350, pos_y = 350,
                                          font = ("Arial", 16, "bold"),

@@ -9,17 +9,26 @@ class StudentClasses():
         """Initializes a new instance of the StudentClasses class."""
         self.system = main.System()
 
+    def get_all_classes(self) -> pd.DataFrame:
+        """ Gets all the classes from the database.
+
+        :return: A DataFrame containing the classes.
+        :rtype: pd.DataFrame
+        """        
+        table = self.system.database.select("Class")
+
+        return table
+
     def get_classes(self) -> pd.DataFrame:
         """Retrieves the classes for the student.
 
         Returns:
             pd.DataFrame: A DataFrame containing the class information.
         """
-        db_connector = db.db_connector.DBConnector()
+        db_connector = self.system.database
         query = f" SELECT c.ClassName, c.ClassDate, c.ClassDescription, c.StudentsMax FROM Class as c, Take as t where t.IdStudent = {self.system.user} and t.IdTeacher = c.IdUser and t.IdClass = c.IdClass;"
 
         result = db_connector.query(query)
-        print(result)
 
         table = result.split("c.IdClass;")
         table = table[1]
@@ -33,7 +42,6 @@ class StudentClasses():
         table = [row.split("|")[1:-1] for row in table]
         table = [[value.strip() for value in row] for row in table]
         table = pd.DataFrame(table, columns = columns)
-        print(table)
 
         return table
     
