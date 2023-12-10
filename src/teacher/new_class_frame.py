@@ -12,13 +12,30 @@ import teacher.classes as cl
 class NewClassFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
                   pos_x: int = 240, pos_y: int = 200) -> None:
+        """Creates a new instance of the NewClassFrame class.
+
+        :param window: The Tkinter window object.
+        :type window: tk.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 960.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 240.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         self.teacher = cl.Classes()
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """Designs the appearance of the frame.
+        """
         self.config(bg = "#000F31")
 
     def insert_class(self) -> None:
+        """Inserts a new class into the database.
+        """
         name = self.name_entry.get()
         date = self.date_entry.get()
         description = self.description_entry.get()
@@ -40,12 +57,20 @@ class NewClassFrame(fr.Frame):
             warning = el.ErrorLabel(self, text = "Preencha todos os campos",
                                     pos_x = 300, pos_y = 340, height = 50)
             warning.after(4000, warning.destroy)
+
     def validate_int(self, event):
+        """Validates the input in the max_students_entry field to allow only integer values.
+
+        :param event: The event object.
+        :type event: _type_
+        """
         entry = self.max_students_entry.get()
         if not entry.isdigit():
             self.max_students_entry.delete(0, tk.END)
 
     def place_objects(self) -> None:
+        """Places the objects/widgets in the frame.
+        """
         label = tk.Label(self, text = "Nova aula", font = ("Arial", 24, "bold"),
                          bg = "#000F31", fg = "#FEFAD2")
         
@@ -96,6 +121,8 @@ class NewClassFrame(fr.Frame):
                                          width = 100, height = 30)
 
     def destroy(self) -> None:
+        """Destroys the current frame and returns to the ClassesFrame.
+        """
         tff.TeacherFrameFactory.get_frame("ClassesFrame", self.window)
         super().destroy()
 

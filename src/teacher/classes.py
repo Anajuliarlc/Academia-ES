@@ -5,9 +5,15 @@ import main
 
 class Classes():
     def __init__(self):
+        """Initializes a new instance of the Classes class."""
         self.system = main.System()
 
     def get_classes(self) -> pd.DataFrame:
+        """Returns a DataFrame containing all the classes in the system.
+        
+        :return: A DataFrame containing the classes.
+        :rtype: pd.DataFrame
+        """
         return self.system.database.select("Class")
     
     def insert_class(self, name: str, date: str,

@@ -18,13 +18,19 @@ class SystemMeta(type):
         return cls._instances[cls]
 
 class System(metaclass = SystemMeta):
+    """ Core application class. Carry out the system's database access and 
+    GUI main window management.
+    """
     def __init__(self) -> None:
+        """Initialize a new System object. 
+        Automatically connects to the database.
+        """
         self.user = None
         self.window = None
         self.database = DBConnector()
 
     def start(self) -> None:
-        """ Starts the system. """
+        """ Boot the system. Create a new window and a login screen."""
         self.window = wd.Window()
         frame = lff.LoginFrameFactory.get_frame("LoginFrame", self.window)
         self.window.mainloop()
