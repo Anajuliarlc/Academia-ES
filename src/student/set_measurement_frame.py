@@ -1,6 +1,7 @@
-import tkinter as tk
 import sys
 sys.path.append("./src")
+
+import tkinter as tk
 import gui.frame as fr
 import gui.buttons as bt
 import gui.entrytext as et
@@ -11,13 +12,30 @@ import gui.errorlabel as el
 class SetMeasurementFrame(fr.Frame):
     def __init__(self, window, height: int = 400, width: int = 480,
                  pos_x: int = 240, pos_y: int = 200) -> None:
+        """Creates a SetMeasurementFrame object.
+
+        :param window: The parent window for the frame.
+        :type window: tkinter.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 480.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 240.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         self.measurements = ms.Measurements()
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """Designs the SetMeasurementFrame.
+        """
         self.config(bg = "#000F31")
 
     def get_measurement(self) -> None:
+        """Gets the measurements from the entry fields and updates the database.
+        """
         measurements = {}
         measurements["Weight"] = self.entry_weight.get()
         measurements["Height"] = self.entry_height.get()
@@ -51,7 +69,10 @@ class SetMeasurementFrame(fr.Frame):
         print(self.measurements.update_db(measurements))
         self.destroy()
         sff.StudentFrameFactory.get_frame("MeasurementsFrame", self.window)
+
     def place_objects(self) -> None:
+        """Places the labels, entry fields, and button in the SetMeasurementFrame.
+        """
         self.label_weight = tk.Label(self, text = "Peso (kg):",
                                         font = ("Arial", 12, "bold"),
                                         bg = "#000F31", fg = "#FEFAD2")
@@ -102,5 +123,7 @@ class SetMeasurementFrame(fr.Frame):
                                                 height = 50, width = 340)
 
     def destroy(self) -> None:
+        """Destroys the SetMeasurementFrame and creates a new MeasurementsFrame.
+        """
         super().destroy()
         sff.StudentFrameFactory.get_frame("MeasurementsFrame", self.window)

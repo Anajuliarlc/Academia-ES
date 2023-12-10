@@ -1,3 +1,11 @@
+"""
+This module contains the Login class for accessing a user's account.
+
+.. module:: login_class
+   :platform: Windows
+   :synopsis: This module contains the Login class for accessing a user's account.
+"""
+
 import pandas as pd
 import re
 
@@ -10,7 +18,10 @@ import main
 import exc.exceptions as exc
 
 class Login():
-    """Login class for accessing a user's account."""
+    """
+    Login class for accessing a user's account.
+    """
+
     def __init__(self, cpf: str, password: str) -> None:
         """
         Initializes the Login class.
@@ -19,7 +30,7 @@ class Login():
         :type cpf: str
         :param password: The user's password.
         :type password: str
-        :raises EmptyFieldError: Se o campo senha estiver vazio.
+        :raises EmptyFieldError: If the password field is empty.
         """
         self.system = main.System() # Access the system singleton instance.
         self.cpf = self.validate_cpf(cpf)
@@ -54,6 +65,12 @@ class Login():
         return result_cpf
 
     def run(self) -> None:
+        """
+        Runs the login process.
+
+        :raises CPFNotFoundError: If the CPF is not found in the database.
+        :raises IncorrectPasswordError: If the password is incorrect.
+        """
         database = self.system.database
         attempt = database.select("User", "*", f"WHERE CPF = {self.cpf}")
         

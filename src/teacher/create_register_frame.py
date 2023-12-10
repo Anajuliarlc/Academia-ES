@@ -16,13 +16,27 @@ import exc.exceptions as exc
 class CreateRegisterFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 960,
                   pos_x: int = 240, pos_y: int = 150) -> None:
-        """Create a frame to be used as example in the application """
+        """
+        Initialize the CreateRegisterFrame object.
+
+        :param window: The Tkinter window object.
+        :param height: The height of the frame (default is 450).
+        :param width: The width of the frame (default is 960).
+        :param pos_x: The x-coordinate position of the frame (default is 240).
+        :param pos_y: The y-coordinate position of the frame (default is 150).
+        """
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """
+        Design the CreateRegisterFrame.
+        """
         self.config(bg = "#000F31")
 
     def place_objects(self) -> None:
+        """
+        Place the objects in the CreateRegisterFrame.
+        """
         label1 = tk.Label(self,
                           text = "Preencha os dados do aluno:", 
                           font = ("Arial", 20), 
@@ -145,5 +159,8 @@ class CreateRegisterFrame(fr.Frame):
                                     font=("Arial", 12, "bold"))
         
     def destroy(self) -> None:
+        """
+        Destroy the CreateRegisterFrame.
+        """
         super().destroy()
         

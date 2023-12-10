@@ -6,9 +6,15 @@ import db
 
 class StudentClasses():
     def __init__(self):
+        """Initializes a new instance of the StudentClasses class."""
         self.system = main.System()
 
     def get_classes(self) -> pd.DataFrame:
+        """Retrieves the classes for the student.
+
+        Returns:
+            pd.DataFrame: A DataFrame containing the class information.
+        """
         db_connector = db.db_connector.DBConnector()
         query = f" SELECT c.ClassName, c.ClassDate, c.ClassDescription, c.StudentsMax FROM Class as c, Take as t where t.IdStudent = {self.system.user} and t.IdTeacher = c.IdUser and t.IdClass = c.IdClass;"
 

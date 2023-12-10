@@ -1,12 +1,19 @@
-
 import sys
 sys.path.append("./src")
+
 import student.student_frame_factory as sff
 import exc.exceptions as exc
-import main
 import gui.errorlabel as el
+import main
 
 def send_request(frame):
+    """
+    Sends a request to the database to register a card.
+
+    :param frame: The frame object containing the card registration form.
+    :type frame: Frame
+    """
+    
     if frame.warning != None:
         frame.warning.destroy()
 
@@ -884,6 +891,26 @@ def has_errors(name, number, card_type, date, cvv):
 """
 
 def has_errors(name, number, card_type, date, cvv):
+    """
+    Check if there are any errors in the provided card information.
+
+    :param name: The name on the card.
+    :type name: str
+    :param number: The card number.
+    :type number: int
+    :param card_type: The type of the card (Credit or Debit).
+    :type card_type: str
+    :param date: The expiration date of the card (format: MM/YY).
+    :type date: str
+    :param cvv: The CVV code of the card.
+    :type cvv: int
+    :raises exc.EmptyFieldError: If any required field is empty.
+    :raises exc.WrongTypeError: If any field has an unexpected type.
+    :raises exc.NonLetterError: If the name contains non-letter characters.
+    :raises exc.WrongLengthError: If any field has an invalid length.
+    :raises exc.InvalidCardTypeError: If the card type is not valid.
+    :raises exc.WrongFormatError: If the date has an invalid format.
+    """
     if name == None or name == "":
         raise exc.EmptyFieldError("Nome")
     if type(name) != str:
@@ -911,7 +938,7 @@ def has_errors(name, number, card_type, date, cvv):
         raise exc.WrongFormatError("Data de Validade")
     if not date[:2].isnumeric() or not date[3:].isnumeric():
         raise exc.WrongTypeError("Data de Validade", int, type(date),
-                            "O formato esperado é \'MM/AA\'")
+                            "The expected format is 'MM/YY'")
     
     if type(cvv) != int:
         raise exc.WrongTypeError("CVV", int, type(cvv))
