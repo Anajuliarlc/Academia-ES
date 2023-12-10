@@ -23,7 +23,6 @@ import student.register_card_frame as rcf
 import student.student_classes_frame as sclf
 import student.student_new_class_frame as sncf
 
-
 class StudentFrameFactory(ff.FrameFactory):
     @staticmethod
     def get_frame(type_: str, window: tk.Tk, height: int = 600, width: int = 800,

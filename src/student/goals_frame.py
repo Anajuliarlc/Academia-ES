@@ -8,12 +8,29 @@ from gui.buttons import DefaultButton
 class GoalsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 480,
                  pos_x: int = 720, pos_y: int = 200) -> None:
+        """Initializes the GoalsFrame class.
+
+        :param window: The Tkinter window object.
+        :type window: tk.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 480.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 720.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """Sets the design of the GoalsFrame.
+        """
         self.config(bg = "#000F31")
 
     def clear_error_messages(self) -> None:
+        """Clears any error messages displayed on the frame.
+        """
         try:
             if len(self.error_messages) > 0:
                 for message in self.error_messages:
@@ -22,7 +39,7 @@ class GoalsFrame(fr.Frame):
             pass
     
     def place_objects(self) -> None:
-        """Place objects on the frame
+        """Places objects on the GoalsFrame.
         """
 
         self.label_manage_goals = tk.Label(self,
@@ -33,10 +50,14 @@ class GoalsFrame(fr.Frame):
         self.label_manage_goals.place(x = 0, y = 20, height = 30, width = 480)
         
         def view_goals() -> None:
+            """Displays the ViewGoalsFrame.
+            """
             self.destroy()
             sff.StudentFrameFactory.get_frame("ViewGoalsFrame", self.window)
 
         def set_goals() -> None:
+            """Displays the SetGoalsFrame.
+            """
             self.destroy()
             sff.StudentFrameFactory.get_frame("SetGoalsFrame", self.window)
 
@@ -56,4 +77,6 @@ class GoalsFrame(fr.Frame):
         
 
     def destroy(self) -> None:
+        """Destroys the GoalsFrame.
+        """
         super().destroy()

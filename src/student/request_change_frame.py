@@ -1,24 +1,43 @@
-import tkinter as tk
 import sys
 sys.path.append("./src")
+
+import tkinter as tk
+import datetime
+
 import gui.frame as fr
 import gui.window as wd
 import gui.buttons as bt
 import gui.entrytext as et
 import gui.errorlabel as el
-import main
 import student.student_frame_factory as sff
-import datetime
+import main
 
 class RequestChangeFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960, 
                  pos_x: int = 240, pos_y: int = 200) -> None:
+        """Creates a frame for requesting a change.
+
+        :param window: The Tkinter window object.
+        :type window: tk.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 960.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 240.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """Configures the design of the frame.
+        """
         self.config(bg = "#000F31")
 
     def button_send_request(self) -> None:
+        """Handles the button click event for sending the request.
+        """
         if self.clicked.get() == "Motivo da solicitação":
             # show error message
             error = el.ErrorLabel(self, "Selecione um motivo", pos_x=280,
@@ -34,13 +53,14 @@ class RequestChangeFrame(fr.Frame):
             return_message = system.database.insert("Request (IdUser, RequestDate, RequestDescription, RequestClosed)", f"({system.user}, \'{datetime_str}\', \'{details}\', false)")
             print(return_message)
 
-            
             for frame in self.window.active_frames:
                 if type(frame).__name__ != "MenuFrame" and type(frame).__name__ != "LogoFrame":
                     frame.destroy()
             sff.StudentFrameFactory.get_frame("ThankYouFrame", self.window)
 
     def place_objects(self) -> None:
+        """Places the objects within the frame.
+        """
         title_label = tk.Label(self, text="Solicitar Alteração",
                                font=("Arial", 18, "bold"),
                                bg = "#E29E6C", fg = "#FEFAD2")
@@ -70,6 +90,8 @@ class RequestChangeFrame(fr.Frame):
                                         command = self.button_send_request)
 
     def destroy(self) -> None:
+        """Destroys the frame.
+        """
         super().destroy()
 
 if __name__ == "__main__":

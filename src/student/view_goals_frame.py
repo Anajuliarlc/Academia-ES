@@ -9,12 +9,29 @@ import main
 
 class ViewGoalsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 960,
-                 pos_x: int = 240, pos_y: int = 200) -> None:
-        self.system = main.System()
+                     pos_x: int = 240, pos_y: int = 200) -> None:
+            """
+            Initializes the ViewGoalsFrame class.
 
-        super().__init__(window, height, width, pos_x, pos_y)
+            :param window: The Tkinter window object.
+            :type window: tk.Tk
+            :param height: The height of the frame, defaults to 600.
+            :type height: int, optional
+            :param width: The width of the frame, defaults to 960.
+            :type width: int, optional
+            :param pos_x: The x-coordinate position of the frame, defaults to 240.
+            :type pos_x: int, optional
+            :param pos_y: The y-coordinate position of the frame, defaults to 200.
+            :type pos_y: int, optional
+            """
+            self.system = main.System()
+
+            super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:
+        """
+        Sets the background color of the frame to "#000F31".
+        """
         self.config(bg = "#000F31")
     
     def place_objects(self) -> None:
@@ -150,6 +167,10 @@ class ViewGoalsFrame(fr.Frame):
 
 
     def destroy(self) -> None:
+        """Destroys the view_goals_frame.
+
+        This method overrides the destroy method from the parent class and is responsible for destroying the view_goals_frame.
+        """
         super().destroy()
     
     def update_db(self, goals: dict) -> bool:

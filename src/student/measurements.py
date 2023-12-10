@@ -1,8 +1,10 @@
-import time
 import sys
 sys.path.append("./src")
-import main
+
+import time
 import pandas as pd
+
+import main
 
 class Measurements():
     def __init__(self) -> None:
