@@ -13,14 +13,33 @@ import teacher.teacher_frame_factory as ttf
 class CurrentWorkouts(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
                  pos_x: int = 240, pos_y: int = 200):
-        """Create a frame to be used as login in the application """
+        """Initialize the CurrentWorkouts class.
+
+        :param window: The Tkinter window object.
+        :type window: tk.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 960.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 240.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         super().__init__(window, height, width, pos_x, pos_y)
         self.error_label = None
     
     def design(self):
+        """Design the frame.
+        """
         self.config(bg = "#000F31")
 
     def get_student(self):
+        """Get the list of students.
+
+        :return: A dictionary containing the student names and their corresponding IDs.
+        :rtype: dict
+        """
         self.system = main.System()
         query = "SELECT u.Iduser, u.UserName FROM User u, Student s WHERE u.Iduser = s.Iduser;"
         self.students = self.system.database.query(query)
@@ -35,6 +54,8 @@ class CurrentWorkouts(fr.Frame):
         return self.users
 
     def button_load_workouts(self):
+        """Load the workouts for the selected student.
+        """
         if self.error_label != None:
             self.error_label.destroy()
 
@@ -59,10 +80,14 @@ class CurrentWorkouts(fr.Frame):
             self.error_label.place(x = 280, y = 100)
 
     def button_cancel(self):
+        """Cancel and destroy the frame.
+        """
         self.destroy()
         ttf.TeacherFrameFactory.get_frame("WorkoutsFrame", self.window)
 
     def place_objects(self):
+        """Place the objects in the frame.
+        """
         self.title_label = tk.Label(self, text = "Treinos atuais", 
                                     font = ("Arial", 20, "bold"), 
                                     bg = "#000F31", fg = "#FEFAD2")
@@ -90,10 +115,12 @@ class CurrentWorkouts(fr.Frame):
                                             height = 50)
         
     def destroy(self):
+        """Destroy the frame.
+        """
         super().destroy()
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
+    mainframe = wd.Window()
     mf.MenuFrame(mainframe)
     CurrentWorkouts(mainframe)
     mainframe.mainloop()

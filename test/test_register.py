@@ -11,16 +11,16 @@ import exc.exceptions as exc
 class TestRegister(unittest.TestCase):
     def __init__(self, methodName: str = "runTest") -> None:
         super().__init__(methodName)
-        self.reg = Register(name="George", 
-                            birth="01/01/2000", 
-                            cpf="12340678900", 
-                            rg="123456789", 
-                            password="12aA5676", 
-                            phone="21123456789", 
-                            uf="SP",
-                            city="São Paulo", 
-                            neigh="Jardim", 
-                            medic="Possui depressão e dor na coluna")
+        self.reg = Register("George", 
+                            "01/01/2000", 
+                            "00000000000", 
+                            "123456789", 
+                            "aA23456", 
+                            "12345678910", 
+                            "SP",
+                            "São Paulo",
+                            "Jardim", 
+                            "Possui depressão e dor na coluna")
         
     def test_validate_name_too_big(self):
         self.assertRaises(exc.WrongLengthError, self.reg.validate_name, "A"*256)
@@ -49,7 +49,7 @@ class TestRegister(unittest.TestCase):
         self.assertRaises(exc.CPFAlreadyExistsError, self.reg.validate_cpf, "123.456.789-01")
 
     def test_validate_cpf_valid(self):
-        self.assertEqual(self.reg.validate_cpf("123.456.789-11"), "12345678911")
+        self.assertEqual(self.reg.validate_cpf("000.001.002-03"), "00000100203")
 
     def test_validate_rg_invalid(self):
         self.assertRaises(exc.InvalidRGError, self.reg.validate_rg, "000000000a")

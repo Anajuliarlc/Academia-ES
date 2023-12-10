@@ -96,7 +96,8 @@ class DBConnector:
         query = "DELETE FROM " + table + " " + condition + ";"
         return self.query(query)
     
-    def destroy(self) -> None:
+    def destroy(self):
+        """Close the connection to the database and ssh server"""
         self.db.close()
 
 if __name__ == "__main__":

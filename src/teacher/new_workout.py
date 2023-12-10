@@ -14,7 +14,19 @@ import gui.errorlabel as el
 class NewWorkoutFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
                  pos_x: int = 240, pos_y: int = 200):
-        """Create a frame to be used as login in the application """
+        """Creates a new workout frame.
+
+        :param window: The Tkinter window object.
+        :type window: tk.Tk
+        :param height: The height of the frame, defaults to 400.
+        :type height: int, optional
+        :param width: The width of the frame, defaults to 960.
+        :type width: int, optional
+        :param pos_x: The x-coordinate position of the frame, defaults to 240.
+        :type pos_x: int, optional
+        :param pos_y: The y-coordinate position of the frame, defaults to 200.
+        :type pos_y: int, optional
+        """
         self.system = mn.System()
         self.get_student()
         self.exercises = {}
@@ -22,10 +34,16 @@ class NewWorkoutFrame(fr.Frame):
     
 
     def design(self):
+        """
+        This method sets the background color of the widget to "#000F31".
+        """
         self.config(bg = "#000F31")
 
     def verify_entries(self):
-        """ Verify if all entries are filled correctly
+        """ Verifies if all entries are filled correctly
+        
+        :return: True if all entries are filled, False otherwise.
+        :rtype: bool
         
         >>> import gui.window as wd
         >>> window = wd.Window(connect = False)
@@ -43,7 +61,9 @@ class NewWorkoutFrame(fr.Frame):
         return True
 
     def button_update(self):
-        
+        """
+        Updates the student's workout in the database.
+        """
         if self.verify_entries():
             self.system.database.delete("Exercise", "Where IdUser = '" + self.users[self.name_student.cget("text")] + "';")
             for exercise, specifications in self.exercises.items():
@@ -55,10 +75,16 @@ class NewWorkoutFrame(fr.Frame):
             not_filled = el.ErrorLabel(self, text = "Preencha todos os campos", pos_x = 240, pos_y = 250, width = 300, height = 50)
 
     def button_cancel(self):
+        """
+        Cancels the current operation and destroys the window.
+        """
         self.destroy()
         ttf.TeacherFrameFactory.get_frame("WorkoutsFrame", self.window)
 
     def get_student(self):
+        """
+        Retrieves the list of students from the database.
+        """
         query = "SELECT u.Iduser, u.UserName FROM User u, Student s WHERE u.Iduser = s.Iduser;"
         self.students = self.system.database.query(query)
         table = self.students.split("s.Iduser;")[1]
@@ -67,21 +93,24 @@ class NewWorkoutFrame(fr.Frame):
         table = [[column.strip() for column in line] for line in table]
         self.users = {}
         for line in table:
-            self.users[line[1]] = line[0]
+                self.users[line[1]] = line[0]
 
 
     def place_objects(self):
+        """
+        Place the objects on the screen.
+        """
         exercise_label = tk.Label(self, text = "Exercícios", font = ("Arial", 12, "bold"), 
-                                  bg = "#000F31", fg = "#DF8350")
+                      bg = "#000F31", fg = "#DF8350")
         exercise_label.place(x = 260, y = 0)
         weight_label = tk.Label(self, text = "Peso", font = ("Arial", 12, "bold"),
-                                bg = "#000F31", fg = "#DF8350")
+                    bg = "#000F31", fg = "#DF8350")
         weight_label.place(x = 468, y = 0)
         series_label = tk.Label(self, text = "Séries", font = ("Arial", 12, "bold"),
-                                        bg = "#000F31", fg = "#DF8350")
+                        bg = "#000F31", fg = "#DF8350")
         series_label.place(x = 522, y = 0)
         repetition_label = tk.Label(self, text = "Rep", font = ("Arial", 12, "bold"),
-                                        bg = "#000F31", fg = "#DF8350")
+                        bg = "#000F31", fg = "#DF8350")
         repetition_label.place(x = 585, y = 0)
 
         self.exercise_entry1 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 25, font = ("Arial", 16, "bold"))            
@@ -121,11 +150,14 @@ class NewWorkoutFrame(fr.Frame):
 
         
     def destroy(self):
+        """
+        Destroys the object.
+        """
         super().destroy()
 
 
 if __name__ == "__main__":
-    # mainframe = wd.Window(connect = False)
+    # mainframe = wd.Window()
     # mf.MenuFrame(mainframe)
     # tw.InitialWorkoutsFrame(mainframe)
     # NewWorkoutFrame(mainframe)

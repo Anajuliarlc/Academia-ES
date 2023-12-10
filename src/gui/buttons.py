@@ -10,6 +10,23 @@ class MenuButton(tk.Button):
     (10, 20, 200, 50)
     """
     def __init__(self, text, command, window, pos_x, pos_y, width = 200, height = 50):
+        """
+        Initializes a Button object, default to the column menu.
+
+        :param text: The text to be displayed on the button.
+        :type text: str
+        :param command: The function to be executed when the button is clicked.
+        :type command: function
+        :param window: The window where the button will be placed.
+        :param pos_x: The x-coordinate of the button's position.
+        :type pos_x: int
+        :param pos_y: The y-coordinate of the button's position.
+        :type pos_y: int
+        :param width: The width of the button (default is 200).
+        :type width: int
+        :param height: The height of the button (default is 50).
+        :type height: int
+        """
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width
@@ -29,6 +46,23 @@ class DefaultButton(tk.Button):
     (10, 20, 300, 120)
     """
     def __init__(self, text, command, window, pos_x, pos_y, width = 300, height = 120, font = ("Arial", 28)):
+        """
+            Initializes a Button object, default to the gym system.
+
+            :param text: The text to be displayed on the button.
+            :type text: str
+            :param command: The function to be executed when the button is clicked.
+            :type command: function
+            :param window: The window where the button will be placed.
+            :param pos_x: The x-coordinate of the button's position.
+            :type pos_x: int
+            :param pos_y: The y-coordinate of the button's position.
+            :type pos_y: int
+            :param width: The width of the button (default is 200).
+            :type width: int
+            :param height: The height of the button (default is 50).
+            :type height: int
+            """
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.width = width
@@ -39,18 +73,3 @@ class DefaultButton(tk.Button):
                                     command = command)
         self.place(x = self.pos_x, y = self.pos_y, width = self.width, height = self.height)
    
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
-
-"""
-COMENTÁRIO PARA APAGAR DEPOIS:
-
-Cores usadas:
-    #DF8350 - Laranja escuro
-    #FEFAD2 - Bege
-    #E29E6C - Laranja claro
-    #000F31 - Azul escuro
-    
-no botão padrão de 300x120, a fonte é Arial 28, mas se quiserem, dá pra mudar tbm 
-tanto tamanho do botão, tanto o tamnho da font"""
