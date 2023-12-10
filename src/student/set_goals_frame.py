@@ -1,16 +1,14 @@
-import tkinter as tk
-import time
-
 import sys
 import os
 # Adds src directory to python modules path.
 sys.path.append(os.path.abspath("./src")) 
 
-import gui.frame as fr
-import pandas as pd
 import main
+import tkinter as tk
+import gui.frame as fr
 from gui.buttons import DefaultButton
 from gui.errorlabel import ErrorLabel
+import student.student_frame_factory as sff
 
 class SetGoalsFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 600, width: int = 960,
@@ -155,53 +153,68 @@ class SetGoalsFrame(fr.Frame):
         def confirm_set_goals() -> None:
             self.warning.destroy()
 
-            if self.entry_goal_name.get() == "":
+            goals = {}
+            goals["GoalName"] = self.entry_goal_name.get()
+            goals["CardioMin"] = self.entry_cardio_min.get()
+            goals["GoalWeight"] = self.entry_goal_weight.get()
+            goals["GoalDate"] = self.entry_start_date.get()
+            goals["FinalDate"] = self.entry_final_date.get()
+            goals["LeanMassPct"] = self.entry_lean_mass.get()
+            goals["FatPct"] = self.entry_fat_mass.get()
+
+            def check_date(date: str) -> bool:
+                return (len(date) == 10 and date[4] == "-" and date[7] == "-"
+                    and date[0:4].isnumeric()
+                    and date[5:7].isnumeric() and 0<int(date[5:7])<13
+                    and date[8:10].isnumeric() and 0<int(date[8:10])<32)
+
+            if goals["GoalName"] == "":
                 self.warning = ErrorLabel(window = self,
                                           text = "Insira um nome para a meta",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif (self.entry_cardio_min.get() != ""
-                  and not self.entry_cardio_min.get().isnumeric()):
+            elif (goals["CardioMin"] != ""
+                  and not goals["CardioMin"].isnumeric()):
                 self.warning = ErrorLabel(window = self,
                                           text = "Insira um valor numérico para o mínimo de aeróbicos",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif (self.entry_goal_weight.get() != ""
-                  and not self.entry_goal_weight.get().isnumeric()):
+            elif (goals["GoalWeight"] != ""
+                  and not goals["GoalWeight"].isnumeric()):
                 self.warning = ErrorLabel(window = self,
                                           text = "Insira um valor numérico para o objetivo de peso",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif self.entry_start_date.get() == "":
+            elif (goals["GoalDate"]=="" or not check_date(goals["GoalDate"])):
                 self.warning = ErrorLabel(window = self,
-                                          text = "Insira uma data de início",
+                                          text = "Formato de data: AAAA-MM-DD",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif self.entry_final_date.get() == "":
+            elif (goals["FinalDate"]=="" or not check_date(goals["FinalDate"])):
                 self.warning = ErrorLabel(window = self,
-                                          text = "Insira uma data final",
+                                          text = "Formato de data: AAAA-MM-DD",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif (self.entry_lean_mass.get() != ""
-                    and not self.entry_lean_mass.get().isnumeric()):
+            elif (goals["LeanMassPct"] != ""
+                    and not goals["LeanMassPct"].isnumeric()):
                 self.warning = ErrorLabel(window = self,
                                           text = "Insira um valor numérico para a massa magra",
                                           pos_x = 50, pos_y = 360,
                                           width = 380, height = 30,
                                           font = ("Arial", 10))
                 
-            elif (self.entry_fat_mass.get() != ""
-                  and not self.entry_fat_mass.get().isnumeric()):
+            elif (goals["FatPct"] != ""
+                  and not goals["FatPct"].isnumeric()):
                 self.warning = ErrorLabel(window = self,
                                           text = "Insira um valor numérico para a massa gorda",
                                           pos_x = 50, pos_y = 360,
@@ -209,18 +222,10 @@ class SetGoalsFrame(fr.Frame):
                                           font = ("Arial", 10))
             
             else:
-                # Falta a função para inserir os dados no bd
-                database = self.system.database
-                goals = pd.DataFrame({"IdUser": [self.system.user],
-                                      "CardioMin": [self.entry_cardio_min.get()],
-                                      "GoalWeight": [self.entry_goal_weight.get()],
-                                      "GoalDate": [self.entry_start_date.get()],
-                                      "FinalDate": [self.entry_final_date.get()],
-                                      "LeanMassPct": [self.entry_lean_mass.get()],
-                                      "FatPct": [self.entry_fat_mass.get()]})
+                # Insert goals in database
                 self.update_db(goals)
-
                 self.destroy()
+                sff.StudentFrameFactory.get_frame("GoalsFrame", self.window)
         
         self.button_confirm = DefaultButton(text = "Confirmar",
                                             command = confirm_set_goals,
@@ -233,9 +238,11 @@ class SetGoalsFrame(fr.Frame):
     def destroy(self) -> None:
         """Destroys the set_goals_frame.
 
-        This method overrides the destroy method from the parent class and is responsible for destroying the set_goals_frame.
+        This method overrides the destroy method from the parent class
+        and is responsible for destroying the set_goals_frame.
         """
         super().destroy()
+        sff.StudentFrameFactory.get_frame("GoalsFrame", self.window)
     
     def update_db(self, goals: dict) -> bool:
         """Updates the database with the new goals
@@ -243,13 +250,13 @@ class SetGoalsFrame(fr.Frame):
         table = "Goal (IdUser, CardioMin, GoalWeight, GoalDate, FinalDate, \
                 LeanMassPct, FatPct)"
         
-        date = time.strftime("%Y-%m-%d")
         values = f"({self.system.user}, '{goals['CardioMin']}', \
                    '{goals['GoalWeight']}', '{goals['GoalDate']}', \
                    '{goals['FinalDate']}', '{goals['LeanMassPct']}', \
                    '{goals['FatPct']}')"
         
         result = self.system.database.insert(table = table, values = values)
+        print(result)
         if "1 row affected" in result:
             print("Meta inserida com sucesso")
             return True
