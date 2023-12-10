@@ -250,13 +250,17 @@ class SetGoalsFrame(fr.Frame):
         table = "Goal (IdUser, CardioMin, GoalWeight, GoalDate, FinalDate, \
                 LeanMassPct, FatPct)"
         
-        values = f"({self.system.user}, '{goals['CardioMin']}', \
-                   '{goals['GoalWeight']}', '{goals['GoalDate']}', \
-                   '{goals['FinalDate']}', '{goals['LeanMassPct']}', \
-                   '{goals['FatPct']}')"
+        for key in goals.keys():
+            if goals[key] == "":
+                goals[key] = "NULL"
+
+        values = f"({self.system.user}, {goals['CardioMin']}, \
+                   {goals['GoalWeight']}, '{goals['GoalDate']}', \
+                   '{goals['FinalDate']}', {goals['LeanMassPct']}, \
+                   {goals['FatPct']})"
         
         result = self.system.database.insert(table = table, values = values)
-        print(result)
+
         if "1 row affected" in result:
             print("Meta inserida com sucesso")
             return True

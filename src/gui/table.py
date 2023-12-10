@@ -40,6 +40,7 @@ class Table():
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.columns_width = self.width // len(self.columns)
+        self.table = tk.Frame(self.window, bg = "#DF8350")
         self.create_table()
 
     def create_table(self) -> None:
@@ -47,29 +48,31 @@ class Table():
             Create a table in the GUI window with the given columns and data.
             """
             for i in range(len(self.columns)):
-                self.label_index = tk.Label(self.window,
+                self.label_index = tk.Label(self.table,
                                             text = f"{self.columns[i]}",
                                             font = ("Arial", self.font_size, "bold"),
                                             bg = "#DF8350",
                                             fg = "#FEFAD2")
-                self.label_index.place(x = self.pos_x + self.columns_width * i,
-                                        y = self.pos_y,
-                                        height = 30, width = self.columns_width)
+                self.label_index.place(x = self.columns_width * i,
+                                        y = 0, height = 30,
+                                        width = self.columns_width)
                 for j, value in enumerate(self.data[self.columns[i]]):
-                    self.label_value = tk.Label(self.window,
+                    self.label_value = tk.Label(self.table,
                                                 text = f"{value}",
                                                 font = ("Arial", self.font_size),
                                                 bg = "#DF8350",
                                                 fg = "#FEFAD2")
-                    self.label_value.place(x = self.pos_x + self.columns_width * i,
-                                            y = self.pos_y + 30 * (j + 1),
-                                            height = 30, width = self.columns_width)
+                    self.label_value.place(x = self.columns_width * i,
+                                            y = 30 * (j + 1), height = 30,
+                                            width = self.columns_width)
+            self.table.place(x = self.pos_x, y = self.pos_y,
+                                width = self.width, height = self.height)
         
     def destroy(self) -> None:
         """
         Destroy the table.
         """
-        pass
+        self.table.destroy()
         
 if __name__ == "__main__":
     # window = tk.Tk()
