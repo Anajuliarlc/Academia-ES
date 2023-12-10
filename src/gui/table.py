@@ -11,7 +11,7 @@ class Table():
     (600, 400, 10, 0, 0)
     """
     def __init__(self, window: tk.Frame, data: pd.DataFrame,
-                  widht: int, height: int, font_size: int = 10,
+                  width: int, height: int, font_size: int = 10,
                   pos_x: int = 0, pos_y: int = 0) -> None:
         """
         Initializes a Table object.
@@ -34,7 +34,7 @@ class Table():
         self.window = window
         self.columns = data.columns
         self.data = data
-        self.width = widht
+        self.width = width
         self.height = height
         self.font_size = font_size
         self.pos_x = pos_x
