@@ -15,7 +15,7 @@ class TestClasses(unittest.TestCase):
         return True
         """
         name = "Spining"
-        date = "2020-12-12 12:00:00"
+        date = "2020-12-12 20:00:00"
         description = "Aula de spining"
         max_students = 10
         self.assertTrue(self.classes.insert_class(name, date,
