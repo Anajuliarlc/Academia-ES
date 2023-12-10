@@ -65,6 +65,11 @@ class Table():
                                             y = self.pos_y + 30 * (j + 1),
                                             height = 30, width = self.columns_width)
         
+    def destroy(self) -> None:
+        """
+        Destroy the table.
+        """
+        pass
         
 if __name__ == "__main__":
     # window = tk.Tk()
