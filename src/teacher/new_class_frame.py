@@ -8,6 +8,7 @@ import gui.entrytext as et
 import gui.buttons as bt
 import gui.errorlabel as el
 import teacher.classes as cl
+import exc.exceptions as ex
 
 class NewClassFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 400, width: int = 960,
@@ -44,9 +45,10 @@ class NewClassFrame(fr.Frame):
             date != "" and
             description != "" and
             max_students != ""):
-            result_query = self.teacher.insert_class(name, date,
-                                                      description, max_students)
-            if not result_query:
+            try:
+                self.teacher.insert_class(name, date,
+                                            description, max_students)
+            except:
                 warning = el.ErrorLabel(self,
                                     text = "Data no formato 2023-01-01 12:00:00",
                                     pos_x = 300, pos_y = 340, height = 50)

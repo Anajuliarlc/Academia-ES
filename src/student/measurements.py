@@ -11,10 +11,15 @@ class Measurements():
         self.system = main.System()
 
     def update_db(self, measurements: dict) -> bool:
-        """
-        1 - Write a test that fails
-        pass
-        """
+        """ Update the measurements of the user in the database
+
+        :param measurements: Measurements of the user in a dictionary format:
+        {"Weight": int, "Height": int, "HighWaist": int, "LowWaist": int,
+        "Bust": int, "Biceps": int, "Thigh": int}
+        :type measurements: dict
+        :return: True if the measurements were updated, False otherwise
+        :rtype: bool
+        """        
         table = "Measurements (IdUser, MeasDate, Weight, Height, HighWaist, \
                 LowWaist, Bust, Biceps, Thigh)"
         
@@ -27,7 +32,6 @@ class Measurements():
         
         
         result = self.system.database.insert(table = table, values = values)
-        print(result)
         if "1 row affected" in result:
             return True
         else:

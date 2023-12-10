@@ -51,12 +51,12 @@ class MeasurementsFrame(fr.Frame):
         self.label_view_measurements = bt.DefaultButton(text = "Definir Medidas",
                                                         command = self.set_measurement,
                                                         window = self,
-                                                        pos_x = 80, pos_y = 140,
+                                                        pos_x = 80, pos_y = 240,
                                                         height = 50, width = 340)
         self.label_view_measurements = bt.DefaultButton(text = "Visualizar Medidas",
                                                         command = self.view_measurement,
                                                         window = self,
-                                                        pos_x = 80, pos_y = 240,
+                                                        pos_x = 80, pos_y = 140,
                                                         height = 50, width = 340)
 
     def destroy(self) -> None:

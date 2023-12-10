@@ -53,7 +53,7 @@ class SetMeasurementFrame(fr.Frame):
             measurements["Biceps"] == "" or
             measurements["Thigh"] == ""):
             el.ErrorLabel(self, "Todos os campos devem ser preenchidos",
-                            80, 380, 340, 20)
+                            70, 380, 360, 20)
             return
         if (not measurements["Weight"].isnumeric() or
             not measurements["Height"].isnumeric() or
@@ -63,10 +63,10 @@ class SetMeasurementFrame(fr.Frame):
             not measurements["Biceps"].isnumeric() or
             not measurements["Thigh"].isnumeric()):
             el.ErrorLabel(self, "Todos os campos devem ser numéricos",
-                            80, 380, 340, 20)
+                            70, 380, 360, 20)
             return
         
-        print(self.measurements.update_db(measurements))
+        self.measurements.update_db(measurements)
         self.destroy()
         sff.StudentFrameFactory.get_frame("MeasurementsFrame", self.window)
 
