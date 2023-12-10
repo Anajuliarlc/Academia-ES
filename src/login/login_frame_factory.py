@@ -12,6 +12,9 @@ import gui.window as wd
 class LoginFrameFactory(ff.FrameFactory):
     """Frame factory for the login frames
     
+    >>> import gui.window as wd
+    >>> import gui.frame as fr
+    >>> import login.login_frame as lf
     >>> window = wd.Window(connect = False)
     >>> frame = LoginFrameFactory.get_frame("LoginFrame", window)
     >>> isinstance(frame, lf.LoginFrame)

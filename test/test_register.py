@@ -34,8 +34,8 @@ class TestRegister(unittest.TestCase):
     
     def test_validate_birth_invalid(self):
         self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "aaa")
-        self.assertRaises(exc.EmptyFieldError, self.reg.validate_birth, "")
-        self.assertRaises(exc.EmptyFieldError, self.reg.validate_birth, "Data de nascimento (dd/mm/aaaa)")
+        self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "")
+        self.assertRaises(exc.InvalidDateError, self.reg.validate_birth, "Data de nascimento (dd/mm/aaaa)")
 
     def test_validate_birth_valid(self):
         self.assertEqual(self.reg.validate_birth("01/01/2000"), "01/01/2000")
@@ -49,7 +49,7 @@ class TestRegister(unittest.TestCase):
         self.assertRaises(exc.CPFAlreadyExistsError, self.reg.validate_cpf, "123.456.789-01")
 
     def test_validate_cpf_valid(self):
-        self.assertEqual(self.reg.validate_cpf("123.456.789-00"), "12345678900")
+        self.assertEqual(self.reg.validate_cpf("123.456.789-11"), "12345678911")
 
     def test_validate_rg_invalid(self):
         self.assertRaises(exc.InvalidRGError, self.reg.validate_rg, "000000000a")

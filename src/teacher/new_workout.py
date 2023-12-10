@@ -25,6 +25,15 @@ class NewWorkoutFrame(fr.Frame):
         self.config(bg = "#000F31")
 
     def verify_entries(self):
+        """ Verify if all entries are filled correctly
+        
+        >>> import gui.window as wd
+        >>> window = wd.Window(connect = False)
+        >>> frame = NewWorkoutFrame(window)
+        >>> frame.exercises = {tk.Entry(window): [tk.Entry(window), tk.Entry(window), tk.Entry(window)]}
+        >>> frame.verify_entries()
+        False
+        """
         for exercise, specifications in self.exercises.items():
             if exercise.get() == "":
                 return False
@@ -81,23 +90,23 @@ class NewWorkoutFrame(fr.Frame):
         self.repetition_entry1 = et.EntryText(self, width = 40, height=30, pos_x = 585, pos_y = 25, font = ("Arial", 16, "bold"))
         self.exercises[self.exercise_entry1] = [self.weight_entry1, self.series_entry1, self.repetition_entry1]
 
-        self.exercise_entrey2 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 65, font = ("Arial", 16, "bold"))
+        self.exercise_entry2 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 65, font = ("Arial", 16, "bold"))
         self.weight_entry2 = et.EntryText(self, width = 40, height=30, pos_x = 470, pos_y = 65, font = ("Arial", 16, "bold"))
         self.series_entry2 = et.EntryText(self, width = 40, height=30, pos_x = 530, pos_y = 65, font = ("Arial", 16, "bold"))
         self.repetition_entry2 = et.EntryText(self, width = 40, height=30, pos_x = 585, pos_y = 65, font = ("Arial", 16, "bold"))
-        self.exercises[self.exercise_entrey2] = [self.weight_entry2, self.series_entry2, self.repetition_entry2]
+        self.exercises[self.exercise_entry2] = [self.weight_entry2, self.series_entry2, self.repetition_entry2]
 
-        self.exercise_entrey3 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 105, font = ("Arial", 16, "bold"))
+        self.exercise_entry3 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 105, font = ("Arial", 16, "bold"))
         self.weight_entry3 = et.EntryText(self, width = 40, height=30, pos_x = 470, pos_y = 105, font = ("Arial", 16, "bold"))
         self.series_entry3 = et.EntryText(self, width = 40, height=30, pos_x = 530, pos_y = 105, font = ("Arial", 16, "bold"))
         self.repetition_entry3 = et.EntryText(self, width = 40, height=30, pos_x = 585, pos_y = 105, font = ("Arial", 16, "bold"))
-        self.exercises[self.exercise_entrey3] = [self.weight_entry3, self.series_entry3, self.repetition_entry3]
+        self.exercises[self.exercise_entry3] = [self.weight_entry3, self.series_entry3, self.repetition_entry3]
 
-        self.exercise_entrey4 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 145, font = ("Arial", 16, "bold"))
+        self.exercise_entry4 = et.EntryText(self, width = 300, height=30, pos_x = 150, pos_y = 145, font = ("Arial", 16, "bold"))
         self.weight_entry4 = et.EntryText(self, width = 40, height=30, pos_x = 470, pos_y = 145, font = ("Arial", 16, "bold"))
         self.series_entry4 = et.EntryText(self, width = 40, height=30, pos_x = 530, pos_y = 145, font = ("Arial", 16, "bold"))
         self.repetition_entry4 = et.EntryText(self, width = 40, height=30, pos_x = 585, pos_y = 145, font = ("Arial", 16, "bold"))
-        self.exercises[self.exercise_entrey4] = [self.weight_entry4, self.series_entry4, self.repetition_entry4]
+        self.exercises[self.exercise_entry4] = [self.weight_entry4, self.series_entry4, self.repetition_entry4]
 
 
         clicked = tk.StringVar()
@@ -116,8 +125,11 @@ class NewWorkoutFrame(fr.Frame):
 
 
 if __name__ == "__main__":
-    mainframe = wd.Window(connect = False)
-    mf.MenuFrame(mainframe)
-    tw.InitialWorkoutsFrame(mainframe)
-    NewWorkoutFrame(mainframe)
-    mainframe.mainloop()
+    # mainframe = wd.Window(connect = False)
+    # mf.MenuFrame(mainframe)
+    # tw.InitialWorkoutsFrame(mainframe)
+    # NewWorkoutFrame(mainframe)
+    # mainframe.mainloop()
+    
+    import doctest
+    doctest.testmod(verbose=True)

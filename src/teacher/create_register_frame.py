@@ -16,7 +16,7 @@ import exc.exceptions as exc
 class CreateRegisterFrame(fr.Frame):
     def __init__(self, window: tk.Tk, height: int = 450, width: int = 960,
                   pos_x: int = 240, pos_y: int = 150) -> None:
-        """Create a frame to be used as example in the application """
+        """Create a registration frame for student"""
         super().__init__(window, height, width, pos_x, pos_y)
 
     def design(self) -> None:

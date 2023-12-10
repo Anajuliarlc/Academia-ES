@@ -14,6 +14,15 @@ class GoalsFrame(fr.Frame):
         self.config(bg = "#000F31")
 
     def clear_error_messages(self) -> None:
+        """ Remove all error messages from the frame.
+
+        >>> import student.student_frame_factory as sff
+        >>> frame = sff.StudentFrameFactory.get_frame("GoalsFrame", tk.Tk())
+        >>> frame.error_messages = [tk.Label(frame, text="Error 1"), tk.Label(frame, text="Error 2")]
+        >>> frame.clear_error_messages()
+        >>> frame.error_messages
+        []
+        """
         try:
             if len(self.error_messages) > 0:
                 for message in self.error_messages:
@@ -57,3 +66,7 @@ class GoalsFrame(fr.Frame):
 
     def destroy(self) -> None:
         super().destroy()
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose = True)
