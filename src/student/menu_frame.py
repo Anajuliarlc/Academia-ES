@@ -57,13 +57,6 @@ class MenuFrame(fr.Frame):
                 frame.destroy()
         sff.StudentFrameFactory.get_frame("ProfileFrame", self.window)
 
-    def button_logout(self):
-        """Handle the button click event for 'Sair'."""
-        for frame in self.window.active_frames:
-            if type(frame).__name__ != "LogoFrame":
-                frame.destroy()
-        lff.LoginFrameFactory.get_frame("LoginFrame", self.window)
-
     def place_objects(self) -> None:
         """Place the objects in the MenuFrame."""
         menu_label = tk.Label(self, text = "MENU", font = ("Arial", 24, "bold"), 
@@ -85,10 +78,6 @@ class MenuFrame(fr.Frame):
         button_profile = bt.MenuButton(text = "Perfil",
                                         command = self.button_profile,
                                         window = self.window, pos_x = 20, pos_y = 420)
-        
-        button_logout = bt.MenuButton(text = "Sair", 
-                                      command = self.button_logout,
-                                      window = self, pos_x = 20, pos_y = 510)
 
     def destroy(self) -> None:
         """Destroy the MenuFrame."""
