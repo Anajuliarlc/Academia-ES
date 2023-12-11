@@ -48,7 +48,8 @@ class ViewRegisterFrame(fr.Frame):
         df = pd.merge(df1, df2, on="IdUser")[["UserName", "BirthDate", "CPF", "PhoneNumber", "City", "RegistrationDate", "MedicalData"]]
 
         self.table_index = 0
-        self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 30, pos_x=20, pos_y=20)
+        print(df[self.table_index : self.table_index+10])
+        self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 330, pos_x=20, pos_y=20)
 
         self.page = tk.Label(self, text=str(int(self.table_index/10)), width=3, font=("Arial", 12, "bold"), bg="#000F31", fg="#DF8350")
         self.page.place(x=790, y=400)
@@ -61,7 +62,7 @@ class ViewRegisterFrame(fr.Frame):
 
             self.table_index += 10
             self.table.destroy()
-            self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 30, pos_x=20, pos_y=20)
+            self.table = tb.Table(self, df[self.table_index : self.table_index+10], 920, 330, pos_x=20, pos_y=20)
 
             self.page.destroy()
             self.page = tk.Label(self, text=str(int(self.table_index/10)), width=3, font=("Arial", 12, "bold"), bg="#000F31", fg="#DF8350")
