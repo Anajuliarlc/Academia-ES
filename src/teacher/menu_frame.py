@@ -51,15 +51,6 @@ class MenuFrame(fr.Frame):
                 frame.destroy()
         tff.TeacherFrameFactory.get_frame("RegisterFrame", self.window)
 
-    def button_logout(self):
-        """Handles the button click event for the 'Logout' button."""
-        for frame in self.window.active_frames:
-            if type(frame).__name__ != "LogoFrame":
-                frame.destroy()
-        lf.LogoFrame(self.window)
-        lff.LoginFrameFactory.get_frame("LoginFrame", self.window)
-        
-
     def place_objects(self) -> None:
         """Places the objects within the MenuFrame."""
         menu_label = tk.Label(self, text = "MENU", font = ("Arial", 24, "bold"), 
@@ -77,10 +68,6 @@ class MenuFrame(fr.Frame):
         button_register = bt.MenuButton(text = "Matrículas", 
                                         command = self.button_register,
                                         window = self, pos_x = 20, pos_y = 400)
-        
-        button_logout = bt.MenuButton(text = "Sair", 
-                                      command = self.button_logout,
-                                      window = self, pos_x = 20, pos_y = 500)
 
     def destroy(self) -> None:
         """Destroys the MenuFrame."""
